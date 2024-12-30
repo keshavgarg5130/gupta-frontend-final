@@ -33,9 +33,6 @@ const footerContents = [
   {
     header: 'Help',
     labels: [{
-      lable: 'Contact Us',
-      redirectsTo: '/',
-    }, {
       lable: 'Terms of Service',
       redirectsTo: '/',
     }, {

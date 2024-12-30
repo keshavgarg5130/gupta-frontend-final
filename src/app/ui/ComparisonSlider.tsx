@@ -67,7 +67,7 @@ export function ComparisonSlider({
             <div
                 ref={rangeRef}
                 className={cn(
-                    "relative h-[240px] w-11/12 md:h-[600px] lg:h-[860px] select-none overflow-hidden rounded-lg",
+                    "relative h-[240px] w-11/12 md:h-[600px] lg:h-[700px] select-none overflow-hidden rounded-lg",
                     className
                 )}
                 {...props}

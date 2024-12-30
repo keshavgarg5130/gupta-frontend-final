@@ -1,0 +1,37 @@
+const Navbar = () => {
+  return (
+    <div className=" justify-between bg-[#0c77b6] w-full h-[60px] flex items-center">
+      <div className=" flex items-center mx-2">
+        <img src="/logo.svg" height='80px' width='140px' />
+      </div>
+
+      <div className="max-w-lg w-full h-[30px] flex items-center relative">
+        <img src="/search-icon.png" className="absolute h-1/2 ml-2" />
+        <input className="w-full h-full rounded-3xl px-9 outline-none" />
+        <div className="flex w-14 absolute text-black right-4 font-light text-xs items-center justify-between">
+          <span className="h-full">Clear</span>
+          <img src="/mic-icon.svg" width='25px' />
+        </div>
+      </div>
+
+      <div className="mx-2 flex justify-evenly text-white font-light">
+        <div className="group mx-2 relative">
+          <div className="flex  text-xs items-center">
+            <img src="/call-icon.png" width='20px' />
+            <span className="mx-1 flex justify-between">
+              Talk to our Experts
+              <img src="/down-arrow-icon.png" className="mx-1" width='13px' height='10px' />
+            </span>
+          </div>
+          <div className="absolute w-full bg-blue-50 hidden group-active:block">
+            hellow world
+          </div>
+        </div>
+        <img src="/bag-icon.webp" width='20px' className="mx-1" />
+        <img src="/user-icon.png" width='20px' className="mx-1" />
+      </div>
+    </div>
+  )
+}
+
+export default Navbar;

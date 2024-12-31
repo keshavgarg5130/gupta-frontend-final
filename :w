@@ -1,0 +1,16 @@
+import fetchBillboard from "../lib/fetchBillboard";
+
+export const revalidate = 3600;
+
+const CategoryPamphlet = async ({ categoryName, billboardId }: { categoryName: string, billboardId: string }) => {
+    const billboardUrl = await fetchBillboard(billboardId)
+
+    return (<div className="flex flex-col items-center justify-center gap-3 max-h-[500px] max-w-[500px] overflow-hidden">
+        <img src={billboardUrl} className="max-w-[500px] max-h-[300px]" />
+        <div className="text-xl font-bold text-themeBlue relative">{categoryName}
+            <div className="absolute w-full h-1 bg-themeBlue rounded-lg -bottom-10"></div>
+        </div>
+    </div>)
+}
+
+export default CategoryPamphlet;

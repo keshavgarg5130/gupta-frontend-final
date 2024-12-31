@@ -52,7 +52,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings }: { ban
 
     useEffect(() => {
         console.log(polesSelected)
-        let prdts = [...productsSort]
+        let prdts = [...products]
         prdts = prdts.filter(product => {
             const priceFits = parseInt(product.price) >= filter.price
             const poleFits = polesSelected[product.polesId].isSelected;
@@ -126,8 +126,9 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings }: { ban
                         }} />
                     </div>
                     <div>
+                        <div>Poles:</div>
                         {poles.map(pole => {
-                            return (<button onClick={() => {
+                            return (<button key={pole.id} onClick={() => {
                                 setPolesSelected({
                                     ...polesSelected,
                                     [pole.id]: {
@@ -136,7 +137,23 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings }: { ban
                                     }
                                 })
                             }}>
-                                <PolesDiv key={pole.id} name={pole.name} isSelected={polesSelected[pole.id].isSelected} />
+                                <DisplayDiv name={pole.name} isSelected={polesSelected[pole.id].isSelected} />
+                            </button>)
+                        })}
+                    </div>
+                    <div>
+                        <div>Current Ratings:</div>
+                        {currentRatings.map(current => {
+                            return (<button key={current.id} onClick={() => {
+                                setCurrentRatingsSelected({
+                                    ...currentRatingsSelected,
+                                    [current.id]: {
+                                        name: current.name,
+                                        isSelected: !currentRatingsSelected[current.id].isSelected
+                                    }
+                                })
+                            }}>
+                                <DisplayDiv name={current.name} isSelected={currentRatingsSelected[current.id].isSelected} />
                             </button>)
                         })}
                     </div>
@@ -146,7 +163,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings }: { ban
     )
 }
 
-const PolesDiv = ({ name, isSelected }: { name: string, isSelected: boolean }) => {
+const DisplayDiv = ({ name, isSelected }: { name: string, isSelected: boolean }) => {
     const classes = `h-[30px] w-max px-4 rounded-full flex items-center justify-center ${isSelected ? 'bg-themeBlue text-white' : 'bg-white text-themeBlue border border-themeBlue'} ${isSelected && 'text-lg font-bold'} hover:bg-themeBlue hover:text-white transition-all duration-300`
     return (
         <div className={classes} >{name}</div>

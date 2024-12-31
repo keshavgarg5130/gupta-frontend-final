@@ -5,6 +5,7 @@ import CategoryBanner from "./CategoryBanner"
 import ProductFullRow from "./ProductFullRow"
 import poles from "../interfaces/poles"
 import currentRatingInterface from "../interfaces/currentRating"
+import { ArrowUp } from "lucide-react"
 
 const SortBy = ['price', 'currentRating', 'poles', ''] as const;
 type SortByType = typeof SortBy[number];
@@ -20,29 +21,35 @@ interface filterStateInterface {
     },
 }
 
-const CategoryPageClient = ({ bannerId, products, poles, currentRatings }: { bannerId: string, products: product[], poles: poles[], currentRatings: currentRatingInterface[] }) => {
+const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPrice, minPrice }: { bannerId: string, products: product[], poles: poles[], currentRatings: currentRatingInterface[], maxPrice: number, minPrice: number }) => {
     const [productsSort, setProducts] = useState(products)
     const [increasing, setIncreasing] = useState({ price: true, poles: true, currentRating: true })
     const [sortBy, setSortBy] = useState<typeSort>({
         name: '',
         increasing: true
     })
+    const [filter, setFilter] = useState({
+        poles: false,
+        currentRating: false
+    });
+    minPrice = isNaN(minPrice) ? 100 : minPrice
     const remains = products.length > 0
-    const [filter, setFilter] = useState<{ price: number }>({
-        price: 0,
+    const [priceRange, setPriceRange] = useState<{ min: number, max: number }>({
+        min: minPrice + 1,
+        max: maxPrice
     })
 
     let polesState: filterStateInterface = {};
     for (let pole of poles) {
         polesState[pole.id] = {
-            isSelected: true,
+            isSelected: false,
             name: pole.name
         }
     }
     let currentRatingState: filterStateInterface = {};
     for (let currentRating of currentRatings) {
         currentRatingState[currentRating.id] = {
-            isSelected: true,
+            isSelected: false,
             name: currentRating.name
         }
     }
@@ -50,17 +57,34 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings }: { ban
     const [polesSelected, setPolesSelected] = useState<filterStateInterface>(polesState)
     const [currentRatingsSelected, setCurrentRatingsSelected] = useState<filterStateInterface>(currentRatingState)
 
+    const handleMinChange = (e) => {
+        const value = Math.min(e.target.value, priceRange.max - 1);
+        setPriceRange({
+            ...priceRange,
+            min: value
+        })
+    }
+
+    const handleMaxChange = (e) => {
+        const value = Math.max(e.target.value, priceRange.min + 1)
+        setPriceRange({
+            ...priceRange,
+            max: value
+        })
+    }
+
+    const [filterHidden, setFilterHidden] = useState(true)
+
     useEffect(() => {
-        console.log(polesSelected)
         let prdts = [...products]
         prdts = prdts.filter(product => {
-            const priceFits = parseInt(product.price) >= filter.price
-            const poleFits = polesSelected[product.polesId].isSelected;
-            const currentFits = currentRatingsSelected[product.currentRatingId].isSelected
+            const priceFits = parseInt(product.price) >= priceRange.min && parseInt(product.price) <= priceRange.max
+            const poleFits = filter.poles ? polesSelected[product.polesId].isSelected : true;
+            const currentFits = filter.currentRating ? currentRatingsSelected[product.currentRatingId].isSelected : true;
             return priceFits && poleFits && currentFits
         })
-
         setProducts(prdts)
+
         if (sortBy.name) {
             const increasing = sortBy.increasing
             switch (sortBy.name) {
@@ -83,88 +107,113 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings }: { ban
                         setProducts(prdts.sort((a, b) => parseInt(b.currentRating.name) - parseInt(a.currentRating.name)))
             }
         }
-    }, [sortBy, filter, polesSelected, currentRatingsSelected])
+    }, [sortBy, priceRange, polesSelected, currentRatingsSelected])
 
     return (
-        <div className="flex flex-col items-center w-full relative pt-16 md:pt-0">
+        <div className="flex flex-col items-center w-full relative md:pt-0 min-h-screen">
+            <button className="md:hidden w-full bg-blue-100 font-bold h-10" onClick={() => setFilterHidden(!filterHidden)}>Sort/Filter</button>
             <CategoryBanner bannerId={bannerId} />
             <ProductFullRow products={productsSort} Remains={remains} />
             {/* Filter Menu */}
-            <div className="absolute top-0 left-0 w-full h-14 md:w-[200px] lg:w-[300px] md:h-full bg-blue-100">
-                <div>
-                    <h1> Sort By </h1>
-                    <div className="flex flex-col">
+            <div className={`${filterHidden ? 'hidden' : 'block'} md:flex absolute top-10 left-0 w-full md:w-[200px] lg:w-[300px] bg-blue-100 flex-col md:gap-5 py-5 md:rounded-lg`}>
+                <div className="flex flex-col items-center gap-3">
+                    <h1 className="text-2xl font-bold text-themeBlue"> Sort By </h1>
+                    <div className="flex flex-col gap-2 justify-evenly w-11/12 flex-wrap">
                         {SortBy.map(sort => {
                             if (sort) {
-                                return <button key={sort} onClick={() => {
+                                return <button key={sort} className="py-1 px-3 bg-white text-themeBlue rounded-full border-themeBlue border text-lg relative font-semibold" onClick={() => {
                                     setSortBy({
                                         name: sort,
                                         increasing: increasing[sort]
                                     })
                                     setIncreasing(increasing => {
+                                        const newInceasing = { price: false, currentRating: false, poles: false }
                                         return {
-                                            ...increasing,
+                                            ...newInceasing,
                                             [sort]: !increasing[sort]
                                         }
                                     })
-                                }}>{sort}</button>
+                                }}>
+                                    {sort}
+                                    <div className="absolute top-[50%] translate-y-[-50%] right-10"><div className={`${increasing[sort] ? '' : 'rotate-180'} transition-all ease-in-out duration-300`}><ArrowUp /></div></div>
+                                </button>
                             }
                         })}
                     </div>
                 </div>
 
-                <div>
-                    <div>
-                        <label>Price:</label>
-                        <input name='price' onChange={e => {
-                            if (parseInt(e.target.value)) {
-                                setFilter({
-                                    ...filter,
-                                    [e.target.name]: e.target.value
-                                })
-                            }
-                        }} />
+                <div className="flex flex-col gap-5">
+                    <div className="flex flex-col items-center gap-3">
+                        <h1 className="text-2xl font-bold text-themeBlue"> Price Range</h1>
+                        <div className="relative w-11/12 flex flex-col items-center">
+                            {/* Range Inputs */}
+                            <input
+                                type="range"
+                                min={minPrice - 10}
+                                max={maxPrice}
+                                value={priceRange.min}
+                                onChange={handleMinChange}
+                                className="w-full pointer-events-auto z-10 range-thumb"
+                            />
+                            {/* Range Values */}
+                            <div className="flex justify-between mt-2 text-sm w-full text-themeBlue">
+                                <span>{priceRange.min}</span>
+                                <span>{priceRange.max}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <div>Poles:</div>
-                        {poles.map(pole => {
-                            return (<button key={pole.id} onClick={() => {
-                                setPolesSelected({
-                                    ...polesSelected,
-                                    [pole.id]: {
-                                        name: pole.name,
-                                        isSelected: !polesSelected[pole.id].isSelected
-                                    }
-                                })
-                            }}>
-                                <DisplayDiv name={pole.name} isSelected={polesSelected[pole.id].isSelected} />
-                            </button>)
-                        })}
+                    <div className="flex flex-col gap-3 items-center">
+                        <h1 className="text-2xl font-bold text-themeBlue">Select Poles</h1>
+                        <div className="flex justify-evenly w-11/12">
+                            {poles.map(pole => {
+                                return (<button key={pole.id} onClick={() => {
+                                    setPolesSelected({
+                                        ...polesSelected,
+                                        [pole.id]: {
+                                            name: pole.name,
+                                            isSelected: !polesSelected[pole.id].isSelected
+                                        }
+                                    })
+                                    setFilter({
+                                        ...filter,
+                                        poles: true
+                                    })
+                                }}>
+                                    <DisplayDiv name={pole.name} isSelected={polesSelected[pole.id].isSelected} />
+                                </button>)
+                            })}
+                        </div>
                     </div>
-                    <div>
-                        <div>Current Ratings:</div>
-                        {currentRatings.map(current => {
-                            return (<button key={current.id} onClick={() => {
-                                setCurrentRatingsSelected({
-                                    ...currentRatingsSelected,
-                                    [current.id]: {
-                                        name: current.name,
-                                        isSelected: !currentRatingsSelected[current.id].isSelected
-                                    }
-                                })
-                            }}>
-                                <DisplayDiv name={current.name} isSelected={currentRatingsSelected[current.id].isSelected} />
-                            </button>)
-                        })}
+                    <div className="flex flex-col gap-3 items-center">
+                        <h1 className="text-2xl font-bold text-themeBlue">Select Current Rating</h1>
+                        <div className="flex justify-evenly w-11/12 gap-2 flex-wrap">
+                            {currentRatings.map(current => {
+                                return (<button key={current.id} onClick={() => {
+                                    setCurrentRatingsSelected({
+                                        ...currentRatingsSelected,
+                                        [current.id]: {
+                                            name: current.name,
+                                            isSelected: !currentRatingsSelected[current.id].isSelected
+                                        }
+                                    })
+                                    setFilter({
+                                        ...filter,
+                                        currentRating: true
+                                    })
+                                }}>
+                                    <DisplayDiv name={current.name} isSelected={currentRatingsSelected[current.id].isSelected} />
+                                </button>)
+                            })}
+                        </div>
                     </div>
                 </div>
             </div >
-        </div>
+        </div >
     )
 }
 
 const DisplayDiv = ({ name, isSelected }: { name: string, isSelected: boolean }) => {
-    const classes = `h-[30px] w-max px-4 rounded-full flex items-center justify-center ${isSelected ? 'bg-themeBlue text-white' : 'bg-white text-themeBlue border border-themeBlue'} ${isSelected && 'text-lg font-bold'} hover:bg-themeBlue hover:text-white transition-all duration-300`
+    const classes = `h-[30px] w-max px-4 rounded-full flex items-center justify-center ${isSelected ? 'bg-themeBlue text-white' : 'bg-white text-themeBlue border border-themeBlue'} ${isSelected && 'text-lg font-bold'} hover:px-5 transition-all duration-300`
     return (
         <div className={classes} >{name}</div>
     )

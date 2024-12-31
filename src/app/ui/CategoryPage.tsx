@@ -13,8 +13,15 @@ export default async function CategoryPage({ category }: { category: string }) {
   let polesIds: string[] = [];
   let currentRatings: currentRatingInterface[] = [];
   let currentRatingsIds: string[] = [];
+  let maxPrice = 0;
+  let minPrice = Infinity;
 
   for (let prdt of products) {
+    const price = parseInt(prdt.price)
+
+    if (price > maxPrice) maxPrice = price
+    if (price < minPrice) minPrice = price;
+
     if (polesIds.indexOf(prdt.polesId) == -1) {
       polesIds.push(prdt.polesId)
       poles.push(prdt.poles)
@@ -27,5 +34,5 @@ export default async function CategoryPage({ category }: { category: string }) {
 
   const bannerId = (await fetchCategories()).filter(categor => categor.name == category)[0].billboardId;
 
-  return (<CategoryPageClient products={products} bannerId={bannerId} poles={poles} currentRatings={currentRatings} />)
+  return (<CategoryPageClient products={products} bannerId={bannerId} poles={poles} currentRatings={currentRatings} maxPrice={maxPrice} minPrice={minPrice} />)
 }

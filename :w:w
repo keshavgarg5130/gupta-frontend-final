@@ -1,0 +1,142 @@
+'use client'
+import { Dispatch, SetStateAction, useState, useEffect } from "react"
+import { product } from "../interfaces/product"
+import CategoryBanner from "./CategoryBanner"
+import ProductFullRow from "./ProductFullRow"
+import poles from "../interfaces/poles"
+import currentRatingInterface from "../interfaces/currentRating"
+
+const SortBy = ['price', 'currentRating', 'poles', ''] as const;
+type SortByType = typeof SortBy[number];
+type typeSort = {
+    name: SortByType,
+    increasing: boolean
+}
+
+interface filterStateInterface {
+    id: string,
+    name: string,
+    isSelected: boolean
+}
+
+const CategoryPageClient = ({ bannerId, products, poles, currentRatings }: { bannerId: string, products: product[], poles: poles[], currentRatings: currentRatingInterface[] }) => {
+    const [productsSort, setProducts] = useState(products)
+    const [sortBy, setSortBy] = useState<typeSort>({
+        name: '',
+        increasing: true
+    })
+    const remains = products.length > 0
+    const [filter, SetFilter] = useState<{ price: number }>({
+        price: 0,
+    })
+
+    let polesState: filterStateInterface[] = [];
+    for (let pole of poles) {
+        polesState.push({
+            id: pole.id,
+            name: pole.name,
+            isSelected: true
+        })
+    }
+    let currentRatingState: filterStateInterface[] = [];
+    for (let currentRating of currentRatings) {
+        currentRatingState.push({
+            id: currentRating.id,
+            name: currentRating.name,
+            isSelected: true
+        })
+    }
+
+    const [polesSelected, setPolesSelected] = useState<filterStateInterface[]>(polesState)
+    const [currentRatingsSelected, setCurrentRatingsSelected] = useState<filterStateInterface[]>(currentRatingState)
+
+    useEffect(() => {
+
+        if (sortBy.name) {
+            let prdts = [...products]
+            const increasing = sortBy.increasing
+            switch (sortBy.name) {
+                case 'price':
+                    if (increasing)
+                        setProducts(prdts.sort((a, b) => parseInt(a.price) - parseInt(b.price)))
+                    else
+                        setProducts(prdts.sort((a, b) => parseInt(b.price) - parseInt(a.price)))
+                    break;
+                case 'poles':
+                    if (increasing)
+                        setProducts(prdts.sort((a, b) => parseInt(a.poles.name) - parseInt(b.poles.name)))
+                    else
+                        setProducts(prdts.sort((a, b) => parseInt(b.poles.name) - parseInt(a.poles.name)))
+                    break;
+                case 'currentRating':
+                    if (increasing)
+                        setProducts(prdts.sort((a, b) => parseInt(a.currentRating.name) - parseInt(b.currentRating.name)))
+                    else
+                        setProducts(prdts.sort((a, b) => parseInt(b.currentRating.name) - parseInt(a.currentRating.name)))
+            }
+        }
+    }, [sortBy])
+
+    useEffect(() => {
+        let prdts = [...products]
+        prdts = prdts.filter(product => parseInt(product.price) >= filter.price)
+        setProducts(prdts)
+    }, [filter])
+
+    return (
+        <div className="flex flex-col items-center w-full relative pt-16 md:pt-0">
+            <CategoryBanner bannerId={bannerId} />
+            <ProductFullRow products={productsSort} Remains={remains} />
+            <FilterMenu setSortBy={setSortBy} filter={filter} setFilter={SetFilter} />
+        </div>
+    )
+}
+
+const FilterMenu = ({ setSortBy, setFilter, filter }: { setSortBy: Dispatch<SetStateAction<typeSort>>, setFilter: Dispatch<SetStateAction<{ price: number }>>, filter: { price: number } }) => {
+
+    const [increasing, setIncreasing] = useState({ price: true, poles: true, currentRating: true })
+
+    return (
+        <div className="absolute top-0 left-0 w-full h-14 md:w-[200px] lg:w-[300px] md:h-full bg-blue-100">
+            <div>
+                <h1> Sort By </h1>
+                <div className="flex flex-col">
+                    {SortBy.map(sort => {
+                        if (sort) {
+                            return <button key={sort} onClick={() => {
+                                setSortBy({
+                                    name: sort,
+                                    increasing: increasing[sort]
+                                })
+                                setIncreasing(increasing => {
+                                    return {
+                                        ...increasing,
+                                        [sort]: !increasing[sort]
+                                    }
+                                })
+                            }}>{sort}</button>
+                        }
+                    })}
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <label>Price:</label>
+                    <input name='price' onChange={e => {
+                        if (parseInt(e.target.value)) {
+                            setFilter({
+                                ...filter,
+                                [e.target.name]: e.target.value
+                            })
+                        }
+                    }} />
+                </div>
+                <div>
+                </div>
+            </div>
+        </div >
+    )
+}
+
+export default CategoryPageClient

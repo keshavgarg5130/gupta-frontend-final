@@ -34,10 +34,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
     });
     minPrice = isNaN(minPrice) ? 100 : minPrice
     const remains = products.length > 0
-    const [priceRange, setPriceRange] = useState<{ min: number, max: number }>({
-        min: minPrice + 1,
-        max: maxPrice
-    })
+    const [minPriceValue, setMinPriceValue] = useState<number>(minPrice - 100)
 
     let polesState: filterStateInterface = {};
     for (let pole of poles) {
@@ -58,19 +55,8 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
     const [currentRatingsSelected, setCurrentRatingsSelected] = useState<filterStateInterface>(currentRatingState)
 
     const handleMinChange = (e) => {
-        const value = Math.min(e.target.value, priceRange.max - 1);
-        setPriceRange({
-            ...priceRange,
-            min: value
-        })
-    }
-
-    const handleMaxChange = (e) => {
-        const value = Math.max(e.target.value, priceRange.min + 1)
-        setPriceRange({
-            ...priceRange,
-            max: value
-        })
+        const value = Math.min(e.target.value, maxPrice - 1);
+        setMinPriceValue(value)
     }
 
     const [filterHidden, setFilterHidden] = useState(true)
@@ -78,7 +64,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
     useEffect(() => {
         let prdts = [...products]
         prdts = prdts.filter(product => {
-            const priceFits = parseInt(product.price) >= priceRange.min && parseInt(product.price) <= priceRange.max
+            const priceFits = parseInt(product.price) >= minPriceValue
             const poleFits = filter.poles ? polesSelected[product.polesId].isSelected : true;
             const currentFits = filter.currentRating ? currentRatingsSelected[product.currentRatingId].isSelected : true;
             return priceFits && poleFits && currentFits
@@ -107,7 +93,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                         setProducts(prdts.sort((a, b) => parseInt(b.currentRating.name) - parseInt(a.currentRating.name)))
             }
         }
-    }, [sortBy, priceRange, polesSelected, currentRatingsSelected])
+    }, [sortBy, minPriceValue, polesSelected, currentRatingsSelected])
 
     return (
         <div className="flex flex-col items-center w-full relative md:pt-0 min-h-screen">
@@ -151,14 +137,14 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                                 type="range"
                                 min={minPrice - 10}
                                 max={maxPrice}
-                                value={priceRange.min}
+                                value={minPriceValue}
                                 onChange={handleMinChange}
                                 className="w-full pointer-events-auto z-10 range-thumb"
                             />
                             {/* Range Values */}
                             <div className="flex justify-between mt-2 text-sm w-full text-themeBlue">
-                                <span>{priceRange.min}</span>
-                                <span>{priceRange.max}</span>
+                                <span>{minPriceValue}</span>
+                                <span>{maxPrice}</span>
                             </div>
                         </div>
                     </div>

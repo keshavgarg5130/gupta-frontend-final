@@ -1,17 +1,22 @@
 import { product } from "../interfaces/product"
 import ProductPamphletFull from "./ProductPamphletFull"
 
-const ProductFullRow = ({ products }: { products: product[] }) => {
+const ProductFullRow = ({ products, Remains }: { products: product[], Remains: boolean }) => {
   if (products.length == 0) {
-    return (
-      <div className="flex flex-col gap-5 my-5">
-        <SkeletonLoaderProductFull />
-        <SkeletonLoaderProductFull />
-        <SkeletonLoaderProductFull />
-        <SkeletonLoaderProductFull />
-        <SkeletonLoaderProductFull />
-      </div>
-    )
+    if (!Remains)
+      return (
+        <div className="flex flex-col gap-5 my-5">
+          <SkeletonLoaderProductFull />
+          <SkeletonLoaderProductFull />
+          <SkeletonLoaderProductFull />
+          <SkeletonLoaderProductFull />
+          <SkeletonLoaderProductFull />
+        </div>
+      )
+    else
+      return (
+        <div>No Products Remain...</div>
+      )
   } else {
     return (
       <div className="flex flex-col m-10 gap-5 items-center w-11/12 md:w-2/3 lg:w-2/5 ">

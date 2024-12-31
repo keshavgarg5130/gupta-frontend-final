@@ -1,10 +1,16 @@
+'use client'
+import { useEffect, useState } from "react";
 import fetchBillboard from "../lib/fetchBillboard"
 
-const CategoryBanner = async ({ bannerId }: { bannerId: string }) => {
+const CategoryBanner = ({ bannerId }: { bannerId: string }) => {
 
-  let url = ''
-  if (bannerId)
-    url = await fetchBillboard(bannerId);
+  const [url, setUrl] = useState('');
+  useEffect(() => {
+    const getUrl = async () => {
+      setUrl(await fetchBillboard(bannerId));
+    }
+    getUrl();
+  }, [])
   if (url)
     return (
       <div className="mt-2">

@@ -28,6 +28,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
         name: '',
         increasing: true
     })
+    const [showAll, setShowAll] = useState(true);
     const [filter, setFilter] = useState({
         poles: false,
         currentRating: false
@@ -63,14 +64,15 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
 
     useEffect(() => {
         let prdts = [...products]
-        prdts = prdts.filter(product => {
-            const priceFits = parseInt(product.price) >= minPriceValue
-            const poleFits = filter.poles ? polesSelected[product.polesId].isSelected : true;
-            const currentFits = filter.currentRating ? currentRatingsSelected[product.currentRatingId].isSelected : true;
-            return priceFits && poleFits && currentFits
-        })
+        if (!showAll) {
+            prdts = prdts.filter(product => {
+                const priceFits = parseInt(product.price) >= minPriceValue
+                const poleFits = filter.poles ? polesSelected[product.polesId].isSelected : true;
+                const currentFits = filter.currentRating ? currentRatingsSelected[product.currentRatingId].isSelected : true;
+                return priceFits && poleFits && currentFits
+            })
+        }
         setProducts(prdts)
-
         if (sortBy.name) {
             const increasing = sortBy.increasing
             switch (sortBy.name) {
@@ -93,7 +95,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                         setProducts(prdts.sort((a, b) => parseInt(b.currentRating.name) - parseInt(a.currentRating.name)))
             }
         }
-    }, [sortBy, minPriceValue, polesSelected, currentRatingsSelected])
+    }, [sortBy, minPriceValue, polesSelected, currentRatingsSelected, showAll])
 
     return (
         <div className="flex flex-col items-center w-full relative md:pt-0 min-h-screen">
@@ -130,9 +132,22 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
 
                 <div className="flex flex-col gap-5">
                     <div className="flex flex-col items-center gap-3">
+                        <h1 className="text-2xl font-bold text-themeBlue"> Show All </h1>
+                        <button onClick={() => {
+                            setShowAll(!showAll)
+                            if (!showAll) {
+                                setFilter({
+                                    poles: false,
+                                    currentRating: false
+                                })
+                            }
+                        }}>
+                            <DisplayDiv name="Show All" isSelected={showAll} />
+                        </button>
+                    </div>
+                    <div className="flex flex-col items-center gap-3">
                         <h1 className="text-2xl font-bold text-themeBlue"> Price Range</h1>
                         <div className="relative w-11/12 flex flex-col items-center">
-                            {/* Range Inputs */}
                             <input
                                 type="range"
                                 min={minPrice - 10}
@@ -141,7 +156,6 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                                 onChange={handleMinChange}
                                 className="w-full pointer-events-auto z-10 range-thumb"
                             />
-                            {/* Range Values */}
                             <div className="flex justify-between mt-2 text-sm w-full text-themeBlue">
                                 <span>{minPriceValue}</span>
                                 <span>{maxPrice}</span>
@@ -164,6 +178,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                                         ...filter,
                                         poles: true
                                     })
+                                    setShowAll(false)
                                 }}>
                                     <DisplayDiv name={pole.name} isSelected={polesSelected[pole.id].isSelected} />
                                 </button>)
@@ -186,6 +201,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                                         ...filter,
                                         currentRating: true
                                     })
+                                    setShowAll(false)
                                 }}>
                                     <DisplayDiv name={current.name} isSelected={currentRatingsSelected[current.id].isSelected} />
                                 </button>)

@@ -26,9 +26,8 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
     const [increasing, setIncreasing] = useState({ price: true, poles: true, currentRating: true })
     const [sortBy, setSortBy] = useState<typeSort>({
         name: '',
-        increasing: true
+        increasing: false
     })
-    const [showAll, setShowAll] = useState(true);
     const [filter, setFilter] = useState({
         poles: false,
         currentRating: false
@@ -64,14 +63,12 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
 
     useEffect(() => {
         let prdts = [...products]
-        if (!showAll) {
-            prdts = prdts.filter(product => {
-                const priceFits = parseInt(product.price) >= minPriceValue
-                const poleFits = filter.poles ? polesSelected[product.polesId].isSelected : true;
-                const currentFits = filter.currentRating ? currentRatingsSelected[product.currentRatingId].isSelected : true;
-                return priceFits && poleFits && currentFits
-            })
-        }
+        prdts = prdts.filter(product => {
+            const priceFits = parseInt(product.price) >= minPriceValue
+            const poleFits = filter.poles ? polesSelected[product.polesId].isSelected : true;
+            const currentFits = filter.currentRating ? currentRatingsSelected[product.currentRatingId].isSelected : true;
+            return priceFits && poleFits && currentFits
+        })
         setProducts(prdts)
         if (sortBy.name) {
             const increasing = sortBy.increasing
@@ -95,7 +92,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                         setProducts(prdts.sort((a, b) => parseInt(b.currentRating.name) - parseInt(a.currentRating.name)))
             }
         }
-    }, [sortBy, minPriceValue, polesSelected, currentRatingsSelected, showAll])
+    }, [sortBy, minPriceValue, polesSelected, currentRatingsSelected])
 
     return (
         <div className="flex flex-col items-center w-full relative md:pt-0 min-h-screen">
@@ -112,18 +109,11 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                                 return <button key={sort} className="py-1 px-3 bg-white text-themeBlue rounded-full border-themeBlue border text-lg relative font-semibold" onClick={() => {
                                     setSortBy({
                                         name: sort,
-                                        increasing: increasing[sort]
-                                    })
-                                    setIncreasing(increasing => {
-                                        const newInceasing = { price: false, currentRating: false, poles: false }
-                                        return {
-                                            ...newInceasing,
-                                            [sort]: !increasing[sort]
-                                        }
+                                        increasing: sortBy.name == sort ? !sortBy.increasing : true
                                     })
                                 }}>
                                     {sort}
-                                    <div className="absolute top-[50%] translate-y-[-50%] right-10"><div className={`${increasing[sort] ? '' : 'rotate-180'} transition-all ease-in-out duration-300`}><ArrowUp /></div></div>
+                                    <div className="absolute top-[50%] translate-y-[-50%] right-10"><div className={`${sortBy.name == sort ? (sortBy.increasing ? 'rotate-180' : '') : 'hidden'} transition-all ease-in-out duration-300`}><ArrowUp /></div></div>
                                 </button>
                             }
                         })}
@@ -132,17 +122,15 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
 
                 <div className="flex flex-col gap-5">
                     <div className="flex flex-col items-center gap-3">
-                        <h1 className="text-2xl font-bold text-themeBlue"> Show All </h1>
-                        <button onClick={() => {
-                            setShowAll(!showAll)
-                            if (!showAll) {
-                                setFilter({
-                                    poles: false,
-                                    currentRating: false
-                                })
-                            }
+                        <button className="text-2xl font-bold text-themeBlue" onClick={() => {
+                            setFilter({
+                                poles: false,
+                                currentRating: false
+                            })
+                            setPolesSelected(polesState)
+                            setCurrentRatingsSelected(currentRatingState)
                         }}>
-                            <DisplayDiv name="Show All" isSelected={showAll} />
+                            <DisplayDiv name="Remove Filter" isSelected={true} />
                         </button>
                     </div>
                     <div className="flex flex-col items-center gap-3">

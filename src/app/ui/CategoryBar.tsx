@@ -25,14 +25,16 @@ const CategoryBar = () => {
 
   return (
     <div className="h-[45px] w-full bg-white flex items-center box-border relative z-40 justify-evenly border-b-2 md:px-20">
-      <div className="flex w-full relative cursor-pointer" onClick={handleClick}>
-        <div className="flex flex-col gap-[3px] mx-3 justify-center mr-2">
-          <Bar />
-          <Bar />
-          <Bar />
+      <div className="flex w-full relative ">
+        <div className="flex cursor-pointer" onClick={handleClick}>
+          <div className="flex flex-col gap-[3px] mx-3 justify-center mr-2">
+            < Bar />
+            <Bar />
+            <Bar />
+          </div >
+          <div className="select-none font-bold">Categories</div>
         </div>
-        <div className="select-none font-bold">Categories</div>
-        <div className={`absolute top-[34px] md:max-w-[400px] w-full overflow-hidden bg-white transition-all ${clicked ? '' : 'hidden'} shadow-gray-300 shadow-lg rounded-xl flex flex-col gap-1 py-5`}>
+        <div className={`absolute top-[34px] md:max-w-[400px] w-full overflow-hidden bg-white transition-all ${clicked ? '' : 'hidden'} shadow-gray-300 shadow-md rounded-xl flex flex-col gap-1 py-5`}>
           {categories.map((category, index) => {
             return (
               <div key={index} className="justify-center min-h-8 flex">
@@ -53,11 +55,9 @@ const CategoryButton = ({ name, link, }: { name: string, link: string }) => {
     </a>
   )
 }
-
 const Bar = () => {
   return (
-    <div className="h-[2px] w-[18px] bg-black"></div>
+    <div className={"h-[2px] w-[18px] bg-black"}></div>
   )
 }
-
 export default CategoryBar;

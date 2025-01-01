@@ -1,29 +1,71 @@
+'use client'
 import Image from "next/image";
 import CartIcon from "./CartIcon";
-import { User } from 'lucide-react';
+import { useState, useEffect } from "react";
 
 const Navbar = () => {
 
+  const [showOptions, setShowOptions] = useState(false)
+  const isLoggedIn = localStorage.getItem('token')
+
+  const handleOptionClick = () => {
+    setTimeout(() => {
+      setShowOptions(!showOptions)
+    }, 10)
+  }
+  useEffect(() => {
+    addEventListener('click', handleBodyClick)
+    return () => {
+      removeEventListener('click', handleBodyClick)
+    }
+  })
+
+  const handleBodyClick = () => {
+    if (showOptions)
+      setShowOptions(false)
+  }
   return (
-    <div className="h-16 px-4 bg-themeBlue text-white flex sticky top-0 z-50 justify-between">
+    <div className="h-16 px-2 lg:px-4 bg-themeBlue text-white flex sticky top-0 z-50 justify-evenly md:justify-center md:gap-1 lg:gap-16 items-center">
       {/* CENTER */}
       <a href="/" className="flex h-full items-center">
-        <Image src="/logo.png" alt="" width={80} height={80} />
+        <Image src="/logo.png" alt="LOGO" width={50} height={50} />
         <div className="font-bold text-2xl pl-1">GUPTA ASSOCIATES</div>
       </a>
-      <div className="w-1/2 items-center absolute left-[50%] translate-x-[-50%] hidden md:flex h-full">
-        <img src="/search-icon.png" className=" h-[20px] absolute right-2 mr-2" />
-        <input className="w-full h-2/3 rounded-lg px-9 outline-none" placeholder="Search Products..." />
-      </div>
-      {/* RIGHT */}
-      <div className="flex w-auto md:w-48 justify-between h-ful gap-3">
-        <a href="/register" className="h-full flex items-center">
-          <User size={35} />
-        </a>
-        <CartIcon />
+      <div className="min-h-full flex items-center relative">
+        <div className="md:hidden cursor-pointer" onClick={handleOptionClick}>
+          <div className="flex flex-col gap-[5px] mx-3 justify-center mr-2">
+            <Bar />
+            <Bar />
+            <Bar />
+          </div >
+        </div>
+        <div className={`fixed left-0 items-center py-6 gap-6 top-16 flex-col bg-blue-300 w-full md:py-0 md:static md:flex-row md:bg-themeBlue md:flex md:w-auto md:gap-2 lg:gap-4 md:min-h-full ${showOptions ? 'flex' : 'hidden'}`}>
+          <Link text='HOME' link="/" />
+          <Link text={isLoggedIn ? 'PROFILE' : 'REGISTER'} link={isLoggedIn ? '/' : '/register'} />
+          <Link text="CATEGORIES" link="/Categories" />
+          <Link text="ABOUT US" link="/AboutUs" />
+          <Link text="CONTACT US" link="/ContactUs" />
+          <CartIcon />
+        </div>
       </div>
     </div>
   );
 }
 
+const Link = ({ text, link }: { text: string, link: string }) => {
+  return (
+    <div className="md:h-full flex items-center">
+      <a href={link} className="relative group font-bold md:font-light md:text-sm">
+        {text}
+        <div className="h-[2px] w-0 group-hover:w-full bg-white absolute left-0 bottom-0 transition-all"></div>
+      </a>
+    </div>
+  )
+}
+
+const Bar = () => {
+  return (
+    <div className={"h-[2px] w-[26px] bg-white"}></div>
+  )
+}
 export default Navbar;

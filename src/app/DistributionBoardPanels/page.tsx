@@ -1,4 +1,3 @@
-import PanelsPage from "../ui/PanelsPage"
 import panelsInterface from "../interfaces/panels"
 import Image from "next/image"
 import LeftSideLinkComponent from "../ui/LeftSideLinkComponent"
@@ -20,11 +19,11 @@ const Page = () => {
       <div>
         <Image src={data.mainBanner} alt={data.name} width={2000} height={1000} />
       </div>
-      <div className="flex flex-col md:flex-row justify-center md:gap-5 md:px-2">
+      <div className="flex flex-col md:flex-row md:gap-5 md:px-5">
         <div className="hidden md:block">
           <LeftSideLinkComponent data={[{ name: 'name1', link: 'link1' }]} />
         </div>
-        <div className="lg:w-[900px] md:w-[570px] relative md:-top-8 rounded-lg bg-white px-6 py-10 md:p-24 shadow-xl shadow-gray-300 gap-5 md:font-semibold text-gray-500">
+        <div className="lg:w-[1200px] md:w-[570px] relative md:-top-8 rounded-lg bg-white px-6 py-10 md:p-20 shadow-xl shadow-gray-300 gap-5 md:font-semibold text-gray-500">
           <Image src={data.smallBanner} alt={data.name} height={800} width={700} className="rounded-lg hidden md:block mb-5" />
           <Heading text={data.name} />
           <Para texts={data.firstPara} />

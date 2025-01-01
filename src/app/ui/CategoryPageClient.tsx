@@ -23,7 +23,6 @@ interface filterStateInterface {
 
 const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPrice, minPrice }: { bannerId: string, products: product[], poles: poles[], currentRatings: currentRatingInterface[], maxPrice: number, minPrice: number }) => {
     const [productsSort, setProducts] = useState(products)
-    const [increasing, setIncreasing] = useState({ price: true, poles: true, currentRating: true })
     const [sortBy, setSortBy] = useState<typeSort>({
         name: '',
         increasing: false
@@ -54,8 +53,8 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
     const [polesSelected, setPolesSelected] = useState<filterStateInterface>(polesState)
     const [currentRatingsSelected, setCurrentRatingsSelected] = useState<filterStateInterface>(currentRatingState)
 
-    const handleMinChange = (e) => {
-        const value = Math.min(e.target.value, maxPrice - 1);
+    const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = Math.min(parseInt(e.target.value), maxPrice - 1);
         setMinPriceValue(value)
     }
 
@@ -166,7 +165,6 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                                         ...filter,
                                         poles: true
                                     })
-                                    setShowAll(false)
                                 }}>
                                     <DisplayDiv name={pole.name} isSelected={polesSelected[pole.id].isSelected} />
                                 </button>)
@@ -189,7 +187,6 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                                         ...filter,
                                         currentRating: true
                                     })
-                                    setShowAll(false)
                                 }}>
                                     <DisplayDiv name={current.name} isSelected={currentRatingsSelected[current.id].isSelected} />
                                 </button>)

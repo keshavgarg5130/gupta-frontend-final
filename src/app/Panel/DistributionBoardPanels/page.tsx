@@ -1,6 +1,7 @@
 import panelsInterface from "../interfaces/panels"
 import Image from "next/image"
 import LeftSideLinkComponent from "../ui/LeftSideLinkComponent"
+import PanelsData from "@/lib/PanelsData"
 
 const data: panelsInterface = {
   name: 'Distribution Board Panels',
@@ -21,7 +22,7 @@ const Page = () => {
       </div>
       <div className="flex flex-col md:flex-row md:gap-5 md:px-5">
         <div className="hidden md:block">
-          <LeftSideLinkComponent data={[{ name: 'name1', link: 'link1' }]} />
+          <LeftSideLinkComponent data={PanelsData} />
         </div>
         <div className="lg:w-[1200px] md:w-[570px] relative md:-top-8 rounded-lg bg-white px-6 py-10 md:p-20 shadow-xl shadow-gray-300 gap-5 md:font-semibold text-gray-500">
           <Image src={data.smallBanner} alt={data.name} height={800} width={700} className="rounded-lg hidden md:block mb-5" />

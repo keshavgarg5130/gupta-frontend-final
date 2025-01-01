@@ -15,7 +15,7 @@ const LeftSideLinkComponent = ({ data }: { data: { name: string, link: string }[
 
 const CategoryRow = ({ name, link }: { name: string, link: string }) => {
     return (
-        <a href={link} className="h-9 w-4/5 border-themeBlue border rounded-lg flex items-center justify-center font-light text-sm text-themeBlue hover:bg-themeBlue hover:text-white hover:text-lg transition-all">
+        <a href={link} className="h-11 text-center w-4/5 border-themeBlue border rounded-lg flex items-center justify-center font-light text-sm text-themeBlue hover:bg-themeBlue hover:text-white hover:text-lg transition-all">
             {name}
         </a>
     )

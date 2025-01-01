@@ -1,17 +1,8 @@
 'use client'
+import categories from "@/lib/categoryData"
 
 import { useState } from "react"
 
-const categories = [
-  { name: 'ACB', link: '/ACB' },
-  { name: 'MCB', link: '/MCB' },
-  { name: 'MCCB', link: '/MCCB' },
-  { name: 'RCCB', link: '/RCCB' },
-  { name: 'ISOLATOR', link: '/ISOLATOR' },
-  { name: 'OVERLOAD RELAY', link: '/OVERLOAD_RELAY' },
-  { name: 'POWER CONTRACTOR', link: '/POWER_CONTRACTOR' },
-  { name: 'WIRES & CABLES', link: '/WIRES_AND_CABLES' },
-]
 const CategoryBar = () => {
   const [clicked, setClicked] = useState(false)
   const handleClick = () => {
@@ -45,7 +36,7 @@ const CategoryBar = () => {
   )
 }
 
-const CategoryButton = ({ name, link,  }: { name: string, link: string }) => {
+const CategoryButton = ({ name, link, }: { name: string, link: string }) => {
   return (
     <a href={link} className="text-xs font-semibold hover:text-sm hover:shadow-lg transition-all w-full h-full flex justify-center items-center">
       {name}

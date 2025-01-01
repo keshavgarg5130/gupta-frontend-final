@@ -1,17 +1,15 @@
-import panelsInterface from "@/app/interfaces/panels"
 import Image from "next/image"
 import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import PanelsData from "@/lib/PanelsData"
 
-const data: panelsInterface = {
-  name: 'Distribution Board Panels',
+const data = {
+  name: 'AMF Panel',
   mainBanner: '/banner-1.jpg',
   smallBanner: '/banner-1.jpg',
-  firstPara: ['Leveraging cutting-edge technologies, Rashmi Electricals manufacturers and supplies Distribution Board Panels of international standards. Our panels are fully type-tested assemblies, designed with accuracy using premium quality raw materials, and electrical and high-efficiency components. They are packed with multiple components such as bus bars, switches, fuse links, bypass equipment, and residual current detector (RSD).'],
-  specificationPoints: ['Resistant to corrosion', 'Excellent performance', 'Cost effective', 'Varied enclosure options', 'Interlock', 'External handles in off position and much more'],
-  secondPara: ['Suitable for both industrial and domestic sectors, these panels are perfect for distributing and supplying power. They are powerful enough to distribute the power supply evenly throughout the building using different circuits. Also, they direct power from one or more sources of supply to different loads. They allow electrical power to be redirected, allowing division and control of the power supplied to the switchboard for further distribution.', ' In addition, the distribution board panels designed by us can automatically cut off electric current in case of overload or occurrence of some other anomaly. They have the ability to prevent circuits from overheating due to a defective appliance or a wiring problem.'],
-  secondPoints: ['They can control different applications', 'They protect electrical and mechanical systems', 'They help measure and control different Electrical Parameters.', 'They distribute power to electrical machines or systems.'],
-  thirdPara: ['As a leading manufacturer and supplier, Rashmi Electricals offers customized distribution board panels that can be varying sizes with single or double front access. The equipment can be used in indoor or outdoor applications. They come with different load capacities. In addition, the panels are resistant to corrosion, cost-effective, impart excellent performance, and have various enclosure options, external handles in off position, and much more.', 'They are sturdy, firm, strong, and resilient in their construction with high accuracy. In addition, we manufacture board panels using high-quality components that are sourced from popular vendors.']
+  firstPara: ['Gupta Associates is committed to manufacturing and supplying superior quality AMF (Automatic Main Failure) Panel, using genuine components. The range of panels manufactured by us is Power Inverters, Battery Charger, Automatic Changeover with Current Limit, Automatic Changeover, and Sine Wave Inverters.', 'The designed AMF panels are seamlessly used to manage DG sets. They make the power switch to emergency standby generators in case of a significant loss of main power or total blackout. The panels can be used where generators between the main AC and load where generators are installed. They are used to automatically start or stop the generator and change over the generator lines. Our AMF panels are appropriate for diverse applications and industries, like foundries, apartments, textiles, factories, and so on.'],
+  specificationPoints: ['Automatic Mains Failure Detection', 'Continuous Monitoring Of Three-Phase', 'Voltage / Frequency / Current / Of Mains &', 'DG, Available in Different Models', 'Automatic Shutdown during DG Fault', 'Auto / Manual Selector', 'Fault Indicationvia LED / LCD', 'Configurable Solid State Output', 'Genset Stop With Delay 3 Minutes', 'Auto Delay in Start Of Genset', 'Hooter-Alarm Annunciation For Fail to Start', 'Emergency Stop Switch And Manual Start & Stop Switch'],
+  secondPara: ['Our AMF panel is a kind of module that is designed under the supervision of highly experienced and knowledgeable engineers and professionals. Several quality inspections are done on different parameters before the delivery of the product. No fault, no default product, no hidden costs! Get in touch for more information about our AMF panel or place your order.'],
+  SalientFeatures: ['Easy to install', 'CPRI Approved', 'High Efficiency', 'Longer Service Life', 'Easy Opearation', 'Excellent Performance'],
 }
 
 const Page = () => {
@@ -28,11 +26,11 @@ const Page = () => {
           <Image src={data.smallBanner} alt={data.name} height={800} width={700} className="rounded-lg hidden md:block mb-5" />
           <Heading text={data.name} />
           <Para texts={data.firstPara} />
-          <Heading text="Product Specifications" />
+          <Heading text="Product Details With Specifications:" />
           <Points points={data.specificationPoints} />
           <Para texts={data.secondPara} />
-          <Points points={data.secondPoints} />
-          <Para texts={data.thirdPara} />
+          <Heading text="Salient Features of AMF Panels:" />
+          <Para texts={data.SalientFeatures} />
         </div>
       </div>
     </div>

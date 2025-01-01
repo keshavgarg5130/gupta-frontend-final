@@ -1,17 +1,17 @@
-import panelsInterface from "@/app/interfaces/panels"
 import Image from "next/image"
 import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import PanelsData from "@/lib/PanelsData"
 
-const data: panelsInterface = {
-  name: 'Distribution Board Panels',
+const data = {
+  name: 'APFC / Power Factor Improvement Panel',
   mainBanner: '/banner-1.jpg',
   smallBanner: '/banner-1.jpg',
-  firstPara: ['Leveraging cutting-edge technologies, Rashmi Electricals manufacturers and supplies Distribution Board Panels of international standards. Our panels are fully type-tested assemblies, designed with accuracy using premium quality raw materials, and electrical and high-efficiency components. They are packed with multiple components such as bus bars, switches, fuse links, bypass equipment, and residual current detector (RSD).'],
-  specificationPoints: ['Resistant to corrosion', 'Excellent performance', 'Cost effective', 'Varied enclosure options', 'Interlock', 'External handles in off position and much more'],
-  secondPara: ['Suitable for both industrial and domestic sectors, these panels are perfect for distributing and supplying power. They are powerful enough to distribute the power supply evenly throughout the building using different circuits. Also, they direct power from one or more sources of supply to different loads. They allow electrical power to be redirected, allowing division and control of the power supplied to the switchboard for further distribution.', ' In addition, the distribution board panels designed by us can automatically cut off electric current in case of overload or occurrence of some other anomaly. They have the ability to prevent circuits from overheating due to a defective appliance or a wiring problem.'],
-  secondPoints: ['They can control different applications', 'They protect electrical and mechanical systems', 'They help measure and control different Electrical Parameters.', 'They distribute power to electrical machines or systems.'],
-  thirdPara: ['As a leading manufacturer and supplier, Rashmi Electricals offers customized distribution board panels that can be varying sizes with single or double front access. The equipment can be used in indoor or outdoor applications. They come with different load capacities. In addition, the panels are resistant to corrosion, cost-effective, impart excellent performance, and have various enclosure options, external handles in off position, and much more.', 'They are sturdy, firm, strong, and resilient in their construction with high accuracy. In addition, we manufacture board panels using high-quality components that are sourced from popular vendors.']
+  firstPara: ['Gupta Associates is one of the leading Automatic Power Factor Improvement Panels manufacturers in the power distribution equipment industry in India. It is popularly known as APFC Panels. It is a prime component used for power improvement and measuring electricity consumption. As its name defines its work and usability that it is an automatic system or capacitor bank unit that improves power factors by switching On and Off as per requirement.', 'A modern power network is inductive and requires a wide variety of reactive power and electronic loads that creates extensive power demand on the power supply system. Most of the reactive power is wasted and not properly used for actual work which leads to the necessity of additional power to run heavy industrial machinery. Keeping this perspective in mind, we deliver the APFC Panels to ensure consistent high power factors without manual interventions. Our panels consist of features including a digital power-saving display, power monitoring display, pluggable current sensor, LED indicators, etc. that offer several benefits which include:'],
+  features: ['Perfect to Improve Power Factor', 'User-Friendly Microprocessor Based APFC Relay', 'Self Optimizing Control Capability', 'Dust-Proof Cabinet With Power Coating', 'Perfect Control With Different System Parameters Measurement With Indicating Light', 'Cost Effective Reliable Static Devices', 'Durable Construction'],
+  secondPara: ['Ingeniously designed, our panel provides a unique solution to meet the variations of loads. Our panels consist of multiple capacitors, and a microprocessor controller that understands the power consumption, improves capacitance energy saving at peak and low energy demand levels, magnetizes the current, and optimizes real-time energy uses. Moreover, it is used in conjunction with applications with Bluetooth connection, and many other renewable energy sources such as wind turbines, solar panels, and inverters as well.'],
+  specifications: ['Non-Compartmentalized', 'MOdular Design For Easier Assembly, Installation & Maintenance', 'Automatic Power Factor Correction', '4-14 Correction Stages', 'Optimum Reactive Power Compensation', 'Indoor', 'Floor Mounted', 'Cable Entry From Bottom', 'Better Reliability And Lower Losses', 'Withstands High Temperature', 'Step Protection MCCB', 'Savings And Incentives in Electricity Bills'],
+  thirdPara: ['Benefits of APFC panels include shortening mal-operation of diesel generation sets, avoiding over-voltages, voltage fluctuations, and power issues, delivering smooth power factor to avoid sound and disturbance, overcoming electrical issues and maintaining a consistent power factor. The panels also reduce operational losses occur due to a lack of leading power and minimize the higher electricity bills and heavy penalties led by the power distribution authorities. They can be used in a wide range of industries like.'],
+  secondPoints: ['Hospitals / Hostels', 'Building Segment', 'Steel Rolling Mills', 'Chemical Industry', 'Textile', 'Cement Plant', 'Sugar Plant', 'Automobile Industry']
 }
 
 const Page = () => {
@@ -28,11 +28,13 @@ const Page = () => {
           <Image src={data.smallBanner} alt={data.name} height={800} width={700} className="rounded-lg hidden md:block mb-5" />
           <Heading text={data.name} />
           <Para texts={data.firstPara} />
-          <Heading text="Product Specifications" />
-          <Points points={data.specificationPoints} />
+          <Heading text="Some of the key features of our APFC products are:" />
+          <Points points={data.features} />
           <Para texts={data.secondPara} />
-          <Points points={data.secondPoints} />
+          <Heading text="Product Specifications" />
+          <Points points={data.specifications} />
           <Para texts={data.thirdPara} />
+          <Points points={data.secondPoints} />
         </div>
       </div>
     </div>

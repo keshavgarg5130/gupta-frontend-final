@@ -1,9 +1,8 @@
-import panelsInterface from "@/app/interfaces/panels"
 import Image from "next/image"
 import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import PanelsData from "@/lib/PanelsData"
 
-const data: panelsInterface = {
+const data = {
   name: 'Distribution Board Panels',
   mainBanner: '/banner-1.jpg',
   smallBanner: '/banner-1.jpg',

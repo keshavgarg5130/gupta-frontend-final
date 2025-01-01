@@ -1,17 +1,16 @@
-import panelsInterface from "@/app/interfaces/panels"
 import Image from "next/image"
 import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import PanelsData from "@/lib/PanelsData"
 
-const data: panelsInterface = {
-  name: 'Distribution Board Panels',
+const data = {
+  name: 'DG Synchronization Panel',
   mainBanner: '/banner-1.jpg',
   smallBanner: '/banner-1.jpg',
-  firstPara: ['Leveraging cutting-edge technologies, Rashmi Electricals manufacturers and supplies Distribution Board Panels of international standards. Our panels are fully type-tested assemblies, designed with accuracy using premium quality raw materials, and electrical and high-efficiency components. They are packed with multiple components such as bus bars, switches, fuse links, bypass equipment, and residual current detector (RSD).'],
-  specificationPoints: ['Resistant to corrosion', 'Excellent performance', 'Cost effective', 'Varied enclosure options', 'Interlock', 'External handles in off position and much more'],
-  secondPara: ['Suitable for both industrial and domestic sectors, these panels are perfect for distributing and supplying power. They are powerful enough to distribute the power supply evenly throughout the building using different circuits. Also, they direct power from one or more sources of supply to different loads. They allow electrical power to be redirected, allowing division and control of the power supplied to the switchboard for further distribution.', ' In addition, the distribution board panels designed by us can automatically cut off electric current in case of overload or occurrence of some other anomaly. They have the ability to prevent circuits from overheating due to a defective appliance or a wiring problem.'],
-  secondPoints: ['They can control different applications', 'They protect electrical and mechanical systems', 'They help measure and control different Electrical Parameters.', 'They distribute power to electrical machines or systems.'],
-  thirdPara: ['As a leading manufacturer and supplier, Rashmi Electricals offers customized distribution board panels that can be varying sizes with single or double front access. The equipment can be used in indoor or outdoor applications. They come with different load capacities. In addition, the panels are resistant to corrosion, cost-effective, impart excellent performance, and have various enclosure options, external handles in off position, and much more.', 'They are sturdy, firm, strong, and resilient in their construction with high accuracy. In addition, we manufacture board panels using high-quality components that are sourced from popular vendors.']
+  firstPara: ['Gupta Associates is a leading manufacturer, supplier, and distributor of advanced DG Synchronization Panel that controls the functionality of several diesel generator sets. Backed with decades of experience and domain expertise, we are able to manufacture, supply, and install a wide range of panels to meet the specific requirements of our esteemed clients. Our range of products includes DG to DG synchronization, DG to MAINS (GRID) synchronization, and Reverse synchronization, based on load generation.', 'Having domain expertise, we are capable of manufacturing, designing, installing, and commissioning a qualitative range of DG Synchronization Panel as per the demand of our esteemed clients. We provide DG to DG synchronization, DG to MAINS (GRID) synchronization, and Reverse synchronization, based on load generation. Some of the specific features of our panel include excellent components, perfect for varied industries, capacity to control various processes with accuracy, Optimum functionality, and manual as well as digital operation.'],
+  specifications: ['DG Synchronization', 'DG Automation', 'Auto DG On Off', 'Parallel DG Operation', 'Feed Back Control in DG', 'DG PLC System', 'Fuel Saving in DG', 'DG Load Sharing', 'DG Load Management', 'DG efficiency improvement', 'Excellent Components', 'Perfect for Varied Industries', 'Optimum Functionality', 'Manual as Well as Digital Operation', 'Made Up of Very Excellent Quality Materials', 'Equipped With all the Latest Technologies'],
+  secondPara: ['DG Synchronization Panels offer complete controlling and protection relays that can simultaneously synchronize several DG sets. These panels require less space, are easy to use, and are corrosion-resistant. They offer high efficiency and are precision engineered. They can perform multiple functions, like starting, sharing, transferring, and stopping load variations.', 'Our CPRI-approved DG Synchronization Panels are packed with diverse features, such as excellent components, perfect for varied industries, capacity to control various processes with accuracy, Optimum functionality, and manual as well as digital operation.'],
+  secondPoints: ['Manual as well as Digital Operatoin', 'Made Up of top-Quality materials', 'Indoor / Ourdoor type Structure', 'Single front/double front Operated', 'Panel structure with MS CRCA/SS', 'Extensible for future use', 'Rubber Gaskets to meet IP requirements', 'Heat Dissipation using Exhaust Fan or Lowers.'],
+  thirdPara: ['Inspired by the ‘Make in India’ initiative and is categorized as one of the micro and small enterprises initiatives under NSIC, we manufacture CPRI-approved DG Synchronization Panels that come with diverse features such as:', 'At Gupta Associates, we are committed to manufacturing panels using top-grade raw materials and modern machines under the supervision of a highly skilled and experienced team. If you are looking out for a higher reliable and trusted DG synchronizing panel manufacturer in India, then get in touch with Gupta Associates. We offer highly sophisticated equipment and quality after-sale customer service.']
 }
 
 const Page = () => {
@@ -28,8 +27,8 @@ const Page = () => {
           <Image src={data.smallBanner} alt={data.name} height={800} width={700} className="rounded-lg hidden md:block mb-5" />
           <Heading text={data.name} />
           <Para texts={data.firstPara} />
-          <Heading text="Product Specifications" />
-          <Points points={data.specificationPoints} />
+          <Heading text="Product Specifications:" />
+          <Points points={data.specifications} />
           <Para texts={data.secondPara} />
           <Points points={data.secondPoints} />
           <Para texts={data.thirdPara} />

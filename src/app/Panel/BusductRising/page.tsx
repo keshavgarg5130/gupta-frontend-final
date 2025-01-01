@@ -1,17 +1,15 @@
-import panelsInterface from "@/app/interfaces/panels"
 import Image from "next/image"
 import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import PanelsData from "@/lib/PanelsData"
 
-const data: panelsInterface = {
-  name: 'Distribution Board Panels',
+const data = {
+  name: 'Busduct / Rising mains',
   mainBanner: '/banner-1.jpg',
   smallBanner: '/banner-1.jpg',
-  firstPara: ['Leveraging cutting-edge technologies, Rashmi Electricals manufacturers and supplies Distribution Board Panels of international standards. Our panels are fully type-tested assemblies, designed with accuracy using premium quality raw materials, and electrical and high-efficiency components. They are packed with multiple components such as bus bars, switches, fuse links, bypass equipment, and residual current detector (RSD).'],
-  specificationPoints: ['Resistant to corrosion', 'Excellent performance', 'Cost effective', 'Varied enclosure options', 'Interlock', 'External handles in off position and much more'],
-  secondPara: ['Suitable for both industrial and domestic sectors, these panels are perfect for distributing and supplying power. They are powerful enough to distribute the power supply evenly throughout the building using different circuits. Also, they direct power from one or more sources of supply to different loads. They allow electrical power to be redirected, allowing division and control of the power supplied to the switchboard for further distribution.', ' In addition, the distribution board panels designed by us can automatically cut off electric current in case of overload or occurrence of some other anomaly. They have the ability to prevent circuits from overheating due to a defective appliance or a wiring problem.'],
+  firstPara: ['Gupta Associates is a renowned manufacturer, supplier, distributor, and exporter of supreme quality Bus Duct Rising Mains that are CPRI Approved for 100kA Short Circuit Rating. Indoor vertical erection type, flexible in-line connections, non-magnetic aluminum enclosures, and fixed type tap-off boxes, the bus duct rising mains supplied by us are ideal to be used in multiple industries for effective, efficient, and smooth supply of electricity', 'Precisely engineered by our skilled technicians, these products are made using top-grade components and materials sourced from authentic vendors. Hassle-free operations, long service life, high efficiency, reliable performance, user-friendly operation, long working life, and low maintenance are some of the key features of our bust duct rising mains. Plus, these rising mains are resistant to heat, easy to install, durable, and robust.'],
+  keyFeatures: ['Air Insulated', 'Non-Segregated Type', 'Flexible Terminations', 'Also non-Magnetic Aluminum Enclosures', 'Flexible In-line Connections', 'Compact and Standard Design with Simple Structure', 'Easy Joint Systems', 'CPRI Approved For 100kA Short Circuit Rating', 'Flexible In-line Connections', 'Fire Barriers', 'Indoor Vertical Erection Type', 'Fixed Type Tap off Boxes'],
+  secondPara: ['Further, the Bus Duct Rising Mains designed and supplied by Gupta Associates are available in Aluminum and other materials to meet requirements. They are primarily custom built suitable to layout, site conditions, and application. What else? Our bus ducts come with important accessories, such as flexible joints to easily connect DG Terminals and transformer terminals.', 'At Gupta Associates, every product undergoes a strict quality check before being delivered to clients. The quality inspection team conducts multiple checkers on different parameters to ensure all standards set by the industry are met. In addition, our bus duct rising mains are available at competitive prices and delivered within the deadline. Get in touch to know more details about our products and place an order.'],
   secondPoints: ['They can control different applications', 'They protect electrical and mechanical systems', 'They help measure and control different Electrical Parameters.', 'They distribute power to electrical machines or systems.'],
-  thirdPara: ['As a leading manufacturer and supplier, Rashmi Electricals offers customized distribution board panels that can be varying sizes with single or double front access. The equipment can be used in indoor or outdoor applications. They come with different load capacities. In addition, the panels are resistant to corrosion, cost-effective, impart excellent performance, and have various enclosure options, external handles in off position, and much more.', 'They are sturdy, firm, strong, and resilient in their construction with high accuracy. In addition, we manufacture board panels using high-quality components that are sourced from popular vendors.']
 }
 
 const Page = () => {
@@ -28,11 +26,9 @@ const Page = () => {
           <Image src={data.smallBanner} alt={data.name} height={800} width={700} className="rounded-lg hidden md:block mb-5" />
           <Heading text={data.name} />
           <Para texts={data.firstPara} />
-          <Heading text="Product Specifications" />
-          <Points points={data.specificationPoints} />
+          <Heading text="Key Features of Busducts/ Rising Mains:" />
+          <Points points={data.keyFeatures} />
           <Para texts={data.secondPara} />
-          <Points points={data.secondPoints} />
-          <Para texts={data.thirdPara} />
         </div>
       </div>
     </div>

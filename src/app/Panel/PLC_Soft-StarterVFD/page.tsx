@@ -1,17 +1,17 @@
-import panelsInterface from "@/app/interfaces/panels"
 import Image from "next/image"
 import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import PanelsData from "@/lib/PanelsData"
 
-const data: panelsInterface = {
-  name: 'Distribution Board Panels',
+const data = {
+  name: 'Soft-Starter & VFD Panel',
   mainBanner: '/banner-1.jpg',
   smallBanner: '/banner-1.jpg',
-  firstPara: ['Leveraging cutting-edge technologies, Rashmi Electricals manufacturers and supplies Distribution Board Panels of international standards. Our panels are fully type-tested assemblies, designed with accuracy using premium quality raw materials, and electrical and high-efficiency components. They are packed with multiple components such as bus bars, switches, fuse links, bypass equipment, and residual current detector (RSD).'],
-  specificationPoints: ['Resistant to corrosion', 'Excellent performance', 'Cost effective', 'Varied enclosure options', 'Interlock', 'External handles in off position and much more'],
-  secondPara: ['Suitable for both industrial and domestic sectors, these panels are perfect for distributing and supplying power. They are powerful enough to distribute the power supply evenly throughout the building using different circuits. Also, they direct power from one or more sources of supply to different loads. They allow electrical power to be redirected, allowing division and control of the power supplied to the switchboard for further distribution.', ' In addition, the distribution board panels designed by us can automatically cut off electric current in case of overload or occurrence of some other anomaly. They have the ability to prevent circuits from overheating due to a defective appliance or a wiring problem.'],
-  secondPoints: ['They can control different applications', 'They protect electrical and mechanical systems', 'They help measure and control different Electrical Parameters.', 'They distribute power to electrical machines or systems.'],
-  thirdPara: ['As a leading manufacturer and supplier, Rashmi Electricals offers customized distribution board panels that can be varying sizes with single or double front access. The equipment can be used in indoor or outdoor applications. They come with different load capacities. In addition, the panels are resistant to corrosion, cost-effective, impart excellent performance, and have various enclosure options, external handles in off position, and much more.', 'They are sturdy, firm, strong, and resilient in their construction with high accuracy. In addition, we manufacture board panels using high-quality components that are sourced from popular vendors.']
+  firstPara: ['Gupta Associates manufactures industry-centric VFD Pannel ( Variable Frequency drive panel) using the most advanced technologies and tools. They are pre-engineered simplex, duplex, and triplex panels with a user-friendly HMI control interface. These panels are the best solution when it comes to controlling the motor, pump, and fan applications in Industries. They are ideal for multiple industries, such as textile, pharma, paper industry, cable industry, and more.', 'At Gupta Associates , we provide you with guaranteed and standard Soft-Starter & amp; VED Panels, which are multifunctional, easy to perform, and easy-to-install. They are designed to control acceleration and declaration of various phases of motors. Our soft-starter & amp; VFD Panels provide you with extensive benefits such as lower stress on motors, energy efficiency, diagnostic capabilities, and process control integration. You can use our product to control motor speed. The bonus point is that lowering motor speed usually increases energy efficiency.'],
+  features: ['Optimum Strength', 'Durability', 'Well Designed', 'Technical Effectiveness', 'Efficiency', 'Scaratch Resistant', 'Smooth Operation', 'Standard Quality', 'Economic Rates', 'Achieving Optimum Level Of Power Consumption', 'Dust and Vermin Proof and Much More', 'Designed Using the High Quality Material', 'Comfortable Use for a Longer Period Of Time'],
+  secondPara: ['With in-depth industry experience, Gupta Associates provides you with guaranteed and standard VED Panels, which are multifunctional, easy to use, and install. The VFD Panels manufactured and supplied by us provide you with comprehensive benefits such as energy efficiency, lower stress on motors, process control integration, and diagnostic capabilities. Energy efficiency is possible because our product controls the motor speed which leads to less power consumption.'],
+  thirdPara: ['The VFD Control Panel we supply is packed with advanced features that control the speed of the electric motor and feed pump. They can be used in your drinking, pumping, and other large machine applications, such as compressors and conveyors. These products will meet your requirements of quality standards. They come with a modular design and an excellent power range that can resolve issues in complicated applications easily.'],
+  salientFeatures: ['Low maintenance', 'Long Service', 'Thermal Resistance', 'Energy Efficient', 'Sturdy Construction', 'Easy Monitoring', 'High Tensile Strength', 'Supreme Quality'],
+  fourthPara: ['On top of that, our VDF Panels are also known for durability, optimum strength, technical effectiveness, efficiency, smooth operation, scratch resistance, economic rates, international quality standards, Optimum Level Of Power Consumption, usage of high-quality materials, and so on.', 'What else? At Gupta Associates, we are committed to manufacturing VDF Panels as per the industry standards under the strict supervision of highly experienced and knowledgeable professionals. The best is we can customize these panels as per your specific requirements.']
 }
 
 const Page = () => {
@@ -28,11 +28,14 @@ const Page = () => {
           <Image src={data.smallBanner} alt={data.name} height={800} width={700} className="rounded-lg hidden md:block mb-5" />
           <Heading text={data.name} />
           <Para texts={data.firstPara} />
-          <Heading text="Product Specifications" />
-          <Points points={data.specificationPoints} />
+          <Heading text="Key Features" />
+          <Points points={data.features} />
           <Para texts={data.secondPara} />
-          <Points points={data.secondPoints} />
+          <Heading text="Why You Need Our VFD Panel:" />
           <Para texts={data.thirdPara} />
+          <Heading text="Salient Features and Specifications:" />
+          <Points points={data.salientFeatures} />
+          <Para texts={data.fourthPara} />
         </div>
       </div>
     </div>

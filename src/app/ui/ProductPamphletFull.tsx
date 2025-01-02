@@ -14,9 +14,9 @@ const ProductPamphletFull = (product: product) => {
   const description = descriptionArray.length > size ? descriptionArray.splice(0, size).join('') + '...' : descriptionArray.join('')
 
   return (
-    <div className=" w-11/12 md:w-8/12 bg-blue-200 h-[200px] flex items-center xl:w-9/12 px-2 md:px-7 rounded-xl group hover:shadow-xl transition-all duration-500">
-      <a href={'/product/' + product.id} className="h-1/2 w-1/3 md:w-1/5 md:h-1/4 flex items-center md:group-hover:w-2/6 transition-all duration-500 rounded-xl">
-        <img src={image} className="w-full h-full md:w-10/12 md:group-hover:w-9/12 md:h-2/3 md:group-hover:h-full md:group-hover:py-5 rounded-lg group-hover:rounded-xl transition-all duration-500" />
+    <div className="w-full bg-blue-200 h-[200px] flex items-center px-2 justify-center rounded-xl group hover:shadow-xl transition-all duration-500">
+      <a href={'/product/' + product.id} className="justify-center h-3/4 group-hover:h-5/6 w-1/3 max-w-1/5 flex items-center md:group-hover:w-2/6 transition-all duration-500 rounded-xl">
+        <img src={image} className="max-h-full max-w-full rounded-lg group-hover:rounded-xl transition-all duration-500" />
       </a>
       <div className="ml-5 flex w-3/4 h-full items-center py-2 md:py-7 ">
         <a href={'/product/' + product.id}>

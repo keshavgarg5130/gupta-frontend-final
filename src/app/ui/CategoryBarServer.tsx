@@ -1,9 +1,11 @@
 import fetchCategories from "../lib/fetchCategories"
 import fetchBillboards from "../lib/fetchBillboards"
 import CategoryBar from "./CategoryBar"
+import PanelsCategory from "@/lib/PanelsCategory"
 
 const CategoryBarServer = async () => {
-    const categoriesData = await fetchCategories()
+    let categoriesData = await fetchCategories()
+    categoriesData.unshift(PanelsCategory)
     const billboards = await fetchBillboards();
 
     return (

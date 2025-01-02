@@ -1,6 +1,7 @@
 import Image from "next/image"
 import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import PanelsData from "@/lib/PanelsData"
+import Enquiry from '@/app/ui/Enquiry'
 
 const data = {
   name: 'APFC / Power Factor Improvement Panel',
@@ -22,7 +23,7 @@ const Page = () => {
       </div>
       <div className="flex flex-col md:flex-row md:gap-5 md:px-5">
         <div className="hidden md:block">
-          <LeftSideLinkComponent data={PanelsData} />
+          <LeftSideLinkComponent data={PanelsData} heading="Panels" />
         </div>
         <div className="lg:w-[1200px] md:w-[570px] relative md:-top-8 rounded-lg bg-white px-6 py-10 md:px-10 lg:p-20 shadow-xl shadow-gray-300 gap-5 md:font-semibold text-gray-500">
           <Image src={data.smallBanner} alt={data.name} height={800} width={700} className="rounded-lg hidden md:block mb-5" />
@@ -37,6 +38,7 @@ const Page = () => {
           <Points points={data.secondPoints} />
         </div>
       </div>
+      <Enquiry />
     </div>
   )
 }

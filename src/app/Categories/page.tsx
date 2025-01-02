@@ -1,21 +1,13 @@
-import fetchCategories from "../lib/fetchCategories";
-import CategoryPamphlet from "../ui/CategoryPamphlet";
-import categoriesData from "@/lib/categoryData";
-import LeftSideLinkComponent from "../ui/LeftSideLinkComponent";
+import AllCategoriesPage from '@/app/ui/AllCategoriesPage'
+import fetchCategories from '../lib/fetchCategories';
+import fetchBillboards from '../lib/fetchBillboards';
 
 const Page = async () => {
 
+  const billboards = await fetchBillboards();
   const categories = await fetchCategories();
-
   return (
-    <div className="flex gap-5 p-10">
-      <LeftSideLinkComponent data={categoriesData} />
-      <div className="flex flex-wrap gap-5 p-10 items-center justify-center">
-        {categories.map(category => {
-          return <CategoryPamphlet key={category.id} categoryName={category.name} billboardId={category.billboardId} />
-        })}
-      </div>
-    </div>
+    <AllCategoriesPage categories={categories} billboards={billboards} />
   )
 }
 

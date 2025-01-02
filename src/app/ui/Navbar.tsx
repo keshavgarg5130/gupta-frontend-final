@@ -43,6 +43,7 @@ const Navbar = () => {
           <Link text='HOME' link="/" />
           <Link text={isLoggedIn ? 'PROFILE' : 'REGISTER'} link={isLoggedIn ? '/' : '/register'} />
           <Link text="CATEGORIES" link="/Categories" />
+          <Link text="PANELS" link="/Panel/DistributionBoard" />
           <Link text="ABOUT US" link="/AboutUs" />
           <Link text="CONTACT US" link="/ContactUs" />
           <CartIcon />

@@ -7,6 +7,7 @@ import Footer from "./ui/Footer";
 import CategoryBar from "./ui/CategoryBar";
 import { GlobalProvider } from "@/app/GlobalProvider";
 import ToastProvider from "@/app/providers/toast-provider";
+import CategoryBarServer from "./ui/CategoryBarServer";
 
 export const metadata: Metadata = {
   title: "Gupta Switchgears: Electrical Automation Bestseller",
@@ -28,7 +29,7 @@ export default function RootLayout({
         <div>
           <GlobalProvider>
             <Navbar />
-            <CategoryBar />
+            <CategoryBarServer />
             <ToastProvider />
             {children}
             <Footer />

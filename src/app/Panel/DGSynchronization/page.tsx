@@ -3,6 +3,8 @@ import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import PanelsData from "@/lib/PanelsData"
 import Enquiry from '@/app/ui/Enquiry'
 import { Para, Heading, Points } from "@/app/ui/PanelsPageComponents"
+import WhatsappButton from "@/app/ui/WhatsappButton"
+import ScrollToEnquiry from "@/app/ui/ScrollToEnquiry"
 
 const data = {
   name: 'DG Synchronization Panel',
@@ -37,6 +39,8 @@ const Page = () => {
         </div>
       </div>
       <Enquiry />
+      <WhatsappButton />
+      <ScrollToEnquiry />
     </div>
   )
 }

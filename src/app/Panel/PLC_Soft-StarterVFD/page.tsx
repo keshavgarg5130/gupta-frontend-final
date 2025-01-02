@@ -3,6 +3,8 @@ import LeftSideLinkComponent from "@/app/ui/LeftSideLinkComponent"
 import Enquiry from '@/app/ui/Enquiry'
 import PanelsData from "@/lib/PanelsData"
 import { Para, Heading, Points } from "@/app/ui/PanelsPageComponents"
+import WhatsappButton from "@/app/ui/WhatsappButton"
+import ScrollToEnquiry from "@/app/ui/ScrollToEnquiry"
 
 const data = {
   name: 'Soft-Starter & VFD Panel',
@@ -41,6 +43,8 @@ const Page = () => {
         </div>
       </div>
       <Enquiry />
+      <WhatsappButton />
+      <ScrollToEnquiry />
     </div>
   )
 }

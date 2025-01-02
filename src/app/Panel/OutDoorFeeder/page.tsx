@@ -3,6 +3,8 @@ import Enquiry from '@/app/ui/Enquiry'
 import Image from "next/image"
 import PanelsData from "@/lib/PanelsData"
 import { Para, Heading, Points } from "@/app/ui/PanelsPageComponents"
+import WhatsappButton from "@/app/ui/WhatsappButton"
+import ScrollToEnquiry from "@/app/ui/ScrollToEnquiry"
 
 const data = {
   name: 'Ourdoor Feeder Pillars',
@@ -40,6 +42,8 @@ const Page = () => {
         </div>
       </div>
       <Enquiry />
+      <WhatsappButton />
+      <ScrollToEnquiry />
     </div>
   )
 }

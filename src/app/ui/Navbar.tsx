@@ -25,7 +25,7 @@ const Navbar = () => {
       setShowOptions(false)
   }
   return (
-    <div className="h-16 px-2 lg:px-4 bg-themeBlue text-white flex sticky top-0 z-50 justify-evenly md:justify-center md:gap-1 lg:gap-16 items-center">
+    <div className="h-16 px-2 lg:px-4 bg-themeBlue text-white flex z-50 justify-evenly md:justify-center md:gap-1 lg:gap-16 items-center">
       {/* CENTER */}
       <a href="/" className="flex h-full items-center">
         <Image src="/logo.png" alt="LOGO" width={50} height={50} className="rounded-full" />

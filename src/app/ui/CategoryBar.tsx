@@ -38,7 +38,7 @@ const CategoryBar = ({ categoriesData, billboards }: { categoriesData: category[
             </div >
             <div className="select-none font-bold">All Categories</div>
           </div>
-          <div className="hidden bg-white bg-opacity-95 absolute top-[45px] -left-16 md:hidden md:group-hover:block overflow-y-scroll w-[95vw] h-[80vh] scrollbar-hidden shadow-gray-500 shadow-lg rounded-lg">
+          <div className="hidden bg-white bg-opacity-95 absolute top-[45px] -left-16 md:hidden md:group-hover:block overflow-y-scroll w-[95vw] h-[80vh] scrollbar-hidden shadow-gray-500 shadow-lg rounded-b-lg">
             <AllCategoriesPage categories={categoriesData} billboards={billboards} />
           </div>
         </div>

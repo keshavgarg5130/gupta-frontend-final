@@ -27,7 +27,7 @@ const CategoryBar = ({ categoriesData, billboards }: { categoriesData: category[
   }
 
   return (
-    <div className="h-[45px] w-full bg-white flex items-center box-border relative z-40 justify-evenly border-b-2 md:px-20">
+    <div className="h-[45px] w-full flex items-center box-border relative z-40 justify-evenly border-b-2 md:px-20">
       <div className="flex w-full relative ">
         <div className="flex group relative" onClick={handleClick}>
           <div className="w-18 cursor-pointer h-[45px] flex items-center">
@@ -38,7 +38,7 @@ const CategoryBar = ({ categoriesData, billboards }: { categoriesData: category[
             </div >
             <div className="select-none font-bold">All Categories</div>
           </div>
-          <div className="hidden absolute top-[45px] -left-16 md:hidden md:group-hover:block overflow-y-scroll w-[95vw] h-[80vh] scrollbar-hidden shadow-gray-500 shadow-lg rounded-lg">
+          <div className="hidden bg-white bg-opacity-95 absolute top-[45px] -left-16 md:hidden md:group-hover:block overflow-y-scroll w-[95vw] h-[80vh] scrollbar-hidden shadow-gray-500 shadow-lg rounded-lg">
             <AllCategoriesPage categories={categoriesData} billboards={billboards} />
           </div>
         </div>

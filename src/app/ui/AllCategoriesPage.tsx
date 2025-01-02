@@ -7,7 +7,7 @@ import billboard from "../interfaces/billboard";
 const AllCategoriesPage = ({ categories, billboards }: { categories: category[], billboards: billboard[] }) => {
 
     return (
-        <div className="flex gap-5 p-10 bg-white">
+        <div className="flex gap-5 p-10">
             <LeftSideLinkComponent data={categoriesData} heading="Categories" />
             <div className="flex flex-wrap gap-5 p-10 items-center justify-center">
                 {categories.map(category => {

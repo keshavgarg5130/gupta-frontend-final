@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 const Navbar = () => {
 
   const [showOptions, setShowOptions] = useState(false)
-  const isLoggedIn = localStorage.getItem('token')
 
   const handleOptionClick = () => {
     setTimeout(() => {
@@ -41,7 +40,7 @@ const Navbar = () => {
         </div>
         <div className={`fixed left-0 items-center py-6 gap-6 top-16 flex-col bg-blue-300 w-full md:py-0 md:static md:flex-row md:bg-themeBlue md:flex md:w-auto md:gap-2 lg:gap-4 md:min-h-full ${showOptions ? 'flex' : 'hidden'}`}>
           <Link text='HOME' link="/" />
-          <Link text={isLoggedIn ? 'PROFILE' : 'REGISTER'} link={isLoggedIn ? '/' : '/register'} />
+          <Link text='PROFILE' link='/' />
           <Link text="CATEGORIES" link="/Categories" />
           <Link text="PANELS" link="/Panel/DistributionBoard" />
           <Link text="ABOUT US" link="/AboutUs" />

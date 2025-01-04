@@ -37,7 +37,7 @@ const PanelsData = [
     },
     {
         name: 'Soft Starter & VFC Panel',
-        link: '/Panel/Soft-StarterVFD'
+        link: '/Panel/PLC_Soft-StarterVFD'
     },
 ]
 

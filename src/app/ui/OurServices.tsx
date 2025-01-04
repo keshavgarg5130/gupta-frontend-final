@@ -28,10 +28,10 @@ const svgs = [
 const OurServices = () => {
     return (
         <div className="relative z-40 py-2 flex flex-col items-center">
-            <h1 className="text-4xl font-bold text-white text-center relative">Our Services
+            <h1 className="text-4xl z-10  font-bold text-white text-center relative">Our Services
                 <div className="w-full -bottom-7 h-1 bg-white rounded-lg"></div>
             </h1>
-            <div className="flex flex-wrap justify-center items-center gap-10 w-3/4 py-5">
+            <div className="flex flex-wrap z-10 justify-center items-center gap-10 w-3/4 py-5">
                 {svgs.map((svg, index) => {
                     return <Icon key={index} url={svg.url} label={svg.label} />
                 })}

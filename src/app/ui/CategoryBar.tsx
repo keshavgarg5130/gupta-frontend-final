@@ -27,7 +27,7 @@ const CategoryBar = ({ categoriesData, billboards }: { categoriesData: category[
   }
 
   return (
-    <div className="h-[45px] w-full flex items-center box-border relative z-40 justify-evenly border-b-2 md:px-20">
+    <div className="h-[45px] w-full flex items-center box-border bg-white relative z-50 justify-evenly border-b-2 md:px-20">
       <div className="flex w-full relative ">
         <div className="flex group relative" onClick={handleClick}>
           <div className="w-18 cursor-pointer h-[45px] flex items-center">

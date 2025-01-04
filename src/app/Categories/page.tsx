@@ -7,7 +7,6 @@ const Page = async () => {
 
   const billboards = await fetchBillboards();
   let categories = await fetchCategories();
-  categories.unshift(PanelsCategory)
   return (
     <AllCategoriesPage categories={categories} billboards={billboards} />
   )

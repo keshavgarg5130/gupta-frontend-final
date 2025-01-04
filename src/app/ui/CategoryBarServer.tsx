@@ -5,7 +5,6 @@ import PanelsCategory from "@/lib/PanelsCategory"
 
 const CategoryBarServer = async () => {
     let categoriesData = await fetchCategories()
-    categoriesData.unshift(PanelsCategory)
     const billboards = await fetchBillboards();
 
     return (

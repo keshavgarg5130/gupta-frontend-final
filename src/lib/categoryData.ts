@@ -1,5 +1,5 @@
 const categories = [
-    { name: 'PANELS', link: '/Panels/DistributionBoard' },
+    { name: 'PANELS', link: '/Panel/DistributionBoard' },
     { name: 'ACB', link: '/ACB' },
     { name: 'MCB', link: '/MCB' },
     { name: 'MCCB', link: '/MCCB' },

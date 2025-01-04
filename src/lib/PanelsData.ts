@@ -28,8 +28,8 @@ const PanelsData = [
         link: '/Panel/LoadSharing'
     },
     {
-        name: 'Ourdoor Feeder Pillars',
-        link: '/Panel/OurDoorFeeder'
+        name: 'Outdoor Feeder Pillars',
+        link: '/Panel/OutDoorFeeder'
     },
     {
         name: 'PLC Panel / SCADA System',

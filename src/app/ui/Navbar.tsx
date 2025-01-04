@@ -2,7 +2,11 @@
 import Image from "next/image";
 import CartIcon from "./CartIcon";
 import { useState, useEffect } from "react";
+<<<<<<< HEAD
 import {UserButton} from "@clerk/nextjs";
+=======
+import { UserButton } from "@clerk/nextjs";
+>>>>>>> 1d113c3 (clerk)
 
 const Navbar = () => {
 
@@ -40,6 +44,7 @@ const Navbar = () => {
           </div >
         </div>
         <div
+<<<<<<< HEAD
             className={`fixed left-0 items-center py-6 gap-6 top-16 flex-col bg-blue-300 w-full md:py-0 md:static md:flex-row md:bg-themeBlue md:flex md:w-auto md:gap-2 lg:gap-4 md:min-h-full ${showOptions ? 'flex' : 'hidden'}`}>
           <Link text='HOME' link="/"/>
           <Link text="CATEGORIES" link="/Categories"/>
@@ -49,6 +54,17 @@ const Navbar = () => {
           <CartIcon/>
           <div className="flex items-center">
             <UserButton afterSignOutUrl="/"/>
+=======
+          className={`fixed left-0 items-center py-6 gap-6 top-16 flex-col bg-blue-300 w-full md:py-0 md:static md:flex-row md:bg-themeBlue md:flex md:w-auto md:gap-2 lg:gap-4 md:min-h-full ${showOptions ? 'flex' : 'hidden'}`}>
+          <Link text='HOME' link="/" />
+          <Link text="CATEGORIES" link="/Categories" />
+          <Link text="PANELS" link="/Panel/DistributionBoard" />
+          <Link text="ABOUT US" link="/AboutUs" />
+          <Link text="CONTACT US" link="/ContactUs" />
+          <CartIcon />
+          <div className="flex items-center">
+            <UserButton afterSignOutUrl="/" />
+>>>>>>> 1d113c3 (clerk)
           </div>
         </div>
       </div>

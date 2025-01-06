@@ -33,17 +33,17 @@ const footerContents = [
   {
     header: 'Help',
     labels: [{
-      lable: 'Terms of Service',
-      redirectsTo: '/',
+      lable: 'Terms and Conditions',
+      redirectsTo: '/Terms-conditions',
     }, {
       lable: 'Shipping Policy',
-      redirectsTo: '/',
+      redirectsTo: '/Shipping-policy',
     }, {
-      lable: 'Return Policy',
-      redirectsTo: '/',
+      lable: 'Return and Refund Policy',
+      redirectsTo: '/Return-refund-policy',
     }, {
-      lable: 'Warrenty Policy',
-      redirectsTo: '/',
+      lable: 'Privacy Policy',
+      redirectsTo: '/Privacy-policy',
     }]
   },
   {

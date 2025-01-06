@@ -43,7 +43,7 @@ const Navbar = () => {
           className={`fixed left-0 items-center py-6 gap-6 top-16 flex-col bg-blue-300 w-full md:py-0 md:static md:flex-row md:bg-themeBlue md:flex md:w-auto md:gap-2 lg:gap-4 md:min-h-full ${showOptions ? 'flex' : 'hidden'}`}>
           <Link text='HOME' link="/" />
           <Link text="CATEGORIES" link="/Categories" />
-          <Link text="PANELS" link="/Panel/DistributionBoard" />
+          <Link text="DOWNLOADS" link="/Downloads" />
           <Link text="ABOUT US" link="/AboutUs" />
           <Link text="CONTACT US" link="/ContactUs" />
           <CartIcon />

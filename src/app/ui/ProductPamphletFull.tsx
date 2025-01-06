@@ -30,7 +30,7 @@ const ProductPamphletFull = (product: product) => {
             <div>
               <div className="text-sm font-bold" >₹{price}</div>
               <div className="font-extralight text-xs mt-[2px]">
-                <span className="relative"> ₹{mPrice}
+                <span className="relative">MRP ₹{mPrice}
                   <div className="absolute w-full h-[1px] bg-gray-900 top-[50%]"></div>
                 </span>
                 <span className="text-center px-2 py-1 bg-white rounded-2xl mx-1 font-bold text-green-900" >{discount}% OFF</span>

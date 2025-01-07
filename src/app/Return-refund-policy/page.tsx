@@ -20,7 +20,7 @@ const ReturnRefundPolicyPage: React.FC = () => {
             <p>
                 Refunds will only be processed for products that meet our return criteria mentioned above. Once we
                 receive and inspect the returned product, we will notify you about the status of your refund. Refunds
-                will be issued via the original payment method within <strong>5-7 business days</strong> after approval.
+                will be returned via the original payment method within <strong>5-7 business days</strong> after approval.
             </p>
 
             <h2>Warranty Information</h2>

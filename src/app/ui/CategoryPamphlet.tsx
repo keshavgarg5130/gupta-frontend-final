@@ -11,7 +11,9 @@ const CategoryPamphlet = ({ categoryName, billboards, billboardId }: { categoryN
         url = billboard.imageUrl
     else
         url = 'https://res.cloudinary.com/dqefturar/image/upload/v1735033145/yu8uii9n47t5z1r9fxza.png'
-    let link = categoryName.toUpperCase();
+    let link = '/' + categoryName.toUpperCase();
+    console.log('The name is here')
+    console.log(categoryName);
     switch (categoryName) {
         case "Panels":
             link = '/Panel/DistributionBoard'

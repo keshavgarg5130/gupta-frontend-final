@@ -7,7 +7,7 @@ const Page = async () => {
 
   const billboards = await fetchBillboards();
   let categories = await fetchCategories();
-  console.log(categories)
+
   return (
     <AllCategoriesPage categories={categories} billboards={billboards} />
   )

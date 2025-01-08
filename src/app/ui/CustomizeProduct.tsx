@@ -11,13 +11,12 @@ const CustomizeProducts = async ({ product }: { product: product }) => {
   const currentCurrentId = product.currentRatingId;
   const currentPoleId = product.polesId;
 
-  console.log(`Started fetching products ${Date.now() - startTime}`)
+
   const AllProducts = await fetchCustimizeProduct();
-  console.log(`Got products in ${Date.now() - startTime}`);
+
   const ourProducts = AllProducts.filter(prdt => {
     return (prdt.category.id == categoryId && prdt.brand.id == brandId)
   })
-  console.log(`Sorted products in ${Date.now() - startTime}`)
 
   let poles: { name: string, id: string }[] = [];
   let currentRatings: { name: string, id: string }[] = [];

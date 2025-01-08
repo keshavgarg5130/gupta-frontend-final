@@ -14,20 +14,16 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String
-  email         String    @unique
-  emailVerified Boolean   @default(false)
-  image         String?
-  premium       Boolean   @default(false)
-  role          String    @default("user")
-  banned        Boolean   @default(false)
-  banReason     String?
-  banExpires    Int? /// Unix timestamp for ban expiration
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
+  id                  String    @id @default(cuid())
+  name                String
+  email               String    @unique
+  emailVerified       Boolean   @default(false)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  phoneNumber         String?
+  phoneNumberVerified Boolean   @default(false)
+  sessions            Session[]
+  accounts            Account[]
 }
 
 model Session {

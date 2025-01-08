@@ -1,13 +1,14 @@
 'use client'
-import { Dispatch, SetStateAction, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { product } from "../interfaces/product"
 import CategoryBanner from "./CategoryBanner"
 import ProductFullRow from "./ProductFullRow"
 import poles from "../interfaces/poles"
 import currentRatingInterface from "../interfaces/currentRating"
 import { ArrowUp } from "lucide-react"
+import { parse } from "path"
 
-const SortBy = ['price', 'currentRating', 'poles', ''] as const;
+const SortBy = ['Price', 'Current Rating', 'Poles', ''] as const;
 type SortByType = typeof SortBy[number];
 type typeSort = {
     name: SortByType,
@@ -22,6 +23,7 @@ interface filterStateInterface {
 }
 
 const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPrice, minPrice }: { bannerId: string, products: product[], poles: poles[], currentRatings: currentRatingInterface[], maxPrice: number, minPrice: number }) => {
+    currentRatings = currentRatings.sort((currentA, currentB) => parseInt(currentA.name) - parseInt(currentB.name))
     const [productsSort, setProducts] = useState(products)
     const [sortBy, setSortBy] = useState<typeSort>({
         name: '',
@@ -72,19 +74,19 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
         if (sortBy.name) {
             const increasing = sortBy.increasing
             switch (sortBy.name) {
-                case 'price':
+                case 'Price':
                     if (increasing)
                         setProducts(prdts.sort((a, b) => parseInt(a.price) - parseInt(b.price)))
                     else
                         setProducts(prdts.sort((a, b) => parseInt(b.price) - parseInt(a.price)))
                     break;
-                case 'poles':
+                case 'Poles':
                     if (increasing)
                         setProducts(prdts.sort((a, b) => parseInt(a.poles.name) - parseInt(b.poles.name)))
                     else
                         setProducts(prdts.sort((a, b) => parseInt(b.poles.name) - parseInt(a.poles.name)))
                     break;
-                case 'currentRating':
+                case 'Current Rating':
                     if (increasing)
                         setProducts(prdts.sort((a, b) => parseInt(a.currentRating.name) - parseInt(b.currentRating.name)))
                     else
@@ -99,7 +101,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
             <CategoryBanner bannerId={bannerId} />
             <ProductFullRow products={productsSort} Remains={remains} />
             {/* Filter Menu */}
-            <div className={`${filterHidden ? 'hidden' : 'block'} md:flex absolute top-10 left-0 w-full md:w-[200px] lg:w-[300px] bg-blue-100 flex-col md:gap-5 py-5 md:rounded-lg`}>
+            <div className={`${filterHidden ? 'hidden' : 'block'} md:flex absolute left-0 top-10 md:left-10 w-full md:w-[200px] lg:w-[300px] shadow-lg flex-col md:gap-5 py-5 md:rounded-lg`}>
                 <div className="flex flex-col items-center gap-3">
                     <h1 className="text-2xl font-bold text-themeBlue"> Sort By </h1>
                     <div className="flex flex-col gap-2 justify-evenly w-11/12 flex-wrap">

@@ -3,12 +3,16 @@ import CustomizeProducts from "./CustomizeProduct"
 import fetchProduct from "../lib/fetchProduct";
 import fetchCategoryProducts from "../lib/fetchCategoryProducts";
 import FeaturedProductsClient from "./FeaturedProductsClient";
+import {notFound} from "next/navigation";
 
 export const revalidate = 3600;
 
 const ProductPage = async ({ productId }: { productId: string }) => {
 
   const product = await fetchProduct(productId)
+  if(!product) {
+    notFound()
+  }
   const images = product.images.map(image => {
     return {
       id: image.id,

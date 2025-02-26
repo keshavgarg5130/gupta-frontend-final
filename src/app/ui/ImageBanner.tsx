@@ -2,6 +2,7 @@
 import Slider from 'react-slick'
 import fetchBillboards from '../lib/fetchBillboards'
 import { useEffect, useState } from 'react'
+import OptimizedImage from "@/app/components/OptimizedImage";
 
 const ImageBanner = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -43,7 +44,7 @@ const ImageBanner = () => {
   )
 }
 const Image = ({ imgUrl }: { imgUrl: string }) => {
-  return (<img
+  return (<OptimizedImage alt={'Schnieder'}
     src={imgUrl}
   />)
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+//import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./ui/Navbar";
 import "slick-carousel/slick/slick.css";
@@ -9,36 +9,69 @@ import { GlobalProvider } from "@/app/GlobalProvider";
 import ToastProvider from "@/app/providers/toast-provider";
 import CategoryBarServer from "./ui/CategoryBarServer";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Metadata } from 'next'
+import Header from "@/components/header";
 
 export const metadata: Metadata = {
-  title: "Gupta Switchgears: Electrical Automation Bestseller",
-  description: "Discover a wide range of high-quality electrical automation products from top brands like Larsen & Toubro, Schneider Electric, Polycab, and more at Gupta Associates. We specialize in providing cutting-edge solutions for industrial applications, ensuring efficiency, reliability, and safety in your operations. From automation systems to cables, switches, and control panels, we are your trusted partner for all your industrial electrical needs. Explore our extensive catalog and experience unmatched customer service, competitive pricing, and fast delivery. Optimize your industrial processes today with the best in electrical automation technology!",
-
-};
+  title: {
+    template: '%s | Gupta Switchgears',
+    default: 'Gupta Switchgears - Premium Electrical Components & Panels'
+  },
+  description: 'Leading supplier of electrical components, switchgears, panels, and industrial solutions. Browse our wide range of ACB, MCB, MCCB, RCCB, and electrical panels.',
+  keywords: 'electrical components, switchgears, electrical panels, ACB, MCB, MCCB, RCCB, industrial electrical solutions',
+  robots: 'index, follow',
+  openGraph: {
+    title: 'Gupta Switchgears',
+    description: 'Premium Electrical Components & Industrial Solutions',
+    url: 'https://guptaswitchgears.com',
+    siteName: 'Gupta Switchgears',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+      }
+    ],
+    locale: 'en_US',
+    type: 'website',
+  }
+}
+import SchemaOrg from './components/SchemaOrg'
+import CanonicalUrl from './components/CanonicalUrl'
+import SocialMeta from './components/SocialMeta'
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  params
+}: {
+  children: React.ReactNode
+  params: { path: string }
+}) {
   return (
     <html lang="en">
       <head>
         <link rel="icon" type="image/png+xml" sizes="90x90" href="/logo.png" />
+        <CanonicalUrl path={params.path} />
+        <SocialMeta
+          title="Gupta Switchgears"
+          description="Premium Electrical Components & Solutions"
+          image="/og-image.jpg"
+        />
+        <SchemaOrg />
       </head>
       <body className="overflow-x-hidden">
         <div>
           <ClerkProvider>
             <GlobalProvider>
-              <Navbar />
-              <CategoryBarServer />
+              <Header />
+
               <ToastProvider />
               {children}
               <Footer />
             </GlobalProvider>
           </ClerkProvider>
-        </div >
-      </body >
-    </html >
+        </div>
+      </body>
+    </html>
   );
 }

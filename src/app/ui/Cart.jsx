@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 
 import Link from "next/link";
 import CartContext from "../../context/CartContext";
+import OptimizedImage from "../components/OptimizedImage";
 
 const Cart = () => {
     const { addItemToCart, deleteItemFromCart, cart } = useContext(CartContext);
@@ -59,7 +60,8 @@ const Cart = () => {
                                                     <figure className="flex leading-5">
                                                         <div>
                                                             <div className="block w-16 h-16 rounded border border-gray-200 overflow-hidden">
-                                                                <img src={cartItem.image} alt={cartItem.name} />
+                                                                <OptimizedImage
+                                                                                src={cartItem.image} alt={cartItem.name} />
                                                             </div>
                                                         </div>
                                                         <figcaption className="ml-3">

@@ -3,6 +3,7 @@
 import * as React from "react"
 import { useCallback, useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
+import OptimizedImage from "@/app/components/OptimizedImage";
 
 interface ComparisonSliderProps extends React.HTMLAttributes<HTMLDivElement> {
     beforeImage: string
@@ -73,7 +74,7 @@ export function ComparisonSlider({
                 {...props}
             >
                 <div className="absolute inset-0 w-full">
-                    <img
+                    <OptimizedImage
                         src={afterImage}
                         alt="After"
                         className="h-full w-full "
@@ -83,7 +84,7 @@ export function ComparisonSlider({
                     className="absolute inset-0 w-full"
                     style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
                 >
-                    <img
+                    <OptimizedImage
                         src={beforeImage}
                         alt="Before"
                         className="h-full w-full "

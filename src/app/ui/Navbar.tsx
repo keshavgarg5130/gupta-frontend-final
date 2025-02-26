@@ -2,11 +2,18 @@
 import Image from "next/image";
 import CartIcon from "./CartIcon";
 import { useState, useEffect } from "react";
-import { UserButton } from "@clerk/nextjs";
+
+import Login from "@/app/ui/auth/googleLogin_button";
+import AuthForm from "@/app/ui/auth/auth-form";
 
 const Navbar = () => {
 
   const [showOptions, setShowOptions] = useState(false)
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const handleLoginClick = () => {
+    setIsLoginOpen(!isLoginOpen)
+  }
 
   const handleOptionClick = () => {
     setTimeout(() => {
@@ -47,9 +54,7 @@ const Navbar = () => {
           <Link text="ABOUT US" link="/AboutUs" />
           <Link text="CONTACT US" link="/ContactUs" />
           <CartIcon />
-          <div className="flex items-center">
-            <UserButton afterSignOutUrl="/" />
-          </div>
+          <AuthForm  />
         </div>
       </div>
     </div>

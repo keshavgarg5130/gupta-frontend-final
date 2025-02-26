@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import toast from "react-hot-toast";
+import OptimizedImage from "@/app/components/OptimizedImage";
 
 export default function QuotationForm() {
   const [isLoading, setIsLoading] = useState(false)
@@ -39,11 +40,11 @@ export default function QuotationForm() {
   return (
     <div className="grid lg:grid-cols-2 gap-8 p-4 max-w-7xl mx-auto bg-white rounded-lg w-full" id='enquiryForm'>
       <div className="flex flex-col items-center justify-center space-y-8 bg-themeBlue text-white p-8 rounded-lg">
-        <img
+        <OptimizedImage
           src="/logo.png"
           alt="100% Price Guarantee"
           className="w-48 h-48"
-        />
+         />
         <h2 className="text-2xl font-bold italic underline">
           Get Guaranteed low price
         </h2>

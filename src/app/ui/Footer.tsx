@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react"
 import { Instagram, Facebook, Twitter, Linkedin } from 'lucide-react'
+import OptimizedImage from "@/app/components/OptimizedImage";
 
 const iconsUrls = ['/footerIcon1.png', '/footerIcon2.png', '/footerIcon3.png', '/footerIcon4.png', '/footerIcon5.svg']
 
@@ -72,7 +73,7 @@ const Footer = () => {
     <div className="min-h-[380px] bg-[#353332] px-5 md:px-20 py-10 text-white pb-20 md:pb-4 relative z-50">
       <div className="flex justify-between flex-col md:flex-row">
         <div className="box-border h-[50px] flex justify-center mb-4">
-          <img src="/logo.png" className="h-full" />
+          <OptimizedImage alt="GuptaAssocites" src="/logo.png" className="h-full" />
         </div>
         <div className="flex gap-3 justify-evenly">
           <Instagram />
@@ -99,7 +100,7 @@ const Footer = () => {
           <div className="flex flex-col items-center flex-1">
             <span className="font-bold text-lg">Reach Us</span>
             <a href={process.env.GOOGLE_LOCATION} className="max-w-[350px] max-h-[350px]" target="_blank">
-              <img src="guptaImages.png" className="h-full w-full" />
+              <OptimizedImage alt='GuptaAssociates' src="guptaImages.png" className="h-full w-full" />
             </a>
           </div>
         </div>

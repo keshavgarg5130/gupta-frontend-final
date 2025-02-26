@@ -1,3 +1,5 @@
+import OptimizedImage from "@/app/components/OptimizedImage";
+
 const categoryIcons = [
   {
     imgUrl: '/ACB.png',
@@ -44,7 +46,7 @@ const CategoryIcon = ({ imgUrl, redirectUrl, label }: { imgUrl: string, redirect
     <div className="flex items-center justify-center flex-col w-max">
       <div className="h-[100px] w-[100px] duration-500 ease-in-out rounded-full flex items-center hover:h-[120px] hover:w-[120px] transition-all hover:shadow-2xl">
         <a href={redirectUrl}>
-          <img src={imgUrl} className="rounded-full" />
+          <OptimizedImage alt={label} src={imgUrl} className="rounded-full" />
         </a>
       </div>
       <div className="font-bold text-sm">

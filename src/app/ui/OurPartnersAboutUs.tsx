@@ -1,5 +1,6 @@
 'use client'
 import Slider from 'react-slick'
+import OptimizedImage from "@/app/components/OptimizedImage";
 
 const Parteners = ['/partner1.png', '/partner2.png', '/partner3.png', '/partner4.png', '/partner5.jpg']
 
@@ -32,7 +33,7 @@ const OurPartnersAboutUs = () => {
 const Image = ({ imgUrl }: { imgUrl: string }) => {
     return (
         <div className='max-w-[400px] w-full bg-white h-[140px] flex items-center justify-center m-1 '>
-            <img src={imgUrl} className='w-[100px] h-[100px] bg-white' />
+            <OptimizedImage alt="Partners" src={imgUrl} className='w-[100px] h-[100px] bg-white' />
         </div>
     )
 }

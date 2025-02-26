@@ -2,11 +2,12 @@ import ImageBanner from "../ui/ImageBanner"
 import OurKeyClients from "../ui/OurKeyClients"
 import OurPartnersAboutUs from "../ui/OurPartnersAboutUs"
 import OurServices from '../ui/OurServices'
+import OptimizedImage from "@/app/components/OptimizedImage";
 
 const AboutUs = () => {
   return (
     <div className="bg-gray-100">
-      <img className="fixed z-30 top-0 left-0 w-screen h-screen object-none object-center brightness-[0.65]" src="/factoryImage.webp" />
+      <OptimizedImage alt={"FactoryImage"} className="fixed z-30 top-0 left-0 w-screen h-screen object-none object-center brightness-[0.65]" src="/factoryImage.webp" />
       <div className="relative z-40 bg-gray-100">
         <div className="hidden md:block relative z-40 bg-gray-100">
           <ImageBanner />
@@ -31,26 +32,26 @@ const AboutUs = () => {
                 <div className="w-full -bottom-7 h-[2px] bg-themeBlue rounded-lg"></div>
               </h1>
               <div className="flex flex-shrink gap-5 justify-evenly items-center flex-wrap p-2 w-full">
-                <img src="/certificate1.jpg" className="w-3/4 md:w-1/4 border" />
-                <img src="/certificate2.jpg" className="w-3/4 md:w-1/4 max-h-[250px]" />
-                <img src="/certificate3.jpg" className="w-3/4 md:w-1/4 max-h-[250px]" />
+                <OptimizedImage alt="certificate" src="/certificate1.jpg" className="w-3/4 md:w-1/4 border" />
+                <OptimizedImage alt="certificate" src="/certificate2.jpg" className="w-3/4 md:w-1/4 max-h-[250px]" />
+                <OptimizedImage alt="certificate" src="/certificate3.jpg" className="w-3/4 md:w-1/4 max-h-[250px]" />
               </div>
               <h1 className="text-4xl font-bold text-center text-themeBlue relative">Awards
                 <div className="w-full -bottom-7 h-[2px] bg-themeBlue rounded-lg"></div>
               </h1>
               <div className="flex flex-shrink gap-5 justify-evenly items-center flex-wrap p-2 text-sm text-gray-700 font-bold">
                 <div className="flex flex-col w-3/4 md:w-1/4">
-                  <img src="/award1.png" className="w-full" />
+                  <OptimizedImage alt='Award' src="/award1.png" className="w-full" />
                   <div className="text-center">Highest Perfomance - Segment Sales</div>
                   <div className="text-center">CY 2021</div>
                 </div>
                 <div className="flex flex-col w-3/4 md:w-1/4">
-                  <img src="/award2.png" className="w-full" />
+                  <OptimizedImage alt='Award' src="/award2.png" className="w-full" />
                   <div className="text-center">Consistent Performance Award</div>
                   <div className="text-center">CY 2022</div>
                 </div>
                 <div className="flex flex-col w-3/4 md:w-1/4">
-                  <img src="/award3.png" className="w-full" />
+                  <OptimizedImage alt='Award' src="/award3.png" className="w-full" />
                   <div className="text-center">Best in Consumer Satisfaction</div>
                   <div className="text-center">for Q3'2013</div>
                 </div>

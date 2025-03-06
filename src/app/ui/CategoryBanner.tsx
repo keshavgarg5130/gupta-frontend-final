@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import fetchBillboard from "../lib/fetchBillboard"
+import Image from "next/image";
 
 const CategoryBanner = ({ bannerId }: { bannerId: string }) => {
 
@@ -13,8 +14,8 @@ const CategoryBanner = ({ bannerId }: { bannerId: string }) => {
   }, [])
   if (url)
     return (
-      <div className="mt-2">
-        <img src={url} className="max-h-[500px]" />
+      <div className="mt-2 max-h-[500px]">
+        <Image src={url} alt='acb,mccb,panels photo'  />
       </div>
     )
   return (<div className="w-full max-h-[500px] min-h-[300px] bg-white box-border m-3 mx-10 rounded-lg"></div>)

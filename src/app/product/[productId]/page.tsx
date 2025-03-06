@@ -22,6 +22,12 @@ export async function generateMetadata({ params }: {
 	const { productId } = await params
 	const productIId = productId.split('-')[0]
 	const product = await fetchProduct(productIId)
+	if(!product){
+		return {
+			title: "Enquire Now",
+			description: "We may have the product you are looking for, You can contact us on our contact page .",
+		}
+	}
 	return {
 		title: product.name,
 		description: product.description,

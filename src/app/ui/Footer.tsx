@@ -9,7 +9,11 @@ const footerContents = [
     labels: [{
       lable: 'About GuptaSwitches',
       redirectsTo: '/AboutUs',
-    }]
+    },
+      {
+        lable: 'GuptaSwitchgears',
+        redirectsTo: '/',
+      }]
   },
   {
     header: 'Our Products',

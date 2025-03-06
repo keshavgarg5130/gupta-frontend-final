@@ -12,10 +12,15 @@ const ProductPamphletFull = (product: product) => {
   const descriptionArray = product.description.split('')
   let size = 60
   const description = descriptionArray.length > size ? descriptionArray.splice(0, size).join('') + '...' : descriptionArray.join('')
-
+  const escapeXml = (unsafe: string) =>
+      unsafe.replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&apos;");
   return (
     <div className="w-full bg-blue-200 h-[200px] flex items-center px-2 justify-center rounded-xl group hover:shadow-xl transition-all duration-500">
-      <a href={'/product/' + product.id} className="justify-center h-3/4 group-hover:h-5/6 w-1/3 max-w-1/5 flex items-center md:group-hover:w-2/6 transition-all duration-500 rounded-xl">
+      <a href={`/product/${product.id}-${escapeXml(product.name.toLowerCase().replace(/\s+/g, "-"))}`} className="justify-center h-3/4 group-hover:h-5/6 w-1/3 max-w-1/5 flex items-center md:group-hover:w-2/6 transition-all duration-500 rounded-xl">
         <img src={image} className="max-h-full max-w-full rounded-lg group-hover:rounded-xl transition-all duration-500" />
       </a>
       <div className="ml-5 flex w-3/4 h-full items-center py-2 md:py-7 ">

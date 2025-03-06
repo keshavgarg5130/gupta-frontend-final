@@ -45,7 +45,7 @@ const CustomizeProducts = async ({ product }: { product: product }) => {
     }
   }
 
-  console.log(`made links in ${Date.now() - startTime}`)
+
 
   currentRatings.sort((a, b) => parseInt(a.name) - parseInt(b.name));
   for (let i = 0; i < currentRatings.length; i++) {
@@ -67,7 +67,7 @@ const CustomizeProducts = async ({ product }: { product: product }) => {
   }
 
   const endTime = Date.now();
-  console.log(`Time taken = ${endTime - startTime}`)
+
   return (
     <div className='flex flex-col gap-6'>
       <h4 className='font-medium'>Choose Pole</h4>

@@ -15,7 +15,7 @@ const CategoryBanner = ({ bannerId }: { bannerId: string }) => {
   if (url)
     return (
       <div className="mt-2 max-h-[500px]">
-        <Image src={url} alt='acb,mccb,panels photo'  />
+        <Image height={500} width={600} src={url} alt='acb,mccb,panels photo'  />
       </div>
     )
   return (<div className="w-full max-h-[500px] min-h-[300px] bg-white box-border m-3 mx-10 rounded-lg"></div>)

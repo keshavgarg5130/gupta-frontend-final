@@ -1,4 +1,4 @@
-import Cart from '@/app/ui/Cart';
+import Cart from '@/app/ui/Cart.jsx';
 
 
 const CartPage = () => {

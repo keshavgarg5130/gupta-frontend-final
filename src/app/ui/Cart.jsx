@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext } from "react";
-
+import Image from "next/image";
 
 import Link from "next/link";
 import CartContext from "../../context/CartContext";
@@ -53,13 +53,13 @@ const Cart = () => {
                             <main className="md:w-3/4">
                                 <article className="border border-gray-200 bg-white shadow-sm rounded mb-5 p-3 lg:p-5">
                                     {cart?.cartItems?.map((cartItem) => (
-                                        <div key={1}>
+                                        <div key={cartItem.name}>
                                             <div className="flex flex-wrap lg:flex-row gap-5  mb-4">
                                                 <div className="w-full lg:w-2/5 xl:w-2/4">
                                                     <figure className="flex leading-5">
                                                         <div>
                                                             <div className="block w-16 h-16 rounded border border-gray-200 overflow-hidden">
-                                                                <img src={cartItem.image} alt={cartItem.name} />
+                                                                <Image height={100} width={100} src={cartItem.image} alt={cartItem.name} />
                                                             </div>
                                                         </div>
                                                         <figcaption className="ml-3">

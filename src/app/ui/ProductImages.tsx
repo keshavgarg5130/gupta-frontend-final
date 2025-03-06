@@ -27,8 +27,9 @@ const ProductImages = ({ images }: { images: imageInterface[] }) => {
             className='w-1/4 h-32 relative gap-4 mt-8 cursor-pointer'
             onClick={() => setIndex(i)}>
             <Image src={img.url}
+
               alt='image'
-              fill
+              height={100} width={100}
               className='object-cover rounded-md border'
               sizes='30vw' />
           </div>

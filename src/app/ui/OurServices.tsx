@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 const svgs = [
     {
         url: '/servicesProgramming.png',
@@ -43,7 +45,7 @@ const OurServices = () => {
 const Icon = ({ url, label }: { url: string, label: string }) => {
     return (
         <div className="h-[300px] w-[300px] relative z-40 flex flex-col justify-center items-center ">
-            <img className="h-1/2 w-1/2 opacity-100 relative z-40 flex justify-center" src={url} />
+            <Image alt="gupaSwitchgearsServies" height={150} width={150} className="h-1/2 w-1/2 opacity-100 relative z-40 flex justify-center" src={url} />
             <label className="opacity-100 text-white relative z-40 text-xl">{label}</label>
             <div className="absolute w-full h-full opacity-60 bg-blue-900 top-0 left-0 z-30 rounded-2xl"></div>
         </div>

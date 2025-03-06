@@ -5,11 +5,12 @@ import OurServices from "../ui/OurServices"
 import OurPartnersAboutUs from "../ui/OurPartnersAboutUs"
 import { MapPin, Phone } from "lucide-react"
 import { Mail } from "lucide-react"
+import Image from "next/image"
 
 const Page = () => {
   return (
     <div className="bg-gray-100">
-      <img className="fixed z-30 top-0 left-0 w-screen h-screen object-none object-center brightness-[0.65]" src="/factoryImage.webp" />
+      <Image fill alt='gupta-switchgear_factory_image' className="fixed z-30 top-0 left-0 w-screen h-screen object-none object-center brightness-[0.65]" src="/factoryImage.webp" />
       <div className="relative z-40 bg-gray-100">
         <div className="hidden md:block relative z-40 bg-gray-100">
           <ImageBanner />

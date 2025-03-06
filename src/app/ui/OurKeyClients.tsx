@@ -1,5 +1,6 @@
 'use client'
 import Slider from 'react-slick'
+import Image from 'next/image'
 
 const Parteners = ['/client1.png',
     '/client2.png',
@@ -36,17 +37,17 @@ const OurKeyClients = () => {
             </div>
             <Slider {...settings} className='max-h-[150px] flex items-center bg-white' >
                 {Parteners.map((partner, index) => {
-                    return <Image key={index} imgUrl={partner} />
+                    return <ClientImage key={index} imgUrl={partner} />
                 })}
             </Slider>
         </div>
     )
 }
 
-const Image = ({ imgUrl }: { imgUrl: string }) => {
+const ClientImage = ({ imgUrl }: { imgUrl: string }) => {
     return (
         <div className='max-w-[400px] w-full bg-white h-[140px] flex items-center justify-center m-1 '>
-            <img src={imgUrl} className='w-[100px] h-[100px] bg-white' />
+            <Image alt='GuptaSwitchgearClient' height={100} width={100} src={imgUrl} className='w-[100px] h-[100px] bg-white' />
         </div>
     )
 }

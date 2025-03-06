@@ -1,5 +1,6 @@
 'use client'
 import { Children, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const things = [
   {
@@ -43,7 +44,7 @@ const Counter = ({ imgUrl, number, title }: { imgUrl: string, number: number, ti
   return (
     <div className="flex items-center">
       <div className="rounded-2xl h-[40px] w-[40px]">
-        <img src={imgUrl} />
+        <Image height={40} width={40} alt='GuptaSwitchgearCartImageUrl' src={imgUrl} />
       </div>
       <div className="px-1">
         <div className="" >{count}+</div>

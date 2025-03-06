@@ -2,6 +2,7 @@
 import Slider from 'react-slick'
 import fetchBillboards from '../lib/fetchBillboards'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 const ImageBanner = () => {
   const [images, setImages] = useState<string[]>([]);
@@ -17,34 +18,38 @@ const ImageBanner = () => {
   useEffect(() => {
     const banners = async () => {
       const bannerData = (await fetchBillboards())
+
         .filter(billboard => {
           return parseInt(billboard.label)
         })
         .sort((a, b) => parseInt(a.label) - parseInt(b.label))
         .map(billboard => billboard.imageUrl);
       setImages(bannerData)
-      console.log(bannerData)
+
     }
     banners();
   }, [])
   if (images.length == 0) {
     return (
-      <div>Getting Images</div>
+      <div>GuptaSwithgear banner Images</div>
     )
   }
   return (
     <div className='mb-5 '>
       <Slider {...settings} className='h-min overflow-hidden' >
         {images.map((imgU, i) => {
-          return <Image imgUrl={imgU} key={i} />
+          return <ImageB imgUrl={imgU} key={i} />
         })}
       </Slider>
     </div>
   )
 }
-const Image = ({ imgUrl }: { imgUrl: string }) => {
-  return (<img
+const ImageB = ({ imgUrl }: { imgUrl: string }) => {
+  return (<Image
     src={imgUrl}
+    alt='Gupta Switchgear Banner'
+    width={1920}
+    height={1080}
   />)
 }
 

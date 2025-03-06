@@ -14,19 +14,21 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gupta Switchgears: ACB,MCCB Dealer",
-  description: "Find MCCBs, ACBs, electric panels & automation " +
-      "products from L&T, Polycab, Siemens at Gupta Associates. " +
-      "Get expert electric servicing & fast delivery!",
+  title: "\n" +
+      "Buy Electrical Switchgears & Panels | MCB, MCCB, ACB Distributor | Gupta Switchgears",
+  description: "Gupta Switchgears is a trusted distributor of MCB, MCCB," +
+      " ACB, and other electrical switchgear products of top brands like L&K, Polycab , Seimens & Havells. We also manufacture " +
+      "top-quality electrical panels and provide expe" +
+      "rt electrical servicing. Contact Gupta switchgear for reliable electrical solutions.",
   icons:"/favicon.ico",
   twitter: {
     images: "/logoOG.jpeg",
-    title: "Gupta Switchgears: ACB,MCCB Dealer",
+    title: "Buy Electrical Switchgears & Panels | MCB, MCCB, ACB Distributor | Gupta Switchgears",
     card: "summary_large_image",
   },
   openGraph: {
     images: "/src/app/opengraph-image.png",
-    title: "Gupta Switchgears: ACB,MCCB Dealer",
+    title: "Buy Electrical Switchgears & Panels | MCB, MCCB, ACB Distributor | Gupta Switchgear",
     description: "Find MCCBs, ACBs, electric panels & automation " +
       "products from L&T, Polycab, Siemens at Gupta Associates. " +
       "Get expert electric servicing & fast delivery!",

@@ -135,7 +135,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                         </button>
                     </div>
                     <div className="flex flex-col items-center gap-3">
-                        <h1 className="text-2xl font-bold text-themeBlue"> Price Range</h1>
+                        <h3 className="text-2xl font-bold text-themeBlue"> Price Range</h3>
                         <div className="relative w-11/12 flex flex-col items-center">
                             <input
                                 type="range"
@@ -152,7 +152,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 items-center">
-                        <h1 className="text-2xl font-bold text-themeBlue">Select Poles</h1>
+                        <h3 className="text-2xl font-bold text-themeBlue">Select Poles</h3>
                         <div className="flex justify-evenly w-11/12">
                             {poles.map(pole => {
                                 return (<button key={pole.id} onClick={() => {
@@ -174,7 +174,7 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                         </div>
                     </div>
                     <div className="flex flex-col gap-3 items-center">
-                        <h1 className="text-2xl font-bold text-themeBlue">Select Current Rating</h1>
+                        <h3 className="text-2xl font-bold text-themeBlue">Select Current Rating</h3>
                         <div className="flex justify-evenly w-11/12 gap-2 flex-wrap">
                             {currentRatings.map(current => {
                                 return (<button key={current.id} onClick={() => {

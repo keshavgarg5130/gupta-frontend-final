@@ -2,9 +2,9 @@ const LeftSideLinkComponent = ({ data, heading }: { data: { name: string, link: 
     return (
         <div className="min-w-[300px] hidden md:flex items-center h-[600px] justify-center">
             <div className="flex flex-col p-3 justify-center items-center rounded-lg w-full shadow-xl shadow-gray-300 gap-3 bg-white">
-                <h1 className="text-4xl font-bold text-center text-themeBlue relative mb-4">{heading}
+                <h2 className="text-4xl font-bold text-center text-themeBlue relative mb-4">{heading}
                     <div className="w-full -bottom-7 hidden md:block md:h-1 bg-themeBlue rounded-lg"></div>
-                </h1>
+                </h2>
                 {data.map((row, index) => {
                     return <CategoryRow key={index} {...row} />
                 })}

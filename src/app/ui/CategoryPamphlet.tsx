@@ -35,8 +35,8 @@ const CategoryPamphlet = ({ categoryName, billboards, billboardId }: { categoryN
 
     return (<a href={link} className="flex flex-col bg-white items-center justify-center gap-1 w-2/3 md:w-4/5 lg:w-2/5 overflow-hidden md:border rounded-lg md:p-10">
         <Image alt='ACB,MCCB,MCB,Panels' src={url} height={300} width={200} className="max-w-full max-h-3/4" />
-        <h1 className="text-2xl font-bold text-center text-themeBlue underline">{categoryName}
-        </h1>
+        <h2 className="text-2xl font-bold text-center text-themeBlue underline">{categoryName}
+        </h2>
     </a>)
 }
 

@@ -7,15 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             userAgent: '*',
             allow: '/',
             disallow: [
-                '/register',
-                '/login',
-                '/profile',
-                '/orders',  // Lowercase to match typical URL patterns
-                '/checkout',
-                '/cart',
-                '/checkout/success',
-                '/checkout/canceled',
-                '/checkout/webhook',
                 '/checkout/webhook-completed'
             ],
         },

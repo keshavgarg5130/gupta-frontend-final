@@ -3,17 +3,17 @@ import CustomizeProducts from "./CustomizeProduct"
 import fetchProduct from "../lib/fetchProduct";
 import fetchCategoryProducts from "../lib/fetchCategoryProducts";
 import FeaturedProductsClient from "./FeaturedProductsClient";
-import {notFound} from "next/navigation";
+import {notFound, redirect} from "next/navigation";
 
 export const revalidate = 3600;
 
 const ProductPage = async ({ productSlug }: { productSlug: string }) => {
-  try{
-    const product = await fetchProduct(productSlug)
-    if(!product) {
-      notFound()
-    }
-    const images = product.images.map(image => {
+  const product = await fetchProduct(productSlug)
+  if(product==null) {
+    redirect('/')
+    return null;
+  }
+  const images = product.images.map(image => {
       return {
         id: image.id,
         url: image.url
@@ -55,22 +55,8 @@ const ProductPage = async ({ productSlug }: { productSlug: string }) => {
           <div className="mb-16">
             <FeaturedProductsClient products={randomDisplayProducts} heading="Similar Products" />
           </div>
-        </div>
-    )}
-  catch (error) {
-    console.log(error)
-    return (
-        <div>
-          <div className="flex h-screen flex-col items-center justify-center">
-            <h1 className="text-4xl font-bold">404 - Page Not Found</h1>
-            <p className="text-gray-600 mt-4">The page you're looking for doesn't exist.</p>
-            <a href="/" className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-md">
-              Go Home
-            </a>
-          </div>
-        </div>
-    )
-  }
+        </div>)
+
 }
 
 export default ProductPage

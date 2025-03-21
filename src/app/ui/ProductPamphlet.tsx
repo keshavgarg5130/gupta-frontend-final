@@ -5,20 +5,15 @@ import Image from "next/image";
 const ProductPamphelt = (product: product) => {
   const price = parseInt(product.price);
   const mPrice = parseInt(product.mPrice);
+  const slug = product.slug;
   const discount: number = Math.round(((parseInt(product.mPrice) - parseInt(product.price)) / parseInt(product.mPrice)) * 100)
   const image = product.images[0].url
   const nameArray = product.name.split('')
   let name = nameArray.length > 35 ? nameArray.splice(0, 35).join('') + '...' : product.name
-  const escapeXml = (unsafe: string) =>
-      unsafe.replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&apos;");
 
   return (
     <div className="m-2 p-1 flex flex-col items-center box-border group flex-grow w-[200px] bg-white rounded-lg h-[320px] hover:shadow-xl transition-all border" >
-      <a href={`/product/${product.id}-${escapeXml(product.name.toLowerCase().replace(/\s+/g, "-"))}`}>
+      <a href={`/product/${slug}`}>
         <div className="overflow-hidden relative w-[200px] h-[200px] group-hover:h-[160px] items-center justify-center flex rounded-md transition-all">
           <Image alt="GuptaSwitchgear Product Image" height={200} width={200} src={image}  className="rounded-md z-0 w-[195px] group-hover:w-[160px] transition-all" />
         </div>
@@ -40,7 +35,7 @@ const ProductPamphelt = (product: product) => {
           gstRate={product.gstRate} currentRatingId={product.currentRatingId} brandId={product.brandId} images={product.images} name={product.name}
           storeId={product.storeId} categoryId={product.categoryId} isArchived={product.isArchived}
           createdAt={product.createdAt} updatedAt={product.updatedAt} polesId={product.polesId} poles={product.poles} description={product.description}
-          brand={product.brand} category={product.category} currentRating={product.currentRating} />
+          brand={product.brand} category={product.category} slug={product.slug} currentRating={product.currentRating} />
         <div className="w-max text-xs text-white bg-themeBlue h-[25px] flex items-center justify-center px-2 py-1 rounded-full">
           BUY NOW
         </div>

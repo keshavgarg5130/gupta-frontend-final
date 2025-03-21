@@ -7,25 +7,21 @@ import Image from "next/image";
 const ProductPamphletFull = (product: product) => {
   const price = parseInt(product.price);
   const mPrice = parseInt(product.mPrice);
+  const slug = product.slug;
   const discount: number = Math.round(((parseInt(product.mPrice) - parseInt(product.price)) / parseInt(product.mPrice)) * 100)
   const image = product.images[0].url;
   const name = product.name
   const descriptionArray = product.description.split('')
   let size = 60
   const description = descriptionArray.length > size ? descriptionArray.splice(0, size).join('') + '...' : descriptionArray.join('')
-  const escapeXml = (unsafe: string) =>
-      unsafe.replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&apos;");
+
   return (
     <div className="w-full bg-blue-200 h-[200px] flex items-center px-2 justify-center rounded-xl group hover:shadow-xl transition-all duration-500">
-      <a href={`/product/${product.id}-${escapeXml(product.name.toLowerCase().replace(/\s+/g, "-"))}`} className="justify-center h-3/4 group-hover:h-5/6 w-1/3 max-w-1/5 flex items-center md:group-hover:w-2/6 transition-all duration-500 rounded-xl">
+      <a href={`/product/${slug}`} className="justify-center h-3/4 group-hover:h-5/6 w-1/3 max-w-1/5 flex items-center md:group-hover:w-2/6 transition-all duration-500 rounded-xl">
         <Image alt="GuptaSwitchgearProductImage" height={150} width={150} src={image} className="max-h-full max-w-full rounded-lg group-hover:rounded-xl transition-all duration-500" />
       </a>
       <div className="ml-5 flex w-3/4 h-full items-center py-2 md:py-7 ">
-        <a href={'/product/' + product.id}>
+        <a href={'/product/' + product.slug}>
           <div className="w-full mr-2 box-border">
             <div className="text-sm mb-1">
               {name}
@@ -49,7 +45,7 @@ const ProductPamphletFull = (product: product) => {
             gstRate={product.gstRate} currentRatingId={product.currentRatingId} brandId={product.brandId} images={product.images} name={product.name}
             storeId={product.storeId} categoryId={product.categoryId} isArchived={product.isArchived}
             createdAt={product.createdAt} updatedAt={product.updatedAt} polesId={product.polesId} poles={product.poles} description={product.description}
-            brand={product.brand} category={product.category} currentRating={product.currentRating} />
+            brand={product.brand} slug={product.slug} category={product.category} currentRating={product.currentRating} />
           <div className="w-max text-xs text-white bg-themeBlue h-[25px] flex items-center justify-center px-2 py-1 rounded-full">
             BUY NOW
           </div>

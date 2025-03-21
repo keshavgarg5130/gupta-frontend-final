@@ -1,13 +1,13 @@
 const categories = [
-    { name: 'PANELS', link: '/Panel/DistributionBoard' },
-    { name: 'ACB', link: '/ACB' },
-    { name: 'MCB', link: '/MCB' },
-    { name: 'MCCB', link: '/MCCB' },
-    { name: 'RCCB', link: '/RCCB' },
-    { name: 'ISOLATOR', link: '/ISOLATOR' },
-    { name: 'OVERLOAD RELAY', link: '/OVERLOAD_RELAY' },
-    { name: 'POWER CONTRACTOR', link: '/POWER_CONTRACTOR' },
-    { name: 'WIRES & CABLES', link: '/WIRES_AND_CABLES' },
+    { name: 'PANELS', link: '/panel/distribution-board' },
+    { name: 'ACB', link: '/acb' },
+    { name: 'MCB', link: '/mcb' },
+    { name: 'MCCB', link: '/mccb' },
+    { name: 'RCCB', link: '/rccb' },
+    { name: 'ISOLATOR', link: '/isolator' },
+    { name: 'OVERLOAD RELAY', link: '/overload-relay' },
+    { name: 'POWER CONTRACTOR', link: '/power-contractor' },
+    { name: 'WIRES & CABLES', link: '/wires-and-cables' },
 ]
 
 export default categories

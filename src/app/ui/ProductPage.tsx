@@ -7,9 +7,9 @@ import {notFound} from "next/navigation";
 
 export const revalidate = 3600;
 
-const ProductPage = async ({ productId }: { productId: string }) => {
+const ProductPage = async ({ productSlug }: { productSlug: string }) => {
   try{
-    const product = await fetchProduct(productId)
+    const product = await fetchProduct(productSlug)
     if(!product) {
       notFound()
     }

@@ -1,5 +1,6 @@
 export default interface custimizeProduct {
 	id: string,
+	slug: string,
 	category: {
 		name: string,
 		id: string

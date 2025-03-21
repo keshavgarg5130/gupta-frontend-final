@@ -11,7 +11,7 @@ export default function MCB() {
 		const getProducts = async () => {
 			const response = (await axios.get('https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/products')).data as product[];
 			const MCB = response.filter(prdt => {
-				if (prdt.category.name === 'Panel')
+				if (prdt.category.name === 'panel')
 					return prdt
 			})
 			setProducts(MCB)

@@ -1,27 +1,27 @@
 import ProductPage from "@/app/ui/ProductPage"
 import fetchProduct from "@/app/lib/fetchProduct";
-import fetchProductId from "@/app/lib/fetchProductId";
+
+import fetchProductSlug from "@/app/lib/fetchProductSlug";
 
 export async function generateStaticParams() {
-	const productIds = await fetchProductId();
+	const productSlugs = await fetchProductSlug();
 
 	// Ensure productIds is valid
-	if (!productIds || !Array.isArray(productIds)) {
+	if (!productSlugs || !Array.isArray(productSlugs)) {
 		console.error("Error: Invalid product IDs received");
 		return [];
 	}
 
-	return productIds.map((product) => ({
-		productId: product.id // Fix: Use 'product.id' correctly
+	return productSlugs.map((product) => ({
+		productSlug: String(product.slug) // Fix: Use 'product.id' correctly
 	}));
 }
 
 export async function generateMetadata({ params }: {
-	params: Promise<{ productId: string }>
+	params: Promise<{ productSlug: string }>
 }) {
-	const { productId } = await params
-	const productIId = productId.split('-')[0]
-	const product = await fetchProduct(productIId)
+	const { productSlug } = await params
+	const product = await fetchProduct(productSlug)
 	if(!product){
 		return {
 			title: "Enquire Now",
@@ -45,12 +45,11 @@ export async function generateMetadata({ params }: {
 
 export default async function(
 	{ params }: {
-		params: Promise<{ productId: string }>
+		params: Promise<{ productSlug: string }>
 	}
 ) {
-	const { productId } = await params
-	const productIId = productId.split('-')[0]
+	const { productSlug } = await params
 	return (
-		<ProductPage productId={productIId} />
+		<ProductPage productSlug={productSlug} />
 	)
 }

@@ -16,6 +16,7 @@ export interface product {
 	price: string,
 	isFeatured: boolean,
 	isArchived: boolean,
+	slug: string,
 	currentRatingId: string,
 	polesId: string,
 	createdAt: string,

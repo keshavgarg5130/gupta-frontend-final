@@ -15,23 +15,23 @@ const CategoryPamphlet = ({ categoryName, billboards, billboardId }: { categoryN
 
     switch (categoryName) {
         case "Panels":
-            link = '/Panel/DistributionBoard'
+            link = '/panel/distribution-board'
             break
         case "Overlay Relay":
             link = '/OVERLAY_RELAY'
             break
         case "Wires and Cables":
-            link = "/WIRES_AND_CABLES"
+            link = "/wires-and-cables"
             break;
         case "Power Contractor":
-            link = "/POWER_CONTRACTOR"
+            link = "/power-contractor"
             break;
 
     }
-    if (categoryName == 'MCB') categoryName = 'Mineature Circuit Breaker (MCB)'
-    else if (categoryName == 'ACB') categoryName = 'Air Circuit Breaker (ACB)'
-    else if (categoryName == 'MCCB') categoryName = 'Molded Case Circuit Breaker (MCCB)'
-    else if (categoryName == 'RCCB') categoryName = 'Residual Current Circuit Breaker (RCCB)'
+    if (categoryName == 'mcb') categoryName = 'Mineature Circuit Breaker (mcb)'
+    else if (categoryName == 'acb') categoryName = 'Air Circuit Breaker (acb)'
+    else if (categoryName == 'mccb') categoryName = 'Molded Case Circuit Breaker (mccb)'
+    else if (categoryName == 'rccb') categoryName = 'Residual Current Circuit Breaker (rccb)'
 
     return (<a href={link} className="flex flex-col bg-white items-center justify-center gap-1 w-2/3 md:w-4/5 lg:w-2/5 overflow-hidden md:border rounded-lg md:p-10">
         <Image alt='ACB,MCCB,MCB,Panels' src={url} height={300} width={200} className="max-w-full max-h-3/4" />

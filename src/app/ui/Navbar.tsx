@@ -3,8 +3,11 @@ import Image from "next/image";
 import CartIcon from "./CartIcon";
 import { useState, useEffect } from "react";
 import { UserButton } from "@clerk/nextjs";
+import useAuth from "@/hooks/use-auth";
 
 const Navbar = () => {
+
+
 
   const [showOptions, setShowOptions] = useState(false)
 
@@ -47,8 +50,10 @@ const Navbar = () => {
           <Link text="ABOUT US" link="/AboutUs" />
           <Link text="CONTACT US" link="/ContactUs" />
           <CartIcon />
+
+
           <div className="flex items-center">
-            <UserButton afterSignOutUrl="/" />
+
           </div>
         </div>
       </div>

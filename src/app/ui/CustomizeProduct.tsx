@@ -20,15 +20,15 @@ const CustomizeProducts = async ({ product }: { product: product }) => {
 
   let poles: { name: string, id: string }[] = [];
   let currentRatings: { name: string, id: string }[] = [];
-  let poleToProduct: { [key: string]: { url: string, id: string } } = {};
-  let currentToProduct: { [key: string]: { url: string, id: string } } = {};
+  let poleToProduct: { [key: string]: { url: string, slug: string } } = {};
+  let currentToProduct: { [key: string]: { url: string, slug: string } } = {};
 
   for (let prdt of ourProducts) {
     if (currentCurrentId == prdt.currentRating.id) {
       if (!poleToProduct[prdt.poles.id]) {
         poleToProduct[prdt.poles.id] = {
-          id: prdt.id,
-          url: '/product/' + prdt.id
+          slug: prdt.slug,
+          url: '/product/' + prdt.slug
         }
         poles.push(prdt.poles)
       }
@@ -37,8 +37,8 @@ const CustomizeProducts = async ({ product }: { product: product }) => {
     if (currentPoleId == prdt.poles.id) {
       if (!currentToProduct[prdt.currentRating.id]) {
         currentToProduct[prdt.currentRating.id] = {
-          id: prdt.id,
-          url: '/product/' + prdt.id
+          slug: prdt.slug,
+          url: '/product/' + prdt.slug
         }
         currentRatings.push(prdt.currentRating)
       }

@@ -1,43 +1,43 @@
 const PanelsData = [
     {
         name: 'AMF Panels',
-        link: '/Panel/AMF'
+        link: '/panel/amf'
     },
     {
         name: 'APFC Panels',
-        link: '/Panel/APFC'
+        link: '/panel/apfc'
     },
     {
         name: 'Automatic Street Lighting Switching Panels',
-        link: '/Panel/AutomaticStreetLightingSwitching'
+        link: '/panel/automatic-street-lighting-switching'
     },
     {
         name: 'Busduct / Rising mains',
-        link: '/Panel/BusductRising'
+        link: '/panel/busduct-rising'
     },
     {
         name: 'DG Synchronization Panels',
-        link: '/Panel/DGSynchronization'
+        link: '/panel/dg-synchronization'
     },
     {
         name: 'Distribution Board Panels',
-        link: '/Panel/DistributionBoard'
+        link: '/panel/distribution-board'
     },
     {
         name: 'Load Sharing',
-        link: '/Panel/LoadSharing'
+        link: '/panel/load-sharing'
     },
     {
         name: 'Outdoor Feeder Pillars',
-        link: '/Panel/OutDoorFeeder'
+        link: '/panel/out-door-feeder'
     },
     {
         name: 'PLC Panel / SCADA System',
-        link: '/Panel/PLC_SCADA'
+        link: '/panel/plc-scada'
     },
     {
         name: 'Soft Starter & VFC Panel',
-        link: '/Panel/PLC_Soft-StarterVFD'
+        link: '/panel/plc-soft-starter-vfd'
     },
 ]
 

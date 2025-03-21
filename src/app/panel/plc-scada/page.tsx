@@ -11,7 +11,7 @@ const data = {
   mainBanner: '/banner-1.jpg',
   smallBanner: '/banner-1.jpg',
   firstPara: ['Get customized PLC Panels/SCADA System at an affordable price, which is designed, developed and manufactured by using high quality raw materials. Our PLC Panels are applicable for Power, Process, and Manufacturing & Automation Industries. They are compatible for diverse Industrial protocols to connect to SCADA, Control, Monitor &. They are low cost machine-automation systems that come with PLC control panel, HMI interface and Web enabled SCADA system.'],
-  systemIntegrations: ['PLC Control Panel with HMI Interface', 'Web Enabled SCADA System', 'Solutions Delievered at Very Competitive Prices', 'Low Cost machine-Automations System', 'Based on Ebmedded Technology for OEM', 'System Designed using Known Brands of PLC  Hardware', 'Complete Project Handling from Concepts to Commissiong', 'PLC System work station (SCADA)'],
+  systemIntegrations: ['PLC Control panel with HMI Interface', 'Web Enabled SCADA System', 'Solutions Delievered at Very Competitive Prices', 'Low Cost machine-Automations System', 'Based on Ebmedded Technology for OEM', 'System Designed using Known Brands of PLC  Hardware', 'Complete Project Handling from Concepts to Commissiong', 'PLC System work station (SCADA)'],
   features: ['Cost Effective', 'User Friendly', 'Efficient Performance', 'Quality Tested', 'Highly Reliabel', 'Excellent Functionality', 'Robust Structure'],
 }
 

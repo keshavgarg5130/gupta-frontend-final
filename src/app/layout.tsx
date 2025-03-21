@@ -14,19 +14,19 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gupta Switchgears: ACB,MCCB Dealer",
+  title: "Gupta Switchgears: acb,mccb Dealer",
   description: "Find MCCBs, ACBs, electric panels & automation " +
       "products from L&T, Polycab, Siemens at Gupta Associates. " +
       "Get expert electric servicing & fast delivery!",
   icons:"/favicon.ico",
   twitter: {
     images: "/logoOG.jpeg",
-    title: "Gupta Switchgears: ACB,MCCB Dealer",
+    title: "Gupta Switchgears: acb,mccb Dealer",
     card: "summary_large_image",
   },
   openGraph: {
     images: "/src/app/opengraph-image.png",
-    title: "Gupta Switchgears: ACB,MCCB Dealer",
+    title: "Gupta Switchgears: acb,mccb Dealer",
     description: "Find MCCBs, ACBs, electric panels & automation " +
       "products from L&T, Polycab, Siemens at Gupta Associates. " +
       "Get expert electric servicing & fast delivery!",

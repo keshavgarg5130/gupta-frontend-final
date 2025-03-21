@@ -8,7 +8,7 @@ const footerContents = [
     header: 'About Us',
     labels: [{
       lable: 'About GuptaSwitches',
-      redirectsTo: '/AboutUs',
+      redirectsTo: '/about-us',
     },
       {
         lable: 'GuptaSwitchgears',
@@ -18,43 +18,43 @@ const footerContents = [
   {
     header: 'Our Products',
     labels: [{
-      lable: 'ACB',
-      redirectsTo: '/ACB',
+      lable: 'acb',
+      redirectsTo: '/acb',
     }, {
-      lable: 'MCCB',
-      redirectsTo: '/MCCB',
+      lable: 'mccb',
+      redirectsTo: '/mccb',
     }, {
       lable: 'Overload Relay',
-      redirectsTo: '/OVERLOAD_RELAY',
+      redirectsTo: '/overload-relay',
     }, {
       lable: 'Power Contactors',
-      redirectsTo: '/POWER_CONTRACTOR',
+      redirectsTo: '/power-contractor',
     }, {
       lable: 'Wires & Cables',
-      redirectsTo: '/WIRES_AND_CABLES',
+      redirectsTo: '/wires-and-cables',
     }]
   },
   {
     header: 'Help',
     labels: [{
       lable: 'Terms and Conditions',
-      redirectsTo: '/Terms-conditions',
+      redirectsTo: '/terms-conditions',
     }, {
       lable: 'Shipping Policy',
-      redirectsTo: '/Shipping-policy',
+      redirectsTo: '/shipping-policy',
     }, {
       lable: 'Return and Refund Policy',
-      redirectsTo: '/Return-refund-policy',
+      redirectsTo: '/return-refund-policy',
     }, {
       lable: 'Privacy Policy',
-      redirectsTo: '/Privacy-policy',
+      redirectsTo: '/privacy-policy',
     }]
   },
   {
     header: 'Contact ',
     labels: [{
       lable: 'Contact Us',
-      redirectsTo: '/ContactUs',
+      redirectsTo: '/contact-us',
     }, {
       lable: '+91 9311440607',
       redirectsTo: 'tel: +91-9311440607 (Sales)',

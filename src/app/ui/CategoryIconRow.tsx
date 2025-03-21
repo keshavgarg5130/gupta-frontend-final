@@ -2,28 +2,28 @@ import Image from "next/image";
 
 const categoryIcons = [
   {
-    imgUrl: '/ACB.png',
-    redirectUrl: '/ACB',
-    label: 'ACB'
+    imgUrl: '/acb.png',
+    redirectUrl: '/acb',
+    label: 'acb'
   },
   {
-    imgUrl: '/MCCB.png',
+    imgUrl: '/mccb.png',
     redirectUrl: '/',
-    label: 'MCCB'
+    label: 'mccb'
   },
   {
-    imgUrl: '/OVERLOAD_RELAY.png',
-    redirectUrl: '/OVERLOAD_RELAY',
+    imgUrl: '/overload-relay.png',
+    redirectUrl: '/overload-relay',
     label: 'OVERLOAD RELAY'
   },
   {
     imgUrl: '/POWER_CONTACTOR.png',
-    redirectUrl: '/POWER_CONTRACTOR',
+    redirectUrl: '/power-contractor',
     label: 'POWER CONTRACTOR'
   },
   {
-    imgUrl: '/WIRES_AND_CABLES.png',
-    redirectUrl: '/WIRES_AND_CABLES',
+    imgUrl: '/wires-and-cables.png',
+    redirectUrl: '/wires-and-cables',
     label: 'WIRES AND CABLES'
   },
 ]

@@ -1,5 +1,16 @@
 import { NextPage } from 'next';
 
+export const metadata = {
+    title: 'Gupta Switchgear | Downloads',
+    description: 'You can Download our Price List, Brochure, Catalog, etc. from here.',
+    alternates: {
+        canonical: "https://guptaswitchgears.com/downloads",
+    },
+    robots: {
+        index: true, //
+        follow: true,}
+}
+
 const DownloadPage: NextPage = () => {
     const pdfs = [
         { name: 'ESP Price List 01 May 2024_240501_002412', url: '/files/ESP Price List 01 May 2024_240501_002412.pdf' },

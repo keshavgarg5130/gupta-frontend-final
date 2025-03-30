@@ -40,6 +40,12 @@ export async function generateMetadata({ params }: {
 				},
 			],
 		},
+		alternates: {
+			canonical: "https://guptaswitchgears.com/product/" + product.slug,
+		},
+		robots: {
+			index: true, //
+			follow: true,}
 	}
 }
 

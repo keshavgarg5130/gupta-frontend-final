@@ -1,3 +1,13 @@
+export const metadata = {
+    title: 'Gupta Switchgear | Return and Refund Policy',
+    description: 'We offer a transparent and fair return and refund policy. If you are not satisfied with your purchase, you can return it within 10 days of receiving it. The product must be in its original condition and packaging. We will refund the purchase price, excluding shipping costs, within 14 days of receiving the returned product. Please note that we do not accept returns on custom-made or special-order products. For more information, please contact us at info@guptaswitchgears.com.',
+    alternates: {
+        canonical: "https://guptaswitchgears.com/return-refund-policy",
+    },
+    robots: {
+        index: true, //
+        follow: true,}
+}
 const ReturnRefundPolicyPage: React.FC = () => {
     return (
         <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', lineHeight: '1.6' }}>

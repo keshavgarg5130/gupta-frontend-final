@@ -1,3 +1,13 @@
+export const metadata = {
+    title: 'Gupta Switchgear | Privacy Policy',
+    description: 'We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy outlines how we collect, use, and protect your data when you visit our website or use our services.',
+    alternates: {
+        canonical: "https://guptaswitchgears.com/privacy-policy",
+    },
+    robots: {
+        index: true, //
+        follow: true,}
+}
 const PrivacyPolicyPage: React.FC = () => {
     return (
         <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', lineHeight: '1.6' }}>

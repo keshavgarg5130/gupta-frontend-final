@@ -1,3 +1,13 @@
+export const metadata = {
+    title: 'Gupta Switchgear | Terms and Conditions',
+    description: 'Terms and Conditions for using our website. Please read these terms carefully before using our website.',
+    alternates: {
+        canonical: "https://guptaswitchgears.com/privacy-policy",
+    },
+    robots: {
+        index: true, //
+        follow: true,}
+}
 const TermsAndConditions = () => {
     return (
         <div className="container">

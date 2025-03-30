@@ -17,3 +17,18 @@ export const config = {
         '/(api|trpc)(.*)',
     ],
 };
+module.exports = {
+    async headers() {
+        return [
+            {
+                source: "/(.*)", // Apply to all pages
+                headers: [
+                    {
+                        key: "X-Robots-Tag",
+                        value: "index, follow", // Allow indexing
+                    },
+                ],
+            },
+        ];
+    },
+};

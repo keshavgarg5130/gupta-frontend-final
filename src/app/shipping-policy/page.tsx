@@ -1,3 +1,13 @@
+export const metadata = {
+    title: 'Gupta Switchgear | Shipping Policy',
+    description: 'We offer fast and reliable shipping services to ensure your products reach you in the fastest possible time. We use a combination of ground and air transportation to get your orders to you as quickly as possible. We also offer international shipping to many countries around the world. We take great care in packaging your products to ensure they arrive in perfect condition. We use sturdy boxes and packing materials to protect your items during transit. We also provide tracking information so you can track your order every step of the way. We are committed to providing the best possible shipping experience for our customers. We are constantly working to improve our shipping services and to provide the best possible service to our customers.',
+    alternates: {
+        canonical: "https://guptaswitchgears.com/shipping-policy",
+    },
+    robots: {
+        index: true, //
+        follow: true,}
+}
 const ShippingPolicyPage: React.FC = () => {
     return (
         <div style={{ padding: '20px', fontFamily: 'Arial, sans-serif', lineHeight: '1.6' }}>

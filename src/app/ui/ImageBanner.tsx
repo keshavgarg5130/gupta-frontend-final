@@ -31,7 +31,7 @@ const ImageBanner = () => {
   }, [])
   if (images.length == 0) {
     return (
-      <div>GuptaSwithgear banner Images</div>
+      <div className='h-[776px] w-full'>GuptaSwithgear banner Images</div>
     )
   }
   return (
@@ -45,12 +45,13 @@ const ImageBanner = () => {
   )
 }
 const ImageB = ({ imgUrl }: { imgUrl: string }) => {
-  return (<Image
+  return (
+      <Image
     src={imgUrl}
     alt='Gupta Switchgear Banner'
-    width={1920}
-    height={1080}
-  />)
+    width={2560}
+    height={776}
+      />)
 }
 
 export default ImageBanner;

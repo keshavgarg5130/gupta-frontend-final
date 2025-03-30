@@ -6,9 +6,6 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: '*',
             allow: '/',
-            disallow: [
-                '/checkout/webhook-completed'
-            ],
         },
         sitemap: 'https://guptaswitchgears.com/sitemap.xml',
         // Optional but recommended for some crawlers

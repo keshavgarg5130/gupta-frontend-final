@@ -1,3 +1,19 @@
+import { NextResponse } from "next/server";
+
+export function middleware(req) {
+    const res = NextResponse.next();
+
+    // Set X-Robots-Tag header to allow indexing
+    res.headers.set("X-Robots-Tag", "index, follow");
+
+    // Example: Redirect users if they visit "/csr"
+    if (req.nextUrl.pathname === "/csr") {
+        return NextResponse.redirect(new URL("/", req.url));
+    }
+
+    return res;
+}
+
 export const config = {
     matcher: [
         // Match all routes except Next.js internals and static files
@@ -5,19 +21,4 @@ export const config = {
         // Always run for API routes
         '/(api|trpc)(.*)',
     ],
-};
-module.exports = {
-    async headers() {
-        return [
-            {
-                source: "/(.*)", // Apply to all pages
-                headers: [
-                    {
-                        key: "X-Robots-Tag",
-                        value: "index, follow", // Allow indexing
-                    },
-                ],
-            },
-        ];
-    },
 };

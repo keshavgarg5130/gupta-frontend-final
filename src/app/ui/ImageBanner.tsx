@@ -15,43 +15,49 @@ const ImageBanner = () => {
     slidesToShow: 1,
     slideToScroll: 1
   }
+
   useEffect(() => {
     const banners = async () => {
       const bannerData = (await fetchBillboards())
-
-        .filter(billboard => {
-          return parseInt(billboard.label)
-        })
-        .sort((a, b) => parseInt(a.label) - parseInt(b.label))
-        .map(billboard => billboard.imageUrl);
-      setImages(bannerData)
-
+          .filter(billboard => parseInt(billboard.label))
+          .sort((a, b) => parseInt(a.label) - parseInt(b.label))
+          .map(billboard => billboard.imageUrl);
+      setImages(bannerData);
     }
     banners();
   }, [])
+
   if (images.length == 0) {
     return (
-      <div className='h-[776px] w-full'>GuptaSwithgear banner Images</div>
+        <div className='h-[180px] w-full flex items-center justify-center text-lg'>
+          Gupta Switchgear Banner Images
+        </div>
     )
   }
+
   return (
-    <div className='mb-5 '>
-      <Slider {...settings} className='h-min overflow-hidden' >
-        {images.map((imgU, i) => {
-          return <ImageB imgUrl={imgU} key={i} />
-        })}
-      </Slider>
-    </div>
+      <div className='mb-5'>
+        <Slider {...settings} className='h-min overflow-hidden'>
+          {images.map((imgU, i) => (
+              <ImageB imgUrl={imgU} key={i} />
+          ))}
+        </Slider>
+      </div>
   )
 }
+
 const ImageB = ({ imgUrl }: { imgUrl: string }) => {
   return (
-      <Image
-    src={imgUrl}
-    alt='Gupta Switchgear Banner'
-    width={2560}
-    height={776}
-      />)
+      <div className="relative w-full aspect-[16/5]">
+        <Image
+            src={imgUrl}
+            alt="Gupta Switchgear Banner"
+            fill
+            className="object-cover"
+            priority
+        />
+      </div>
+  )
 }
 
 export default ImageBanner;

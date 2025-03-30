@@ -14,14 +14,14 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gupta Switchgears: acb,mccb Dealer",
+  title: "Gupta Switchgears: acb,mccb dealer",
   description: "Find MCCBs, ACBs, electric panels & automation " +
       "products from L&T, Polycab, Siemens at Gupta Associates. " +
       "Get expert electric servicing & fast delivery!",
   icons:"/favicon.ico",
   twitter: {
     images: "/logoOG.jpeg",
-    title: "Gupta Switchgears: acb,mccb Dealer",
+    title: "Gupta Switchgears: acb,mccb dealer",
     card: "summary_large_image",
   },
   openGraph: {
@@ -30,10 +30,15 @@ export const metadata: Metadata = {
     description: "Find MCCBs, ACBs, electric panels & automation " +
       "products from L&T, Polycab, Siemens at Gupta Associates. " +
       "Get expert electric servicing & fast delivery!",
-    url: "https://guptaassociates.com",
+    url: "https://guptaswitchgears.com",
     type: "website",
-  }
-
+  },
+  alternates: {
+    canonical: "https://guptaswitchgears.com",
+  },
+  robots: {
+    index: true, //
+    follow: true,}
 };
 
 export default function RootLayout({

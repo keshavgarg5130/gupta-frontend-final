@@ -2,8 +2,7 @@
 import Image from "next/image";
 import CartIcon from "./CartIcon";
 import { useState, useEffect } from "react";
-import { UserButton } from "@clerk/nextjs";
-import useAuth from "@/hooks/use-auth";
+
 
 const Navbar = () => {
 

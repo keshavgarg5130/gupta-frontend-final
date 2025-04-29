@@ -28,11 +28,9 @@ export const AuthProvider = ({ children }) => {
     };
     const getUser = async () => {
         try {
-            const token = localStorage.getItem('token');
-            console.log(token);
             const res = await axios.get(
                 "https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/auth/user",
-                { credentials: "include" } // Important for sending cookies
+                { withCredentials: true } // ✅ CORRECT for Axios
             );
             setUser(res.data.user);
         } catch (error) {

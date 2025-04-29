@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const isLoggedIn = () => {
-
+    return typeof window !== 'undefined' && localStorage.getItem('token')
 }
 
 export function slugify(name: string): string {

@@ -1,11 +1,18 @@
 'use client'
 import Image from "next/image";
 import CartIcon from "./CartIcon";
-import { useState, useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
+import {LoginButton} from "@/app/ui/auth/login-button";
+import AuthContext from "@/context/AuthContext";
 
 
 const Navbar = () => {
 
+
+  const {user, getUser} = useContext(AuthContext);
+  useEffect(() => {
+    getUser();
+  }, []);
 
 
   const [showOptions, setShowOptions] = useState(false)
@@ -48,6 +55,10 @@ const Navbar = () => {
           <Link text="DOWNLOADS" link="/Downloads" />
           <Link text="ABOUT US" link="/AboutUs" />
           <Link text="CONTACT US" link="/ContactUs" />
+          {!user && (
+              <LoginButton />
+          )}
+
           <CartIcon />
 
 

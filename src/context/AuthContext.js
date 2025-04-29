@@ -12,7 +12,34 @@ export const AuthProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
     const router = useRouter();
+    const logoutUser = async () => {
+        try {
+            await axios.post(
+                'https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/logout',
+                {},
+                { withCredentials: true }
+            );
 
+            // Optional: clear any local state
+            setUser(null);
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
+    const getUser = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            console.log(token);
+            const res = await axios.get(
+                "https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/auth/user",
+                { credentials: "include" } // Important for sending cookies
+            );
+            setUser(res.data.user);
+        } catch (error) {
+            console.error("Error fetching user:", error);
+            setUser(null);
+        }
+    };
     const registerUser = async ({ name, email, password, number }) => {
         try {
             const { data } = await axios.post("https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/users",
@@ -44,7 +71,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    return <AuthContext.Provider value={{ user, error, setUser, registerUser, loginUser }}>
+    return <AuthContext.Provider value={{ user, error, setUser,getUser, logoutUser, registerUser, loginUser }}>
         {children}
     </AuthContext.Provider>
 }

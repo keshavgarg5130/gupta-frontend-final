@@ -1,9 +1,11 @@
 'use client';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation'; // or from 'next/router' if using Pages Router
+import {useContext, useEffect} from 'react';
+import { useRouter } from 'next/navigation';
+import AuthContext from "../../../context/AuthContext"; // or from 'next/router' if using Pages Router
 
 const AuthCallback = () => {
     const router = useRouter();
+    const {getUser} = useContext(AuthContext);
 
     useEffect(() => {
         const url = new URL(window.location.href);
@@ -14,7 +16,7 @@ const AuthCallback = () => {
 
             // Optional: also store in non-HttpOnly cookie
             document.cookie = `token=${token}; path=/`;
-
+            getUser();
             // Redirect to dashboard or homepage
             router.push("/");
         } else {

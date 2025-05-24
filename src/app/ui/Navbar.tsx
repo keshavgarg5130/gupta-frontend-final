@@ -4,6 +4,7 @@ import CartIcon from "./CartIcon";
 import {useState, useEffect, useContext} from "react";
 import {LoginButton} from "@/app/ui/auth/login-button";
 import AuthContext from "@/context/AuthContext";
+import {UserDropdownMenu} from "@/app/ui/user-profile-dropdown";
 
 
 const Navbar = () => {
@@ -57,6 +58,9 @@ const Navbar = () => {
           <Link text="CONTACT US" link="/ContactUs" />
           {!user && (
               <LoginButton />
+          )}
+          {user && (
+              <UserDropdownMenu user={user} />
           )}
 
           <CartIcon />

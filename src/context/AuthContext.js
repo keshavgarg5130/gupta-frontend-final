@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
 
+
     const router = useRouter();
     const logoutUser = async () => {
         try {
@@ -28,16 +29,30 @@ export const AuthProvider = ({ children }) => {
     };
     const getUser = async () => {
         try {
-            const res = await axios.get(
-                "https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/auth/user",
-                { withCredentials: true } // ✅ CORRECT for Axios
-            );
-            setUser(res.data.user);
+            const token = localStorage.getItem('token');
+            console.log("JWT Token:", token); // ✅ check if this is logging
+
+            const res = await fetch('https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/auth/user', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+                credentials: 'include', // optional: only needed if you're using cookies
+            });
+
+            if (!res.ok) {
+                throw new Error(`Failed to fetch user: ${res.status}`);
+            }
+
+            const data = await res.json(); // ✅ parse JSON
+            console.log("User data:", data); // ✅ debug log
+
+            setUser(data?.user);
         } catch (error) {
             console.error("Error fetching user:", error);
             setUser(null);
         }
     };
+
     const registerUser = async ({ name, email, password, number }) => {
         try {
             const { data } = await axios.post("https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/users",

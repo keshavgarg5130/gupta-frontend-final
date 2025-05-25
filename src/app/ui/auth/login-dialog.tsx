@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import React, {useContext} from "react"
 
 import { useState } from "react"
 import { X } from "lucide-react"
@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import toast from "react-hot-toast";
+import AuthContext from "@/context/AuthContext";
 
 interface LoginModalProps {
     isOpen: boolean
@@ -20,6 +21,7 @@ export function LoginModal({ isOpen, onClose, onForgotPassword }: LoginModalProp
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [isLoading, setIsLoading] = useState(false)
+    const {getUser} = useContext(AuthContext)
 
     if (!isOpen) return null
 
@@ -46,11 +48,12 @@ export function LoginModal({ isOpen, onClose, onForgotPassword }: LoginModalProp
                 // Handle successful login
 
                 toast.success("Logged in successfully")
+                getUser()
                 onClose()
             } else {
                 // Handle login error
-                alert(data.message || "Login failed")
-                toast.error(data.message || "Login failed")
+                alert(data.error || data.message || "Login failed")
+                toast.error(data.error || data.message || "Login failed")
             }
         } catch (error) {
             console.error("Login error:", error)

@@ -55,7 +55,7 @@ export function LoginModal({ isOpen, onClose, onForgotPassword }: LoginModalProp
             }
         } catch (error) {
             console.error("Login error:", error)
-            alert("An error occurred during login")
+            alert(error)
         } finally {
             setIsLoading(false)
         }

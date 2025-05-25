@@ -49,7 +49,6 @@ export function LoginModal({ isOpen, onClose, onForgotPassword }: LoginModalProp
                 onClose()
             } else {
                 // Handle login error
-                const data = await response.json()
                 alert(data.message || "Login failed")
                 toast.error(data.message || "Login failed")
             }

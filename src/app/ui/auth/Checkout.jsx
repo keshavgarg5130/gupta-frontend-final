@@ -11,6 +11,7 @@ import AuthContext from "../../../context/AuthContext";
 
 const Checkout = () => {
     const router = useRouter();
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
     const searchParams = useSearchParams();
     const shippingMethod = searchParams.get("method") || "self";
     const { cart, addItemToCart, deleteItemFromCart } = useContext(CartContext);
@@ -121,70 +122,82 @@ const Checkout = () => {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    const  handleContinueToPay = async () => {
+    const  handleContinueToPay = async (method) => {
         if(!validate()){
             alert("Please fill all the required fields");
         }
         if (validate()) {
             alert("Proceeding to payment");
-            const payload = {
-                userEmail,
-                shippingMethod,
-                gstInvoice,
-                userDetails: {
-                    mobile: form.mobile,
-                    altMobile: form.altMobile,
+            setShowPaymentModal(true);
+        }
+    };
+    const handlePaymentSelect = async (method) => {
+        setShowPaymentModal(false);
+
+        const payload = {
+            userEmail,
+            shippingMethod,
+            paymentMethod: method,
+            gstInvoice,
+            userDetails: {
+                mobile: form.mobile,
+                altMobile: form.altMobile,
+            },
+            shippingDetails: shippingMethod === "doorstep" ? {
+                pincode: form.pincode,
+                state: form.state,
+                city: form.city,
+                country: form.country,
+                address: form.address,
+                landmark: form.landmark,
+            } : null,
+            gstDetails: gstInvoice ? {
+                gstNumber: form.gstNumber,
+                businessName: form.businessName,
+                businessPhone: form.businessPhone,
+                billingAddress: form.billingAddress,
+                billingCity: form.billingCity,
+                billingState: form.billingState,
+                billingCountry: form.billingCountry,
+                billingPincode: form.billingPincode,
+                billingLandmark: form.billingLandmark,
+            } : null,
+            cartItems: cart?.cartItems || [],
+            pricing: {
+                amount: amountWithoutTax,
+                tax: taxAmount,
+                shipping: shippingCharge,
+                total: totalAmount,
+            },
+        };
+
+        try {
+            const res = await fetch("https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/checkout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
                 },
-                shippingDetails: shippingMethod === "doorstep" ? {
-                    pincode: form.pincode,
-                    state: form.state,
-                    city: form.city,
-                    country: form.country,
-                    address: form.address,
-                    landmark: form.landmark,
-                } : null,
-                gstDetails: gstInvoice ? {
-                    gstNumber: form.gstNumber,
-                    businessName: form.businessName,
-                    businessPhone: form.businessPhone,
-                    billingAddress: form.billingAddress,
-                    billingCity: form.billingCity,
-                    billingState: form.billingState,
-                    billingCountry: form.billingCountry,
-                    billingPincode: form.billingPincode,
-                    billingLandmark: form.billingLandmark,
-                } : null,
-                cartItems: cart?.cartItems || [],
-                pricing: {
-                    amount: amountWithoutTax,
-                    tax: taxAmount,
-                    shipping: shippingCharge,
-                    total: totalAmount,
-                }
-            };
+                body: JSON.stringify(payload),
+            });
 
-            try {
-                const res = await fetch("https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/checkout", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(payload),
-                });
-
-                if (!res.ok) {
-                    throw new Error("Failed to send checkout data");
-                }
-
-                const data = await res.json();
-
-                // Optionally redirect or handle success
-                console.log("Checkout response:", data);
-                router.push("/order-success"); // or payment page
-            } catch (error) {
-                console.error("Checkout error:", error);
-                alert("Something went wrong while processing your order.");
+            if (!res.ok) {
+                throw new Error("Failed to send checkout data");
             }
+
+            const data = await res.json();
+
+            // 🔁 Redirect based on payment method
+            if (method === "bank") {
+                router.push("/payment-instructions/bank-transfer");
+            } else if (method === "phonepe") {
+                router.push("/payment-gateway/phonepe");
+            } else if (method === "cod") {
+                router.push("/order-success/cod-confirmation");
+            }
+
+        } catch (error) {
+            console.error("Checkout error:", error);
+            alert("Something went wrong while processing your order.");
         }
     };
 
@@ -417,6 +430,45 @@ const Checkout = () => {
                     </Link>
                 </div>
             </aside>
+            {showPaymentModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white rounded-lg p-6 w-full max-w-md">
+                        <h2 className="text-xl font-semibold mb-4 text-center">Choose Payment Method</h2>
+
+                        <div className="space-y-3">
+                            <button
+                                className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                                onClick={() => handlePayment("bank")}
+                            >
+                                Direct Bank Transfer (0% Fee)
+                            </button>
+
+                            <button
+                                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+                                onClick={() => handlePayment("phonepe")}
+                            >
+                                PhonePe Gateway (2% Fee)
+                            </button>
+
+                            {shippingMethod === "doorstep" && (
+                                <button
+                                    className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-700"
+                                    onClick={() => handlePayment("cod")}
+                                >
+                                    Cash on Delivery (1% Fee)
+                                </button>
+                            )}
+                        </div>
+
+                        <button
+                            className="mt-4 text-sm text-gray-500 hover:underline block mx-auto"
+                            onClick={() => setShowPaymentModal(false)}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

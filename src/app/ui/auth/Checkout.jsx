@@ -18,7 +18,9 @@ const Checkout = () => {
     useEffect(() => {
         getUser();
     }, []);
-    const userEmail = user?.user?.email
+    const userEmail = user?.email
+    console.log(user)
+    console.log(userEmail)
     const FREE_SHIPPING_THRESHOLD = 5000;
     const DOORSTEP_SHIPPING_FEE = 500;
 

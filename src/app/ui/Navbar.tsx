@@ -15,7 +15,6 @@ const Navbar = () => {
     getUser();
   }, []);
 
-
   const [showOptions, setShowOptions] = useState(false)
 
   const handleOptionClick = () => {

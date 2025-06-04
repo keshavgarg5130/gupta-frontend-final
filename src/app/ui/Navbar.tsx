@@ -52,10 +52,10 @@ const Navbar = () => {
         <div
           className={`fixed left-0 items-center py-6 gap-6 top-16 flex-col bg-blue-300 w-full md:py-0 md:static md:flex-row md:bg-themeBlue md:flex md:w-auto md:gap-2 lg:gap-4 md:min-h-full ${showOptions ? 'flex' : 'hidden'}`}>
           <Link text='HOME' link="/" />
-          <Link text="CATEGORIES" link="/Categories" />
-          <Link text="DOWNLOADS" link="/Downloads" />
-          <Link text="ABOUT US" link="/AboutUs" />
-          <Link text="CONTACT US" link="/ContactUs" />
+          <Link text="CATEGORIES" link="/categories" />
+          <Link text="DOWNLOADS" link="/downloads" />
+          <Link text="ABOUT US" link="/about-us" />
+          <Link text="CONTACT US" link="/contact-us" />
           {!user && (
               <LoginButton />
           )}

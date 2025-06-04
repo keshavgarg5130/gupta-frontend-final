@@ -1,19 +1,24 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 import Image from "next/image";
 import Link from "next/link";
 import * as z from "zod";
 import CartContext from "../../../context/CartContext";
+import AuthContext from "../../../context/AuthContext";
 
 const Checkout = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const shippingMethod = searchParams.get("method") || "self";
     const { cart, addItemToCart, deleteItemFromCart } = useContext(CartContext);
-
+    const {user, getUser} = useContext(AuthContext);
+    useEffect(() => {
+        getUser();
+    }, []);
+    const userEmail = user?.user?.email
     const FREE_SHIPPING_THRESHOLD = 5000;
     const DOORSTEP_SHIPPING_FEE = 500;
 
@@ -114,10 +119,70 @@ const Checkout = () => {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleContinueToPay = () => {
+    const  handleContinueToPay = async () => {
+        if(!validate()){
+            alert("Please fill all the required fields");
+        }
         if (validate()) {
             alert("Proceeding to payment");
-            // Add further payment logic here
+            const payload = {
+                userEmail,
+                shippingMethod,
+                gstInvoice,
+                userDetails: {
+                    mobile: form.mobile,
+                    altMobile: form.altMobile,
+                },
+                shippingDetails: shippingMethod === "doorstep" ? {
+                    pincode: form.pincode,
+                    state: form.state,
+                    city: form.city,
+                    country: form.country,
+                    address: form.address,
+                    landmark: form.landmark,
+                } : null,
+                gstDetails: gstInvoice ? {
+                    gstNumber: form.gstNumber,
+                    businessName: form.businessName,
+                    businessPhone: form.businessPhone,
+                    billingAddress: form.billingAddress,
+                    billingCity: form.billingCity,
+                    billingState: form.billingState,
+                    billingCountry: form.billingCountry,
+                    billingPincode: form.billingPincode,
+                    billingLandmark: form.billingLandmark,
+                } : null,
+                cartItems: cart?.cartItems || [],
+                pricing: {
+                    amount: amountWithoutTax,
+                    tax: taxAmount,
+                    shipping: shippingCharge,
+                    total: totalAmount,
+                }
+            };
+
+            try {
+                const res = await fetch("https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/checkout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload),
+                });
+
+                if (!res.ok) {
+                    throw new Error("Failed to send checkout data");
+                }
+
+                const data = await res.json();
+
+                // Optionally redirect or handle success
+                console.log("Checkout response:", data);
+                router.push("/order-success"); // or payment page
+            } catch (error) {
+                console.error("Checkout error:", error);
+                alert("Something went wrong while processing your order.");
+            }
         }
     };
 

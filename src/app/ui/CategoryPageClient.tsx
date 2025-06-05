@@ -1,14 +1,14 @@
 'use client'
+
 import { useState, useEffect } from "react"
 import { product } from "../interfaces/product"
-import CategoryBanner from "./CategoryBanner"
-import ProductFullRow from "./ProductFullRow"
+import ProductPamphletFull from "./ProductPamphletFull"
 import poles from "../interfaces/poles"
 import currentRatingInterface from "../interfaces/currentRating"
-import { ArrowUp } from "lucide-react"
-import { parse } from "path"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+import ProductPamphlet from "@/app/ui/ProductPamphlet";
 
-const SortBy = ['Price', 'Current Rating', 'Poles', ''] as const;
+const SortBy = ['Price', 'Current Rating', 'Poles'] as const;
 type SortByType = typeof SortBy[number];
 type typeSort = {
     name: SortByType,
@@ -22,34 +22,33 @@ interface filterStateInterface {
     },
 }
 
-const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPrice, minPrice }: { bannerId: string, products: product[], poles: poles[], currentRatings: currentRatingInterface[], maxPrice: number, minPrice: number }) => {
-    currentRatings = currentRatings.sort((currentA, currentB) => parseInt(currentA.name) - parseInt(currentB.name))
+interface CategoryPageClientProps {
+    bannerId: string,
+    products: product[],
+    poles: poles[],
+    currentRatings: currentRatingInterface[],
+    maxPrice: number,
+    minPrice: number
+}
+
+const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPrice, minPrice }: CategoryPageClientProps) => {
+    currentRatings = currentRatings.sort((a, b) => parseInt(a.name) - parseInt(b.name))
     const [productsSort, setProducts] = useState(products)
-    const [sortBy, setSortBy] = useState<typeSort>({
-        name: '',
-        increasing: false
-    })
-    const [filter, setFilter] = useState({
-        poles: false,
-        currentRating: false
-    });
-    minPrice = isNaN(minPrice) ? 100 : minPrice
-    const remains = products.length > 0
+    const [sortBy, setSortBy] = useState<typeSort>({ name: 'Price', increasing: true })
+    const [filter, setFilter] = useState({ poles: false, currentRating: false })
     const [minPriceValue, setMinPriceValue] = useState<number>(minPrice - 100)
 
+    // Mobile filter toggle state
+    const [showFilters, setShowFilters] = useState(false)
+
+    // Initialize filter selections
     let polesState: filterStateInterface = {};
     for (let pole of poles) {
-        polesState[pole.id] = {
-            isSelected: false,
-            name: pole.name
-        }
+        polesState[pole.id] = { isSelected: false, name: pole.name }
     }
     let currentRatingState: filterStateInterface = {};
-    for (let currentRating of currentRatings) {
-        currentRatingState[currentRating.id] = {
-            isSelected: false,
-            name: currentRating.name
-        }
+    for (let rating of currentRatings) {
+        currentRatingState[rating.id] = { isSelected: false, name: rating.name }
     }
 
     const [polesSelected, setPolesSelected] = useState<filterStateInterface>(polesState)
@@ -60,151 +59,215 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
         setMinPriceValue(value)
     }
 
-    const [filterHidden, setFilterHidden] = useState(true)
+    const [currentPage, setCurrentPage] = useState(1)
+    const PRODUCTS_PER_PAGE = 12
 
     useEffect(() => {
-        let prdts = [...products]
-        prdts = prdts.filter(product => {
+        let filtered = [...products]
+        filtered = filtered.filter(product => {
             const priceFits = parseInt(product.price) >= minPriceValue
             const poleFits = filter.poles ? polesSelected[product.polesId].isSelected : true;
             const currentFits = filter.currentRating ? currentRatingsSelected[product.currentRatingId].isSelected : true;
             return priceFits && poleFits && currentFits
         })
-        setProducts(prdts)
+
         if (sortBy.name) {
             const increasing = sortBy.increasing
-            switch (sortBy.name) {
-                case 'Price':
-                    if (increasing)
-                        setProducts(prdts.sort((a, b) => parseInt(a.price) - parseInt(b.price)))
-                    else
-                        setProducts(prdts.sort((a, b) => parseInt(b.price) - parseInt(a.price)))
-                    break;
-                case 'Poles':
-                    if (increasing)
-                        setProducts(prdts.sort((a, b) => parseInt(a.poles.name) - parseInt(b.poles.name)))
-                    else
-                        setProducts(prdts.sort((a, b) => parseInt(b.poles.name) - parseInt(a.poles.name)))
-                    break;
-                case 'Current Rating':
-                    if (increasing)
-                        setProducts(prdts.sort((a, b) => parseInt(a.currentRating.name) - parseInt(b.currentRating.name)))
-                    else
-                        setProducts(prdts.sort((a, b) => parseInt(b.currentRating.name) - parseInt(a.currentRating.name)))
-            }
+            filtered.sort((a, b) => {
+                const valA = sortBy.name === 'Price' ? parseInt(a.price) : sortBy.name === 'Poles' ? parseInt(a.poles.name) : parseInt(a.currentRating.name);
+                const valB = sortBy.name === 'Price' ? parseInt(b.price) : sortBy.name === 'Poles' ? parseInt(b.poles.name) : parseInt(b.currentRating.name);
+                return increasing ? valA - valB : valB - valA;
+            })
         }
-    }, [sortBy, minPriceValue, polesSelected, currentRatingsSelected])
+
+        setProducts(filtered)
+        setCurrentPage(1)
+    }, [sortBy, minPriceValue, polesSelected, currentRatingsSelected, products])
+
+    const totalPages = Math.ceil(productsSort.length / PRODUCTS_PER_PAGE)
+    const paginatedProducts = productsSort.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE)
+
+    // For accessibility and hydration safe media query, you can replace this logic later with a hook
+    const isDesktop = typeof window !== 'undefined' ? window.innerWidth >= 1024 : true;
 
     return (
-        <div className="flex flex-col items-center w-full relative md:pt-0 min-h-screen">
-            <button className="md:hidden w-full bg-blue-100 font-bold h-10" onClick={() => setFilterHidden(!filterHidden)}>Sort/Filter</button>
-            <CategoryBanner bannerId={bannerId} />
-            <ProductFullRow products={productsSort} Remains={remains} />
-            {/* Filter Menu */}
-            <div className={`${filterHidden ? 'hidden' : 'block'} md:flex absolute left-0 top-10 md:left-10 w-full md:w-[200px] lg:w-[300px] shadow-lg flex-col md:gap-5 py-5 md:rounded-lg`}>
-                <div className="flex flex-col items-center gap-3">
-                    <h1 className="text-2xl font-bold text-themeBlue"> Sort By </h1>
-                    <div className="flex flex-col gap-2 justify-evenly w-11/12 flex-wrap">
-                        {SortBy.map(sort => {
-                            if (sort) {
-                                return <button key={sort} className="py-1 px-3 bg-white text-themeBlue rounded-full border-themeBlue border text-lg relative font-semibold" onClick={() => {
-                                    setSortBy({
-                                        name: sort,
-                                        increasing: sortBy.name == sort ? !sortBy.increasing : true
-                                    })
-                                }}>
-                                    {sort}
-                                    <div className="absolute top-[50%] translate-y-[-50%] right-10"><div className={`${sortBy.name == sort ? (sortBy.increasing ? 'rotate-180' : '') : 'hidden'} transition-all ease-in-out duration-300`}><ArrowUp /></div></div>
-                                </button>
-                            }
-                        })}
-                    </div>
+        <div className="flex flex-col items-center w-full min-h-screen bg-gray-50 px-4 md:pt-0">
+            <div className="flex flex-col lg:flex-row w-full max-w-[1280px] gap-6 py-4">
+
+                {/* Filter toggle button only visible on mobile */}
+                <div className="lg:hidden mb-4 w-full flex justify-end">
+                    <button
+                        onClick={() => setShowFilters(prev => !prev)}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700 transition"
+                        aria-expanded={showFilters}
+                        aria-controls="filter-sidebar"
+                    >
+                        {showFilters ? 'Hide Filters' : 'Show Filters'}
+                    </button>
                 </div>
 
-                <div className="flex flex-col gap-5">
-                    <div className="flex flex-col items-center gap-3">
-                        <button className="text-2xl font-bold text-themeBlue" onClick={() => {
-                            setFilter({
-                                poles: false,
-                                currentRating: false
-                            })
-                            setPolesSelected(polesState)
-                            setCurrentRatingsSelected(currentRatingState)
-                        }}>
-                            <DisplayDiv name="Remove Filter" isSelected={true} />
-                        </button>
-                    </div>
-                    <div className="flex flex-col items-center gap-3">
-                        <h3 className="text-2xl font-bold text-themeBlue"> Price Range</h3>
-                        <div className="relative w-11/12 flex flex-col items-center">
+                {/* Sidebar - show on desktop or if toggled open on mobile */}
+                {(showFilters || isDesktop) && (
+                    <aside
+                        id="filter-sidebar"
+                        className="w-full lg:w-[300px] bg-white p-4 rounded-xl shadow sticky top-5 max-h-[90vh] overflow-auto"
+                    >
+                        {/* Sort By */}
+                        <div className="mb-4">
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Sort By</label>
+                            <select
+                                value={sortBy.name}
+                                onChange={(e) => setSortBy({ name: e.target.value as SortByType, increasing: sortBy.increasing })}
+                                className="w-full px-3 py-2 border rounded-md text-sm text-gray-700 focus:outline-none focus:ring focus:ring-blue-300"
+                            >
+                                {SortBy.map(sort => <option key={sort} value={sort}>{sort}</option>)}
+                            </select>
+                            <div className="mt-2">
+                                <label className="inline-flex items-center text-sm">
+                                    <input
+                                        type="checkbox"
+                                        checked={sortBy.increasing}
+                                        onChange={() => setSortBy(prev => ({ ...prev, increasing: !prev.increasing }))}
+                                        className="mr-2"
+                                    />
+                                    Ascending
+                                </label>
+                            </div>
+                        </div>
+
+                        {/* Price Range */}
+                        <div className="mb-4">
+                            <label className="block text-sm font-semibold text-gray-700 mb-2">Price Range</label>
                             <input
                                 type="range"
                                 min={minPrice - 10}
                                 max={maxPrice}
                                 value={minPriceValue}
                                 onChange={handleMinChange}
-                                className="w-full pointer-events-auto z-10 range-thumb"
+                                className="w-full"
                             />
-                            <div className="flex justify-between mt-2 text-sm w-full text-themeBlue">
-                                <span>{minPriceValue}</span>
-                                <span>{maxPrice}</span>
+                            <div className="text-xs text-gray-600 flex justify-between">
+                                <span>₹{minPriceValue}</span>
+                                <span>₹{maxPrice}</span>
                             </div>
                         </div>
-                    </div>
-                    <div className="flex flex-col gap-3 items-center">
-                        <h3 className="text-2xl font-bold text-themeBlue">Select Poles</h3>
-                        <div className="flex justify-evenly w-11/12">
-                            {poles.map(pole => {
-                                return (<button key={pole.id} onClick={() => {
-                                    setPolesSelected({
-                                        ...polesSelected,
-                                        [pole.id]: {
-                                            name: pole.name,
-                                            isSelected: !polesSelected[pole.id].isSelected
-                                        }
-                                    })
-                                    setFilter({
-                                        ...filter,
-                                        poles: true
-                                    })
-                                }}>
-                                    <DisplayDiv name={pole.name} isSelected={polesSelected[pole.id].isSelected} />
-                                </button>)
-                            })}
+
+                        {/* Poles Filter */}
+                        <div className="mb-4">
+                            <div className="text-sm font-semibold text-gray-700 mb-2">Poles</div>
+                            <div className="flex flex-wrap gap-2">
+                                {poles.map(pole => (
+                                    <button
+                                        key={pole.id}
+                                        onClick={() => {
+                                            setPolesSelected({
+                                                ...polesSelected,
+                                                [pole.id]: {
+                                                    name: pole.name,
+                                                    isSelected: !polesSelected[pole.id].isSelected
+                                                }
+                                            })
+                                            setFilter({ ...filter, poles: true })
+                                        }}
+                                        className={`px-3 py-1 rounded-full border text-sm ${
+                                            polesSelected[pole.id].isSelected
+                                                ? 'bg-blue-600 text-white'
+                                                : 'border-gray-300 text-gray-700 hover:bg-blue-100'
+                                        }`}
+                                    >
+                                        {pole.name}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex flex-col gap-3 items-center">
-                        <h3 className="text-2xl font-bold text-themeBlue">Select Current Rating</h3>
-                        <div className="flex justify-evenly w-11/12 gap-2 flex-wrap">
-                            {currentRatings.map(current => {
-                                return (<button key={current.id} onClick={() => {
-                                    setCurrentRatingsSelected({
-                                        ...currentRatingsSelected,
-                                        [current.id]: {
-                                            name: current.name,
-                                            isSelected: !currentRatingsSelected[current.id].isSelected
-                                        }
-                                    })
-                                    setFilter({
-                                        ...filter,
-                                        currentRating: true
-                                    })
-                                }}>
-                                    <DisplayDiv name={current.name} isSelected={currentRatingsSelected[current.id].isSelected} />
-                                </button>)
-                            })}
+
+                        {/* Current Rating Filter */}
+                        <div>
+                            <div className="text-sm font-semibold text-gray-700 mb-2">Current Rating</div>
+                            <div className="flex flex-wrap gap-2">
+                                {currentRatings.map(current => (
+                                    <button
+                                        key={current.id}
+                                        onClick={() => {
+                                            setCurrentRatingsSelected({
+                                                ...currentRatingsSelected,
+                                                [current.id]: {
+                                                    name: current.name,
+                                                    isSelected: !currentRatingsSelected[current.id].isSelected
+                                                }
+                                            })
+                                            setFilter({ ...filter, currentRating: true })
+                                        }}
+                                        className={`px-3 py-1 rounded-full border text-sm ${
+                                            currentRatingsSelected[current.id].isSelected
+                                                ? 'bg-blue-600 text-white'
+                                                : 'border-gray-300 text-gray-700 hover:bg-blue-100'
+                                        }`}
+                                    >
+                                        {current.name}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
+                    </aside>
+                )}
+
+                {/* Product Grid */}
+                <section className="flex-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {paginatedProducts.map(product => (
+                            <ProductPamphletFull key={product.id} {...product} />
+                        ))}
                     </div>
-                </div>
-            </div >
-        </div >
+
+                    {/* Pagination with page numbers */}
+                    <nav
+                        className="flex justify-center mt-6 gap-2 flex-wrap"
+                        aria-label="Pagination Navigation"
+                    >
+                        <button
+                            onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
+                            disabled={currentPage === 1}
+                            className="px-3 py-1 text-sm bg-white border rounded shadow hover:bg-blue-50 disabled:opacity-40"
+                            aria-label="Previous Page"
+                        >
+                            <ArrowLeft size={16} />
+                        </button>
+
+                        {/* Page Numbers */}
+                        {[...Array(totalPages)].map((_, i) => {
+                            const pageNum = i + 1
+                            const isCurrent = pageNum === currentPage
+                            return (
+                                <button
+                                    key={pageNum}
+                                    onClick={() => setCurrentPage(pageNum)}
+                                    className={`px-3 py-1 text-sm border rounded shadow hover:bg-blue-50 ${
+                                        isCurrent
+                                            ? 'bg-blue-600 text-white cursor-default'
+                                            : 'bg-white text-gray-700'
+                                    }`}
+                                    aria-current={isCurrent ? "page" : undefined}
+                                >
+                                    {pageNum}
+                                </button>
+                            )
+                        })}
+
+                        <button
+                            onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
+                            disabled={currentPage === totalPages}
+                            className="px-3 py-1 text-sm bg-white border rounded shadow hover:bg-blue-50 disabled:opacity-40"
+                            aria-label="Next Page"
+                        >
+                            <ArrowRight size={16} />
+                        </button>
+                    </nav>
+                </section>
+
+            </div>
+        </div>
     )
 }
 
-const DisplayDiv = ({ name, isSelected }: { name: string, isSelected: boolean }) => {
-    const classes = `h-[30px] w-max px-4 rounded-full flex items-center justify-center ${isSelected ? 'bg-themeBlue text-white' : 'bg-white text-themeBlue border border-themeBlue'} ${isSelected && 'text-lg font-bold'} hover:px-5 transition-all duration-300`
-    return (
-        <div className={classes} >{name}</div>
-    )
-}
-export default CategoryPageClient
+export default CategoryPageClient;

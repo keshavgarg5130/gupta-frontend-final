@@ -46,9 +46,7 @@ const ProductPamphletFull = (product: product) => {
             storeId={product.storeId} categoryId={product.categoryId} isArchived={product.isArchived}
             createdAt={product.createdAt} updatedAt={product.updatedAt} polesId={product.polesId} poles={product.poles} description={product.description}
             brand={product.brand} slug={product.slug} category={product.category} currentRating={product.currentRating} />
-          <div className="w-max text-xs text-white bg-themeBlue h-[25px] flex items-center justify-center px-2 py-1 rounded-full">
-            BUY NOW
-          </div>
+
         </div>
       </div>
     </div>

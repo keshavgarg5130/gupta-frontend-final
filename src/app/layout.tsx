@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   openGraph: {
-    images: "/src/app/opengraph-image.png",
+    images: "/src/app/opengraph-image.jpg",
     title: "Gupta Switchgears: acb,mccb Dealer",
     description: "Find MCCBs, ACBs, electric panels & automation " +
       "products from L&T, Polycab, Siemens at Gupta Associates. " +

@@ -8,6 +8,7 @@ import Link from "next/link";
 import * as z from "zod";
 import CartContext from "../../../context/CartContext";
 import AuthContext from "../../../context/AuthContext";
+import {toast} from "../../../hooks/use-toast";
 
 const Checkout = () => {
     const router = useRouter();
@@ -127,12 +128,12 @@ const Checkout = () => {
             alert("Please fill all the required fields");
         }
         if (validate()) {
-            alert("Proceeding to payment");
             setShowPaymentModal(true);
         }
     };
-    const handlePaymentSelect = async (method) => {
+    const handlePayment = async (method) => {
         setShowPaymentModal(false);
+        toast.success("Processing to payment");
 
         const payload = {
             userEmail,
@@ -440,14 +441,16 @@ const Checkout = () => {
                                 className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
                                 onClick={() => handlePayment("bank")}
                             >
-                                Direct Bank Transfer (0% Fee)
+                                Direct Bank Transfer or UPI (0% Fee)
+                                (Recommended)
                             </button>
 
                             <button
                                 className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
                                 onClick={() => handlePayment("phonepe")}
                             >
-                                PhonePe Gateway (2% Fee)
+                                PhonePe Payment Gateway (2% Fee)
+                                Supports Credit Cards)
                             </button>
 
                             {shippingMethod === "doorstep" && (

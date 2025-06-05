@@ -43,7 +43,7 @@ export default function QuotationForm() {
         <Image
             height={100}
             width={100}
-          src="/logo.png"
+          src="/logoOG.jpeg"
           alt="100% Price Guarantee"
           className="w-48 h-48"
         />

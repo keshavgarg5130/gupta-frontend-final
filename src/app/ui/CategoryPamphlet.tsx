@@ -11,14 +11,14 @@ const CategoryPamphlet = ({ categoryName, billboards, billboardId }: { categoryN
         url = billboard.imageUrl
     else
         url = 'https://res.cloudinary.com/dqefturar/image/upload/v1735033145/yu8uii9n47t5z1r9fxza.png'
-    let link = '/' + categoryName.toUpperCase();
+    let link = '/' + categoryName.toLowerCase();
 
     switch (categoryName) {
         case "Panels":
             link = '/panel/distribution-board'
             break
         case "Overlay Relay":
-            link = '/OVERLAY_RELAY'
+            link = '/overload-relay'
             break
         case "Wires and Cables":
             link = "/wires-and-cables"

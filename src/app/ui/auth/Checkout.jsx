@@ -132,7 +132,6 @@ const Checkout = () => {
         }
     };
     const handlePayment = async (method) => {
-        setShowPaymentModal(false);
         toast.success("Processing to payment");
 
         const payload = {
@@ -186,15 +185,15 @@ const Checkout = () => {
             }
 
             const data = await res.json();
-
             // 🔁 Redirect based on payment method
             if (method === "bank") {
-                router.push("/payment-instructions/bank-transfer");
+                localStorage.setItem("orderDetails", JSON.stringify(payload));
+                router.push("/checkout/direct-transfer");
             } else if (method === "phonepe") {
                 router.push("/payment-gateway/phonepe");
             } else if (method === "cod") {
                 router.push("/order-success/cod-confirmation");
-            }
+            }setShowPaymentModal(false)
 
         } catch (error) {
             console.error("Checkout error:", error);

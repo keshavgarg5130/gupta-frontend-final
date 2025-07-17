@@ -8,7 +8,7 @@ import Link from "next/link";
 import * as z from "zod";
 import CartContext from "../../../context/CartContext";
 import AuthContext from "../../../context/AuthContext";
-import {toast} from "../../../hooks/use-toast";
+import { toast } from 'react-hot-toast';
 
 const Checkout = () => {
     const router = useRouter();
@@ -132,10 +132,11 @@ const Checkout = () => {
         setShowPaymentModal(true);
     };
     const handlePayment = async (method) => {
-        console.log("Payment method selected:", method); // Debug log
+        console.log("Payment method selected:", method);
 
         try {
-            toast.success("Processing to payment");
+            // First show loading state
+            toast.loading("Processing payment...");
 
             const payload = {
                 userEmail,
@@ -174,8 +175,6 @@ const Checkout = () => {
                 },
             };
 
-            console.log("Sending payload:", payload); // Debug log
-
             const res = await fetch("https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/checkout", {
                 method: "POST",
                 headers: {
@@ -189,24 +188,29 @@ const Checkout = () => {
             }
 
             const data = await res.json();
-            console.log("Response data:", data); // Debug log
 
-            // 🔁 Redirect based on payment method
+            // Dismiss loading toast
+            toast.dismiss();
+
+            // Show success message
+            toast.success("Payment processed successfully!");
+
+            // Redirect based on payment method
             if (method === "bank") {
                 localStorage.setItem("orderDetails", JSON.stringify(payload));
-                console.log("Redirecting to direct transfer");
                 router.push("/checkout/direct-transfer");
             } else if (method === "phonepe") {
-                console.log("Redirecting to phonepe");
                 router.push("/payment-gateway/phonepe");
             } else if (method === "cod") {
-                console.log("Redirecting to cod confirmation");
                 router.push("/order-success/cod-confirmation");
             }
 
             setShowPaymentModal(false);
         } catch (error) {
             console.error("Checkout error:", error);
+            // Dismiss any existing toasts
+            toast.dismiss();
+            // Show error message
             toast.error("Something went wrong while processing your order.");
         }
     };

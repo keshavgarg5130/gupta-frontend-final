@@ -1,19 +1,11 @@
-"use client";
-
-import { ErrorBoundary } from 'react-error-boundary';
+import React, { Suspense } from "react";
 import Checkout from "../ui/auth/Checkout";
 
-function ErrorFallback({ error, resetErrorBoundary }) {
+
+export default function CheckoutPage() {
     return (
-        <div role="alert">
-            <p>Something went wrong:</p>
-            <pre>{error.message}</pre>
-            <button onClick={resetErrorBoundary}>Try again</button>
-        </div>
+        <Suspense fallback={<div>Loading checkout...</div>}>
+            <Checkout />
+        </Suspense>
     );
 }
-
-// Then wrap your Checkout component:
-<ErrorBoundary FallbackComponent={ErrorFallback}>
-    <Checkout />
-</ErrorBoundary>

@@ -16,6 +16,7 @@ const OrdersPage = () => {
     useEffect(() => {
         const fetchUser = async () => {
             const user = await getUser();
+            console.log(user);
             setUserEmail(user?.email || "");
         };
         fetchUser();
@@ -33,6 +34,7 @@ const OrdersPage = () => {
                     throw new Error("Failed to fetch orders");
                 }
                 const data = await response.json();
+                console.log(data);
                 setOrders(data);
             } catch (err) {
                 setError(err.message);

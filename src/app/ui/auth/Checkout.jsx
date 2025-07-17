@@ -141,7 +141,7 @@ const Checkout = () => {
             const payload = {
                 userEmail,
                 shippingMethod,
-                paymentMethod: method,
+                PaymentMethod: method,
                 gstInvoice,
                 userDetails: {
                     mobile: form.mobile,

@@ -203,7 +203,7 @@ const Checkout = () => {
                 localStorage.setItem("orderDetails", JSON.stringify(payload));
                 router.push("/payment-gateway/phonepe");
             } else if (method === "cod") {
-                localStorage.setItem("orderDetails", JSON.stringify(payload));
+                localStorage.setItem("orderDetails", JSON.stringify(payload));a
                 router.push("/checkout/cod");
             }
 

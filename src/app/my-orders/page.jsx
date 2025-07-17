@@ -48,7 +48,7 @@ const OrdersPage = () => {
     const fetchOrderDetails = async (orderId) => {
         try {
             setLoading(true);
-            const response = await fetch(`https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/order/${orderId}`);
+            const response = await fetch(`https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/orders/${orderId}`);
             if (!response.ok) {
                 throw new Error("Failed to fetch order details");
             }

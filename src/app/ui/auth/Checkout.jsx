@@ -132,46 +132,50 @@ const Checkout = () => {
         setShowPaymentModal(true);
     };
     const handlePayment = async (method) => {
-        toast.success("Processing to payment");
-
-        const payload = {
-            userEmail,
-            shippingMethod,
-            paymentMethod: method,
-            gstInvoice,
-            userDetails: {
-                mobile: form.mobile,
-                altMobile: form.altMobile,
-            },
-            shippingDetails: shippingMethod === "doorstep" ? {
-                pincode: form.pincode,
-                state: form.state,
-                city: form.city,
-                country: form.country,
-                address: form.address,
-                landmark: form.landmark,
-            } : null,
-            gstDetails: gstInvoice ? {
-                gstNumber: form.gstNumber,
-                businessName: form.businessName,
-                businessPhone: form.businessPhone,
-                billingAddress: form.billingAddress,
-                billingCity: form.billingCity,
-                billingState: form.billingState,
-                billingCountry: form.billingCountry,
-                billingPincode: form.billingPincode,
-                billingLandmark: form.billingLandmark,
-            } : null,
-            cartItems: cart?.cartItems || [],
-            pricing: {
-                amount: amountWithoutTax,
-                tax: taxAmount,
-                shipping: shippingCharge,
-                total: totalAmount,
-            },
-        };
+        console.log("Payment method selected:", method); // Debug log
 
         try {
+            toast.success("Processing to payment");
+
+            const payload = {
+                userEmail,
+                shippingMethod,
+                paymentMethod: method,
+                gstInvoice,
+                userDetails: {
+                    mobile: form.mobile,
+                    altMobile: form.altMobile,
+                },
+                shippingDetails: shippingMethod === "doorstep" ? {
+                    pincode: form.pincode,
+                    state: form.state,
+                    city: form.city,
+                    country: form.country,
+                    address: form.address,
+                    landmark: form.landmark,
+                } : null,
+                gstDetails: gstInvoice ? {
+                    gstNumber: form.gstNumber,
+                    businessName: form.businessName,
+                    businessPhone: form.businessPhone,
+                    billingAddress: form.billingAddress,
+                    billingCity: form.billingCity,
+                    billingState: form.billingState,
+                    billingCountry: form.billingCountry,
+                    billingPincode: form.billingPincode,
+                    billingLandmark: form.billingLandmark,
+                } : null,
+                cartItems: cart?.cartItems || [],
+                pricing: {
+                    amount: amountWithoutTax,
+                    tax: taxAmount,
+                    shipping: shippingCharge,
+                    total: totalAmount,
+                },
+            };
+
+            console.log("Sending payload:", payload); // Debug log
+
             const res = await fetch("https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/checkout", {
                 method: "POST",
                 headers: {
@@ -181,26 +185,31 @@ const Checkout = () => {
             });
 
             if (!res.ok) {
-                throw new Error("Failed to send checkout data");
+                throw new Error(`HTTP error! status: ${res.status}`);
             }
 
             const data = await res.json();
+            console.log("Response data:", data); // Debug log
+
             // 🔁 Redirect based on payment method
             if (method === "bank") {
                 localStorage.setItem("orderDetails", JSON.stringify(payload));
+                console.log("Redirecting to direct transfer");
                 router.push("/checkout/direct-transfer");
             } else if (method === "phonepe") {
+                console.log("Redirecting to phonepe");
                 router.push("/payment-gateway/phonepe");
             } else if (method === "cod") {
+                console.log("Redirecting to cod confirmation");
                 router.push("/order-success/cod-confirmation");
-            }setShowPaymentModal(false)
+            }
 
+            setShowPaymentModal(false);
         } catch (error) {
             console.error("Checkout error:", error);
-            alert("Something went wrong while processing your order.");
+            toast.error("Something went wrong while processing your order.");
         }
     };
-
     const increaseQty = (item) => {
         const newQty = item.quantity + 1;
         if (newQty > Number(item.stock)) return;
@@ -431,31 +440,44 @@ const Checkout = () => {
                 </div>
             </aside>
             {showPaymentModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white rounded-lg p-6 w-full max-w-md">
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                    onClick={() => setShowPaymentModal(false)}
+                >
+                    <div
+                        className="bg-white rounded-lg p-6 w-full max-w-md"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         <h2 className="text-xl font-semibold mb-4 text-center">Choose Payment Method</h2>
 
                         <div className="space-y-3">
                             <button
                                 className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-                                onClick={() => handlePayment("bank")}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handlePayment("bank");
+                                }}
                             >
-                                Direct Bank Transfer or UPI (0% Fee)
-                                (Recommended)
+                                Direct Bank Transfer or UPI (0% Fee) (Recommended)
                             </button>
 
                             <button
                                 className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-                                onClick={() => handlePayment("phonepe")}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handlePayment("phonepe");
+                                }}
                             >
-                                PhonePe Payment Gateway (2% Fee)
-                                Supports Credit Cards)
+                                PhonePe Payment Gateway (2% Fee) Supports Credit Cards
                             </button>
 
                             {shippingMethod === "doorstep" && (
                                 <button
                                     className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-700"
-                                    onClick={() => handlePayment("cod")}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handlePayment("cod");
+                                    }}
                                 >
                                     Cash on Delivery (1% Fee)
                                 </button>
@@ -464,7 +486,10 @@ const Checkout = () => {
 
                         <button
                             className="mt-4 text-sm text-gray-500 hover:underline block mx-auto"
-                            onClick={() => setShowPaymentModal(false)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowPaymentModal(false);
+                            }}
                         >
                             Cancel
                         </button>

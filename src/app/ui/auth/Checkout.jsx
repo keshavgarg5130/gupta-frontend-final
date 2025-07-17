@@ -123,13 +123,13 @@ const Checkout = () => {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    const  handleContinueToPay = async (method) => {
-        if(!validate()){
+    const  handleContinueToPay = async () => {
+        const isValid = validate();
+        if (!isValid) {
             alert("Please fill all the required fields");
+            return;
         }
-        if (validate()) {
-            setShowPaymentModal(true);
-        }
+        setShowPaymentModal(true);
     };
     const handlePayment = async (method) => {
         toast.success("Processing to payment");

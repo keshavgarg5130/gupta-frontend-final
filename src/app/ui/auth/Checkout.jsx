@@ -200,9 +200,11 @@ const Checkout = () => {
                 localStorage.setItem("orderDetails", JSON.stringify(payload));
                 router.push("/checkout/direct-transfer");
             } else if (method === "phonepe") {
+                localStorage.setItem("orderDetails", JSON.stringify(payload));
                 router.push("/payment-gateway/phonepe");
             } else if (method === "cod") {
-                router.push("/order-success/cod-confirmation");
+                localStorage.setItem("orderDetails", JSON.stringify(payload));
+                router.push("/checkout/cod");
             }
 
             setShowPaymentModal(false);

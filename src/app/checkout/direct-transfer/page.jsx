@@ -60,6 +60,44 @@ const BankTransferPage = () => {
                     </div>
                 </div>
 
+                {/* Shipping Information */}
+                {orderData.shippingDetails ? (
+                    <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                        <h2 className="text-xl font-semibold mb-3 text-green-800">Shipping Details</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <h3 className="font-medium text-green-700 mb-2">Delivery Address</h3>
+                                <ul className="space-y-1">
+                                    <li><strong>Address:</strong> {orderData.shippingDetails.address}</li>
+                                    <li><strong>Landmark:</strong> {orderData.shippingDetails.landmark}</li>
+                                    <li><strong>City:</strong> {orderData.shippingDetails.city}</li>
+                                    <li><strong>State:</strong> {orderData.shippingDetails.state}</li>
+                                    <li><strong>Pincode:</strong> {orderData.shippingDetails.pincode}</li>
+                                    <li><strong>Country:</strong> {orderData.shippingDetails.country}</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 className="font-medium text-green-700 mb-2">Contact Information</h3>
+                                <ul className="space-y-1">
+                                    <li><strong>Mobile:</strong> {orderData.userDetails.mobile}</li>
+                                    <li><strong>Alternate Mobile:</strong> {orderData.userDetails.altMobile}</li>
+                                    <li><strong>Shipping Method:</strong> Doorstep Delivery</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                        <h2 className="text-xl font-semibold mb-3 text-blue-800">Shipping Information</h2>
+                        <p className="text-blue-700">
+                            <strong>Shipping Method:</strong> Self Pickup
+                        </p>
+                        <p className="mt-2 text-sm text-blue-600">
+                            Please contact us to arrange pickup after payment verification.
+                        </p>
+                    </div>
+                )}
+
                 {/* Payment Breakdown */}
                 <div className="mb-8">
                     <h2 className="text-xl font-semibold mb-4 border-b pb-2">Payment Breakdown</h2>
@@ -120,6 +158,9 @@ const BankTransferPage = () => {
                                     <li>Please keep your payment receipt for reference</li>
                                     <li>For urgent verification, call our support team at +91 88828 69662</li>
                                     <li>Business hours: 9:30 AM to 6:30 PM (Monday-Saturday)</li>
+                                    <li>If you have opted for doorstep delivery,For any changes to delivery address or time, please contact us at least 24 hours
+                                        before expected delivery
+                                    </li>
                                 </ul>
                             </div>
                         </div>

@@ -36,9 +36,10 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
     const [sortBy, setSortBy] = useState<typeSort>({ name: 'Price', increasing: true })
     const [filter, setFilter] = useState({ poles: false, currentRating: false })
     const [minPriceValue, setMinPriceValue] = useState<number>(minPrice - 100)
-
-    // Mobile filter toggle state
     const [showFilters, setShowFilters] = useState(false)
+    const [isDesktop, setIsDesktop] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+    const PRODUCTS_PER_PAGE = 12
 
     // Initialize filter selections
     let polesState: filterStateInterface = {};
@@ -53,13 +54,20 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
     const [polesSelected, setPolesSelected] = useState<filterStateInterface>(polesState)
     const [currentRatingsSelected, setCurrentRatingsSelected] = useState<filterStateInterface>(currentRatingState)
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 1024)
+        }
+
+        handleResize() // initial check
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
     const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = Math.min(parseInt(e.target.value), maxPrice - 1);
         setMinPriceValue(value)
     }
-
-    const [currentPage, setCurrentPage] = useState(1)
-    const PRODUCTS_PER_PAGE = 12
 
     useEffect(() => {
         let filtered = [...products]
@@ -86,13 +94,9 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
     const totalPages = Math.ceil(productsSort.length / PRODUCTS_PER_PAGE)
     const paginatedProducts = productsSort.slice((currentPage - 1) * PRODUCTS_PER_PAGE, currentPage * PRODUCTS_PER_PAGE)
 
-    // For accessibility and hydration safe media query, you can replace this logic later with a hook
-    const isDesktop = typeof window !== 'undefined' ? window.innerWidth >= 1024 : true;
-
     return (
         <div className="flex flex-col items-center w-full min-h-screen bg-gray-50 px-4 md:pt-0">
             <div className="flex flex-col lg:flex-row w-full max-w-[1280px] gap-6 py-4">
-
                 {/* Filter toggle button only visible on mobile */}
                 <div className="lg:hidden mb-4 w-full flex justify-end">
                     <button
@@ -109,7 +113,9 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                 {(showFilters || isDesktop) && (
                     <aside
                         id="filter-sidebar"
-                        className="w-full lg:w-[300px] bg-white p-4 rounded-xl shadow sticky top-5 max-h-[90vh] overflow-auto"
+                        className={`w-full lg:w-[300px] bg-white p-4 rounded-xl shadow ${
+                            isDesktop ? 'sticky top-[109px] h-[calc(100vh-109px)] overflow-y-auto' : 'mb-6'
+                        }`}
                     >
                         {/* Sort By */}
                         <div className="mb-4">
@@ -219,54 +225,51 @@ const CategoryPageClient = ({ bannerId, products, poles, currentRatings, maxPric
                         ))}
                     </div>
 
-                    {/* Pagination with page numbers */}
-                    <nav
-                        className="flex justify-center mt-6 gap-2 flex-wrap"
-                        aria-label="Pagination Navigation"
-                    >
-                        <button
-                            onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
-                            disabled={currentPage === 1}
-                            className="px-3 py-1 text-sm bg-white border rounded shadow hover:bg-blue-50 disabled:opacity-40"
-                            aria-label="Previous Page"
-                        >
-                            <ArrowLeft size={16} />
-                        </button>
+                    {/* Pagination */}
+                    {productsSort.length > 0 && (
+                        <nav className="flex justify-center mt-6 gap-2 flex-wrap">
+                            <button
+                                onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
+                                disabled={currentPage === 1}
+                                className="px-3 py-1 text-sm bg-white border rounded shadow hover:bg-blue-50 disabled:opacity-40"
+                                aria-label="Previous Page"
+                            >
+                                <ArrowLeft size={16} />
+                            </button>
 
-                        {/* Page Numbers */}
-                        {[...Array(totalPages)].map((_, i) => {
-                            const pageNum = i + 1
-                            const isCurrent = pageNum === currentPage
-                            return (
-                                <button
-                                    key={pageNum}
-                                    onClick={() => setCurrentPage(pageNum)}
-                                    className={`px-3 py-1 text-sm border rounded shadow hover:bg-blue-50 ${
-                                        isCurrent
-                                            ? 'bg-blue-600 text-white cursor-default'
-                                            : 'bg-white text-gray-700'
-                                    }`}
-                                    aria-current={isCurrent ? "page" : undefined}
-                                >
-                                    {pageNum}
-                                </button>
-                            )
-                        })}
+                            {[...Array(totalPages)].map((_, i) => {
+                                const pageNum = i + 1
+                                const isCurrent = pageNum === currentPage
+                                return (
+                                    <button
+                                        key={pageNum}
+                                        onClick={() => setCurrentPage(pageNum)}
+                                        className={`px-3 py-1 text-sm border rounded shadow hover:bg-blue-50 ${
+                                            isCurrent
+                                                ? 'bg-blue-600 text-white cursor-default'
+                                                : 'bg-white text-gray-700'
+                                        }`}
+                                        aria-current={isCurrent ? "page" : undefined}
+                                    >
+                                        {pageNum}
+                                    </button>
+                                )
+                            })}
 
-                        <button
-                            onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
-                            disabled={currentPage === totalPages}
-                            className="px-3 py-1 text-sm bg-white border rounded shadow hover:bg-blue-50 disabled:opacity-40"
-                            aria-label="Next Page"
-                        >
-                            <ArrowRight size={16} />
-                        </button>
-                    </nav>
+                            <button
+                                onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                                className="px-3 py-1 text-sm bg-white border rounded shadow hover:bg-blue-50 disabled:opacity-40"
+                                aria-label="Next Page"
+                            >
+                                <ArrowRight size={16} />
+                            </button>
+                        </nav>
+                    )}
                 </section>
-
             </div>
         </div>
     )
 }
 
-export default CategoryPageClient;
+export default CategoryPageClient

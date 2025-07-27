@@ -129,19 +129,14 @@ const Checkout = () => {
             alert("Please fill all the required fields");
             return;
         }
-        setShowPaymentModal(true);
-    };
-    const handlePayment = async (method) => {
-        console.log("Payment method selected:", method);
-
         try {
             // First show loading state
-            toast.loading("Processing payment...");
+            toast.loading("Processing order...");
 
             const payload = {
                 userEmail,
                 shippingMethod,
-                PaymentMethod: method,
+                PaymentMethod: "bank",
                 gstInvoice,
                 userDetails: {
                     mobile: form.mobile,
@@ -193,21 +188,23 @@ const Checkout = () => {
             toast.dismiss();
 
             // Show success message
-            toast.success("Payment processed successfully!");
+            toast.success("Order processed successfully!");
+            localStorage.setItem("orderDetails", JSON.stringify(payload));
+            router.push("/checkout/direct-transfer");
 
-            // Redirect based on payment method
-            if (method === "bank") {
-                localStorage.setItem("orderDetails", JSON.stringify(payload));
-                router.push("/checkout/direct-transfer");
-            } else if (method === "phonepe") {
-                localStorage.setItem("orderDetails", JSON.stringify(payload));
-                router.push("/payment-gateway/phonepe");
-            } else if (method === "cod") {
-                localStorage.setItem("orderDetails", JSON.stringify(payload));
-                router.push("/checkout/cod");
-            }
-
-            setShowPaymentModal(false);
+            // // Redirect based on payment method
+            // if (method === "bank") {
+            //     localStorage.setItem("orderDetails", JSON.stringify(payload));
+            //     router.push("/checkout/direct-transfer");
+            // } else if (method === "phonepe") {
+            //     localStorage.setItem("orderDetails", JSON.stringify(payload));
+            //     router.push("/payment-gateway/phonepe");
+            // } else if (method === "cod") {
+            //     localStorage.setItem("orderDetails", JSON.stringify(payload));
+            //     router.push("/checkout/cod");
+            // }
+            //
+            // setShowPaymentModal(false);
         } catch (error) {
             console.error("Checkout error:", error);
             // Dismiss any existing toasts
@@ -216,6 +213,91 @@ const Checkout = () => {
             toast.error("Something went wrong while processing your order.");
         }
     };
+    // const handlePayment = async (method) => {
+    //     console.log("Payment method selected:", method);
+
+        // try {
+        //     // First show loading state
+        //     toast.loading("Processing payment...");
+        //
+        //     const payload = {
+        //         userEmail,
+        //         shippingMethod,
+        //         PaymentMethod: method,
+        //         gstInvoice,
+        //         userDetails: {
+        //             mobile: form.mobile,
+        //             altMobile: form.altMobile,
+        //         },
+        //         shippingDetails: shippingMethod === "doorstep" ? {
+        //             pincode: form.pincode,
+        //             state: form.state,
+        //             city: form.city,
+        //             country: form.country,
+        //             address: form.address,
+        //             landmark: form.landmark,
+        //         } : null,
+        //         gstDetails: gstInvoice ? {
+        //             gstNumber: form.gstNumber,
+        //             businessName: form.businessName,
+        //             businessPhone: form.businessPhone,
+        //             billingAddress: form.billingAddress,
+        //             billingCity: form.billingCity,
+        //             billingState: form.billingState,
+        //             billingCountry: form.billingCountry,
+        //             billingPincode: form.billingPincode,
+        //             billingLandmark: form.billingLandmark,
+        //         } : null,
+        //         cartItems: cart?.cartItems || [],
+        //         pricing: {
+        //             amount: amountWithoutTax,
+        //             tax: taxAmount,
+        //             shipping: shippingCharge,
+        //             total: totalAmount,
+        //         },
+        //     };
+        //
+        //     const res = await fetch("https://gupta-backend.vercel.app/api/37b51f00-d824-4384-8ee0-1e8965151640/checkout", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(payload),
+        //     });
+        //
+        //     if (!res.ok) {
+        //         throw new Error(`HTTP error! status: ${res.status}`);
+        //     }
+        //
+        //     const data = await res.json();
+        //
+        //     // Dismiss loading toast
+        //     toast.dismiss();
+        //
+        //     // Show success message
+        //     toast.success("Payment processed successfully!");
+        //
+        //     // Redirect based on payment method
+        //     if (method === "bank") {
+        //         localStorage.setItem("orderDetails", JSON.stringify(payload));
+        //         router.push("/checkout/direct-transfer");
+        //     } else if (method === "phonepe") {
+        //         localStorage.setItem("orderDetails", JSON.stringify(payload));
+        //         router.push("/payment-gateway/phonepe");
+        //     } else if (method === "cod") {
+        //         localStorage.setItem("orderDetails", JSON.stringify(payload));
+        //         router.push("/checkout/cod");
+        //     }
+        //
+        //     setShowPaymentModal(false);
+        // } catch (error) {
+        //     console.error("Checkout error:", error);
+        //     // Dismiss any existing toasts
+        //     toast.dismiss();
+        //     // Show error message
+        //     toast.error("Something went wrong while processing your order.");
+        // }
+    // };
     const increaseQty = (item) => {
         const newQty = item.quantity + 1;
         if (newQty > Number(item.stock)) return;
@@ -432,7 +514,7 @@ const Checkout = () => {
 
                 <div className="space-y-3">
                     <button
-                        onClick={handlePayment("bank")}
+                        onClick={handleContinueToPay}
                         className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
                     >
                         Place Order

@@ -432,10 +432,10 @@ const Checkout = () => {
 
                 <div className="space-y-3">
                     <button
-                        onClick={handleContinueToPay}
+                        onClick={handlePayment("bank")}
                         className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
                     >
-                        Continue to Pay
+                        Place Order
                     </button>
                     <Link
                         href="/cart"
@@ -445,63 +445,63 @@ const Checkout = () => {
                     </Link>
                 </div>
             </aside>
-            {showPaymentModal && (
-                <div
-                    className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-                    onClick={() => setShowPaymentModal(false)}
-                >
-                    <div
-                        className="bg-white rounded-lg p-6 w-full max-w-md"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <h2 className="text-xl font-semibold mb-4 text-center">Choose Payment Method</h2>
+            {/*{showPaymentModal && (*/}
+            {/*    <div*/}
+            {/*        className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"*/}
+            {/*        onClick={() => setShowPaymentModal(false)}*/}
+            {/*    >*/}
+            {/*        <div*/}
+            {/*            className="bg-white rounded-lg p-6 w-full max-w-md"*/}
+            {/*            onClick={(e) => e.stopPropagation()}*/}
+            {/*        >*/}
+            {/*            <h2 className="text-xl font-semibold mb-4 text-center">Choose Payment Method</h2>*/}
 
-                        <div className="space-y-3">
-                            <button
-                                className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    handlePayment("bank");
-                                }}
-                            >
-                                Direct Bank Transfer or UPI (0% Fee) (Recommended)
-                            </button>
+            {/*            <div className="space-y-3">*/}
+            {/*                <button*/}
+            {/*                    className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"*/}
+            {/*                    onClick={(e) => {*/}
+            {/*                        e.stopPropagation();*/}
+            {/*                        handlePayment("bank");*/}
+            {/*                    }}*/}
+            {/*                >*/}
+            {/*                    Direct Bank Transfer or UPI (0% Fee) (Recommended)*/}
+            {/*                </button>*/}
 
-                            <button
-                                className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    handlePayment("phonepe");
-                                }}
-                            >
-                                PhonePe Payment Gateway (2% Fee) Supports Credit Cards
-                            </button>
+            {/*                <button*/}
+            {/*                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"*/}
+            {/*                    onClick={(e) => {*/}
+            {/*                        e.stopPropagation();*/}
+            {/*                        handlePayment("phonepe");*/}
+            {/*                    }}*/}
+            {/*                >*/}
+            {/*                    PhonePe Payment Gateway (2% Fee) Supports Credit Cards*/}
+            {/*                </button>*/}
 
-                            {shippingMethod === "doorstep" && (
-                                <button
-                                    className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-700"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handlePayment("cod");
-                                    }}
-                                >
-                                    Cash on Delivery (1% Fee)
-                                </button>
-                            )}
-                        </div>
+            {/*                {shippingMethod === "doorstep" && (*/}
+            {/*                    <button*/}
+            {/*                        className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-700"*/}
+            {/*                        onClick={(e) => {*/}
+            {/*                            e.stopPropagation();*/}
+            {/*                            handlePayment("cod");*/}
+            {/*                        }}*/}
+            {/*                    >*/}
+            {/*                        Cash on Delivery (1% Fee)*/}
+            {/*                    </button>*/}
+            {/*                )}*/}
+            {/*            </div>*/}
 
-                        <button
-                            className="mt-4 text-sm text-gray-500 hover:underline block mx-auto"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setShowPaymentModal(false);
-                            }}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            )}
+            {/*            <button*/}
+            {/*                className="mt-4 text-sm text-gray-500 hover:underline block mx-auto"*/}
+            {/*                onClick={(e) => {*/}
+            {/*                    e.stopPropagation();*/}
+            {/*                    setShowPaymentModal(false);*/}
+            {/*                }}*/}
+            {/*            >*/}
+            {/*                Cancel*/}
+            {/*            </button>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*)}*/}
         </section>
     );
 };

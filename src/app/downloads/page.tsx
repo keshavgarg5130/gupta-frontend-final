@@ -13,12 +13,17 @@ export const metadata = {
 
 const DownloadPage: NextPage = () => {
     const pdfs = [
+        { name: 'PCC LP No. 05 Dtd 2nd January 2025', url: '/files/PCC LP No. 05 Dtd 2nd January 2025.pdf' },
+        { name: 'Panel Accessories Price List 01 May 2024', url: '/files/Panel Accessories Price List 01 May 2024.pdf' },
+        { name: 'LDC LP No. 11 Dtd 20th November 2024', url: '/files/LDC LP No. 11 Dtd 20th November 2024.pdf' },
+        { name: 'PV Solar Cable LP - 3rd Jul 2025', url: '/files/PV Solar Cable LP - 3rd Jul 2025.pdf' },
+        { name: 'KEI Communication Cable LP - 3rd Jul 2025', url: '/files/KEI Communication Cable LP - 3rd Jul 2025.pdf' },
+        { name: 'KEI LDC - 3C Flat List Price - 3rd Jul 2025', url: '/files/KEI LDC - 3C Flat List Price - 3rd Jul 2025.pdf' },
+        { name: 'KEI LDC - MC Flx List Price - 3rd Jul 2025', url: '/files/KEI LDC - MC Flx List Price - 3rd Jul 2025.pdf' },
+        { name: 'KEI LDC - SC Flx List Price - 3rd Jul 2025', url: '/files/KEI LDC - SC Flx List Price - 3rd Jul 2025.pdf' },
         { name: 'ESP Price List 01 May 2024_240501_002412', url: '/files/ESP Price List 01 May 2024_240501_002412.pdf' },
         { name: 'KEI- Cable List Price - Oct 2024', url: '/files/KEI- Cable List Price - Oct 2024.pdf' },
         { name: 'W&F List Price - 9th Oct 2024', url: '/files/W&F List Price - 9th Oct 2024.pdf' },
-        { name: 'PCC LP No. 05 Dtd 2nd January 2025', url: '/files/PCC LP No. 05 Dtd 2nd January 2025.pdf' },
-        { name: 'Panel Accessories Price List 01 May 2024', url: '/files/Panel Accessories Price List 01 May 2024.pdf' },
-        { name: 'LDC LP No. 11 Dtd 20th November 2024', url: '/files/LDC LP No. 11 Dtd 20th November 2024.pdf' }
     ];
 
     return (

@@ -18,6 +18,7 @@ const OrdersPage = () => {
             const user = await getUser();
             console.log(user);
             setUserEmail(user?.email || "");
+            console.log(user.Email);
         };
         fetchUser();
     }, [getUser]);

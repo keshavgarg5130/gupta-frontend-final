@@ -38,13 +38,13 @@ export function UserDropdownMenu(user: any) {
             <DropdownMenuContent className="w-56">
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuGroup>
-                    <DropdownMenuItem onClick={handleMyOrders}>
-                        My Orders
-                        <DropdownMenuShortcut>⌘O</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
+                {/*<DropdownMenuGroup>*/}
+                {/*    <DropdownMenuItem onClick={handleMyOrders}>*/}
+                {/*        My Orders*/}
+                {/*        <DropdownMenuShortcut>⌘O</DropdownMenuShortcut>*/}
+                {/*    </DropdownMenuItem>*/}
+                {/*</DropdownMenuGroup>*/}
+                {/*<DropdownMenuSeparator />*/}
                 <DropdownMenuItem onClick={handleLogout}>
                     Log out
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

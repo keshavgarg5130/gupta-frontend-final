@@ -14,7 +14,7 @@ const CategoryPamphlet = ({ categoryName, billboards, billboardId }: {
 
     switch (categoryName) {
         case "Panels": link = '/panel/distribution-board'; break;
-        case "Overlay Relay": link = '/overload-relay'; break;
+        case "Overload Relay": link = '/overload-relay'; break;
         case "Wires and Cables": link = "/wires-and-cables"; break;
         case "Power Contractor": link = "/power-contractor"; break;
     }
